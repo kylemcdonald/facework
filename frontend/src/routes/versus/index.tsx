@@ -5,14 +5,16 @@ import VideoSelfie from "../../components/videoselfie"
 import * as face from "../../lib/vision"
 
 const Versus: FunctionalComponent = () => {
-  useEffect(() => face.initialize)
+  useEffect(() => {
+    face.initialize()
+  }, [])
   return (
     <div class={style.versus}>
       <h1>Versus</h1>
       <p>
         Get ready to <em>FACE OFF</em>.
       </p>
-      <VideoSelfie onPlay={face.detect} />
+      <VideoSelfie onPlay={face.scheduleDetection} />
     </div>
   )
 }
