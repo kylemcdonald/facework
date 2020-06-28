@@ -1,4 +1,10 @@
 import * as faceapi from "face-api.js"
+import { StateUpdater } from "preact/hooks"
+
+export interface FeatureRatingsData {
+  age: number
+  gender: "male" | "female"
+}
 
 const tinyFaceOptions = new faceapi.TinyFaceDetectorOptions({
   inputSize: 512,
@@ -19,14 +25,22 @@ export async function initialize(): Promise<void> {
 
 let requestAnimationFrameId: number | null = null
 
-export function scheduleDetection(input: HTMLVideoElement): () => void {
-  requestAnimationFrameId = requestAnimationFrame(() => detect(input))
+export function scheduleDetection(
+  input: HTMLVideoElement,
+  stateUpdater: StateUpdater<FeatureRatingsData | null>
+): () => void {
+  requestAnimationFrameId = requestAnimationFrame(() =>
+    detect(input, stateUpdater)
+  )
   return stopDetection
 }
 
-function rescheduleDetection(input: HTMLVideoElement): void {
+function rescheduleDetection(
+  input: HTMLVideoElement,
+  stateUpdater: StateUpdater<FeatureRatingsData | null>
+): void {
   if (requestAnimationFrameId !== null) {
-    scheduleDetection(input)
+    scheduleDetection(input, stateUpdater)
   }
 }
 
@@ -37,17 +51,27 @@ function stopDetection(): void {
   }
 }
 
-async function detect(input: HTMLVideoElement): Promise<void> {
+async function detect(
+  input: HTMLVideoElement,
+  stateUpdater: StateUpdater<FeatureRatingsData | null>
+): Promise<void> {
   if (!isFaceDetectionModelLoaded()) {
     console.debug("model not yet ready")
-    rescheduleDetection(input)
+    rescheduleDetection(input, stateUpdater)
     return
   }
   const detection = await faceapi
     .detectSingleFace(input, tinyFaceOptions)
     .withAgeAndGender()
   if (detection !== undefined) {
-    console.debug({ age: detection.age, gender: detection.gender })
+    const ratings: FeatureRatingsData = {
+      age: detection.age,
+      gender: detection.gender
+    }
+    console.debug(ratings)
+    stateUpdater(ratings)
+  } else {
+    stateUpdater(null)
   }
-  rescheduleDetection(input)
+  rescheduleDetection(input, stateUpdater)
 }
