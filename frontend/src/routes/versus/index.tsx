@@ -2,7 +2,7 @@ import { FunctionalComponent, h } from "preact"
 import { useEffect, useState, useCallback } from "preact/hooks"
 import * as style from "./style.css"
 import VideoSelfie from "../../components/videoselfie"
-import * as face from "../../lib/vision"
+import * as face from "../../lib/face-reader"
 
 interface FeatureRatingsProps {
   data: face.FeatureRatingsData | null
