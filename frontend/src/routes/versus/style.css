@@ -3,3 +3,16 @@
   min-height: 100%;
   width: 100%;
 }
+
+.versus section {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.versus ul {
+  margin-left: 3rem;
+}
+
+.versus li {
+  list-style-type: none;
+}
