@@ -12,15 +12,25 @@ const FeatureRatings: FunctionalComponent<FeatureRatingsProps> = (
   props: FeatureRatingsProps
 ) => {
   if (props.data !== null) {
+    const expressionsValues = new Array<JSX.Element>()
+    for (const [k, v] of props.data.expressions) {
+      expressionsValues.push(
+        <li key={k}>
+          <b>{k}:</b> {v}
+        </li>
+      )
+    }
     return (
       <div>
         <ul>
-          <li>
+          <li key="age">
             <b>age:</b> {props.data.age}
           </li>
-          <li>
-            <b>gender:</b> {props.data.gender}
+          <li key="gender">
+            <b>{props.data.gender.gender}:</b>
+            {` ${props.data.gender.probability}`}
           </li>
+          {expressionsValues}
         </ul>
       </div>
     )
@@ -51,8 +61,10 @@ const Versus: FunctionalComponent = () => {
       <p>
         Get ready to <em>FACE OFF</em>.
       </p>
-      <VideoSelfie onPlay={scheduleDetection} />
-      <FeatureRatings data={featureRatingsData} />
+      <section>
+        <VideoSelfie onPlay={scheduleDetection} />
+        <FeatureRatings data={featureRatingsData} />
+      </section>
     </div>
   )
 }
