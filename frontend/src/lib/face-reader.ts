@@ -3,7 +3,11 @@ import { StateUpdater } from "preact/hooks"
 
 export interface FeatureRatingsData {
   age: number
-  gender: "male" | "female"
+  gender: {
+    gender: "male" | "female"
+    probability: number
+  }
+  expressions: ReadonlyMap<string, number>
 }
 
 const tinyFaceOptions = new faceapi.TinyFaceDetectorOptions({
@@ -16,10 +20,12 @@ function isFaceDetectionModelLoaded(): boolean {
 }
 
 export async function initialize(): Promise<void> {
+  const netUri = "assets/models"
   await Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri("assets/models"),
-    faceapi.nets.faceRecognitionNet.loadFromUri("assets/models"),
-    faceapi.nets.ageGenderNet.loadFromUri("assets/models")
+    faceapi.nets.tinyFaceDetector.loadFromUri(netUri),
+    faceapi.nets.faceRecognitionNet.loadFromUri(netUri),
+    faceapi.nets.ageGenderNet.loadFromUri(netUri),
+    faceapi.nets.faceExpressionNet.loadFromUri(netUri)
   ])
 }
 
@@ -63,10 +69,17 @@ async function detect(
   const detection = await faceapi
     .detectSingleFace(input, tinyFaceOptions)
     .withAgeAndGender()
+    .withFaceExpressions()
   if (detection !== undefined) {
     const ratings: FeatureRatingsData = {
       age: detection.age,
-      gender: detection.gender
+      gender: {
+        gender: detection.gender,
+        probability: detection.genderProbability
+      },
+      expressions: new Map<string, number>(
+        Object.entries(detection.expressions)
+      )
     }
     console.debug(ratings)
     stateUpdater(ratings)
