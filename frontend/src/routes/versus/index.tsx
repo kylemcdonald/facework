@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "preact/hooks"
 import * as style from "./style.css"
 import VideoSelfie from "../../components/videoselfie"
 import * as face from "../../lib/face-reader"
+import FeatureRating from "../../components/feature-rating"
 
 interface FeatureRatingsProps {
   data: face.FeatureRatingsData | null
@@ -16,7 +17,8 @@ const FeatureRatings: FunctionalComponent<FeatureRatingsProps> = (
     for (const [k, v] of props.data.expressions) {
       expressionsValues.push(
         <li key={k}>
-          <b>{k}:</b> {v}
+          <b>{k}:</b> <FeatureRating value={v} />
+          <span className="percentage">{` ${Math.trunc(v * 100)}%`}</span>
         </li>
       )
     }
