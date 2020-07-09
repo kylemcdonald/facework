@@ -10,6 +10,9 @@ const Header: FunctionalComponent = () => {
         <Link activeClassName={style.active} href="/">
           Home
         </Link>
+        <Link activeClassName={style.active} href="/ready">
+          Pre-Versus
+        </Link>
         <Link activeClassName={style.active} href="/versus">
           Versus
         </Link>
