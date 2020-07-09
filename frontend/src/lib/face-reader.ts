@@ -19,7 +19,13 @@ function isFaceDetectionModelLoaded(): boolean {
   return faceapi.nets.tinyFaceDetector.params !== undefined
 }
 
+let faceInitialized: boolean = false
+
 export async function initialize(): Promise<void> {
+  if (faceInitialized) {
+    console.warn("models already loaded once, so not loading again")
+    return
+  }
   const netUri = "assets/models"
   await Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri(netUri),
@@ -27,13 +33,16 @@ export async function initialize(): Promise<void> {
     faceapi.nets.ageGenderNet.loadFromUri(netUri),
     faceapi.nets.faceExpressionNet.loadFromUri(netUri)
   ])
+  faceInitialized = true
 }
 
 let requestAnimationFrameId: number | null = null
 
+type FeaturesUpdater = (ratings: FeatureRatingsData | null) => void
+
 export function scheduleDetection(
   input: HTMLVideoElement,
-  stateUpdater: StateUpdater<FeatureRatingsData | null>
+  stateUpdater: FeaturesUpdater
 ): () => void {
   requestAnimationFrameId = requestAnimationFrame(() =>
     detect(input, stateUpdater)
@@ -43,7 +52,7 @@ export function scheduleDetection(
 
 function rescheduleDetection(
   input: HTMLVideoElement,
-  stateUpdater: StateUpdater<FeatureRatingsData | null>
+  stateUpdater: FeaturesUpdater
 ): void {
   if (requestAnimationFrameId !== null) {
     scheduleDetection(input, stateUpdater)
@@ -59,7 +68,7 @@ function stopDetection(): void {
 
 async function detect(
   input: HTMLVideoElement,
-  stateUpdater: StateUpdater<FeatureRatingsData | null>
+  stateUpdater: FeaturesUpdater
 ): Promise<void> {
   if (!isFaceDetectionModelLoaded()) {
     console.debug("model not yet ready")

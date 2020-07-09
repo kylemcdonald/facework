@@ -9,6 +9,16 @@ interface FeatureRatingsProps {
   data: face.FeatureRatingsData | null
 }
 
+const keyFeatures = [
+  "neutral",
+  "happy",
+  "sad",
+  "angry",
+  "fearful",
+  "disgusted",
+  "surprised"
+]
+
 const FeatureRatings: FunctionalComponent<FeatureRatingsProps> = (
   props: FeatureRatingsProps
 ) => {
@@ -52,10 +62,24 @@ const Versus: FunctionalComponent = () => {
     featureRatingsData,
     setFeatureRatingsData
   ] = useState<face.FeatureRatingsData | null>(null)
+  const [keyFeature, setKeyFeature] = useState<string>(
+    keyFeatures[Math.round(Math.random() * keyFeatures.length - 1)]
+  )
+  const [currentScore, setCurrentScore] = useState<number>(0)
+  const updateFeatureRatings = useCallback(
+    (ratings: face.FeatureRatingsData | null) => {
+      setFeatureRatingsData(ratings)
+      if (ratings !== null) {
+        const additive = ratings.expressions.get(keyFeature) || 0
+        setCurrentScore(currentScore + additive)
+      }
+    },
+    [keyFeature, setFeatureRatingsData, setCurrentScore, currentScore]
+  )
   const scheduleDetection = useCallback(
     (input: HTMLVideoElement) =>
-      face.scheduleDetection(input, setFeatureRatingsData),
-    [setFeatureRatingsData]
+      face.scheduleDetection(input, updateFeatureRatings),
+    [updateFeatureRatings]
   )
   return (
     <div class={style.versus}>
@@ -64,9 +88,20 @@ const Versus: FunctionalComponent = () => {
         Get ready to <em>FACE OFF</em>.
       </p>
       <section>
-        <VideoSelfie onPlay={scheduleDetection} />
+        <VideoSelfie key="selfie" onPlay={scheduleDetection} />
         <FeatureRatings data={featureRatingsData} />
       </section>
+      {currentScore < 1.0 ? (
+        <section>
+          Let's see some: <strong>{keyFeature}</strong>!
+          <br />
+          <FeatureRating value={currentScore} />
+        </section>
+      ) : (
+        <section>
+          WOW! that was some great: <strong>{keyFeature}</strong>!
+        </section>
+      )}
     </div>
   )
 }
