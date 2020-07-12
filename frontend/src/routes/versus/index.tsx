@@ -70,11 +70,11 @@ const Versus: FunctionalComponent = () => {
     (ratings: face.FeatureRatingsData | null) => {
       setFeatureRatingsData(ratings)
       if (ratings !== null) {
-        const additive = ratings.expressions.get(keyFeature) || 0
-        setCurrentScore(currentScore + additive)
+        const additive = (ratings.expressions.get(keyFeature) || 0) / 10
+        setCurrentScore(prev => prev + additive)
       }
     },
-    [keyFeature, setFeatureRatingsData, setCurrentScore, currentScore]
+    [keyFeature, setCurrentScore]
   )
   const scheduleDetection = useCallback(
     (input: HTMLVideoElement) =>
