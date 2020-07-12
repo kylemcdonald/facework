@@ -82,27 +82,36 @@ const Versus: FunctionalComponent = () => {
     [updateFeatureRatings]
   )
   return (
-    <div class={style.versus}>
+    <main class={style.versus}>
       <h1>Versus</h1>
       <p>
         Get ready to <em>FACE OFF</em>.
       </p>
-      <section>
+      <div class={style.flexRowWrap}>
         <VideoSelfie key="selfie" onPlay={scheduleDetection} />
-        <FeatureRatings data={featureRatingsData} />
-      </section>
-      {currentScore < 1.0 ? (
-        <section>
-          Let's see some: <strong>{keyFeature}</strong>!
-          <br />
-          <FeatureRating value={currentScore} />
+        <section class={style.accompaniment}>
+          <span class={style.selfieStatus}>
+            {currentScore < 1.0 ? (
+              <>
+                {`💁‍♀️ Okay, let's see some `}
+                <strong>{keyFeature}</strong>
+                <br />
+                <FeatureRating value={currentScore} />
+              </>
+            ) : (
+              <>
+                {`🥳 WOW! That was some great `}
+                <strong>{keyFeature}</strong>.
+              </>
+            )}
+          </span>
+          <details>
+            <summary>Realtime ratings</summary>
+            <FeatureRatings data={featureRatingsData} />
+          </details>
         </section>
-      ) : (
-        <section>
-          WOW! that was some great: <strong>{keyFeature}</strong>!
-        </section>
-      )}
-    </div>
+      </div>
+    </main>
   )
 }
 

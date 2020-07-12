@@ -4,17 +4,28 @@
   width: 100%;
 }
 
-.versus section {
+.flex-row-wrap {
   display: flex;
   flex-flow: row wrap;
 }
 
 .versus ul {
-  margin-left: 3rem;
+  padding: 0;
 }
 
 .versus li {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
+}
+
+.accompaniment {
+  display: flex;
+  flex-flow: column wrap;
+  margin-left: 2rem;
+}
+
+.selfie-status {
+  margin-bottom: 1rem;
+  font-size: large;
 }
