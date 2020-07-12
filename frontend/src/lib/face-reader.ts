@@ -19,7 +19,7 @@ function isFaceDetectionModelLoaded(): boolean {
   return faceapi.nets.tinyFaceDetector.params !== undefined
 }
 
-let faceInitialized: boolean = false
+let faceInitialized = false
 
 export async function initialize(): Promise<void> {
   if (faceInitialized) {
