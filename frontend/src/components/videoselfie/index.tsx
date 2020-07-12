@@ -27,12 +27,7 @@ const VideoSelfie: FunctionalComponent<VideoSelfieProps> = (
   }, [props.onPlay, videoRef.current])
 
   return (
-    <video
-      autoPlay
-      ref={videoRef}
-      onPlay={onPlayCallback}
-      class={style.container}
-    />
+    <video autoPlay ref={videoRef} onPlay={onPlayCallback} class={style.self} />
   )
 }
 
