@@ -1,5 +1,4 @@
 import * as faceapi from "face-api.js"
-import { StateUpdater } from "preact/hooks"
 
 export interface FeatureRatingsData {
   age: number
