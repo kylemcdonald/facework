@@ -6,16 +6,6 @@ import * as FaceReader from "../../lib/face-reader"
 import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"
 
-const keyFeatures = [
-  "neutral",
-  "happy",
-  "sad",
-  "angry",
-  "fearful",
-  "disgusted",
-  "surprised"
-]
-
 const Versus: FunctionalComponent = () => {
   useEffect(() => {
     FaceReader.initialize()
@@ -24,19 +14,27 @@ const Versus: FunctionalComponent = () => {
     featureRatingsData,
     setFeatureRatingsData
   ] = useState<FaceReader.FeatureRatingsData | null>(null)
-  const [keyFeature, setKeyFeature] = useState<string>(
-    keyFeatures[Math.round(Math.random() * keyFeatures.length - 1)]
-  )
-  const [currentScore, setCurrentScore] = useState<number>(0)
+  const [keyFeatureScore, setKeyFeatureScore] = useState<
+    { feature: string; score: number } | undefined
+  >(undefined)
   const updateFeatureRatings = useCallback(
     (ratings: FaceReader.FeatureRatingsData | null) => {
       setFeatureRatingsData(ratings)
       if (ratings !== null) {
-        const additive = (ratings.expressions.get(keyFeature) || 0) / 10
-        setCurrentScore(prev => prev + additive)
+        setKeyFeatureScore(prev => {
+          if (prev !== undefined) {
+            const additive = (ratings.expressions.get(prev.feature) || 0) / 10
+            return { ...prev, score: prev.score + additive }
+          }
+          // otherwise, init
+          const keys = Array.from(ratings.expressions.keys())
+          const newKey = keys[Math.round(Math.random() * keys.length - 1)]
+          console.log(`setting key feature to ${newKey}`)
+          return { feature: newKey, score: 0 }
+        })
       }
     },
-    [keyFeature, setCurrentScore]
+    [setKeyFeatureScore]
   )
   const scheduleDetection = useCallback(
     (input: HTMLVideoElement) =>
@@ -53,17 +51,23 @@ const Versus: FunctionalComponent = () => {
         <VideoSelfie key="selfie" onPlay={scheduleDetection} />
         <section class={style.accompaniment}>
           <span class={style.selfieStatus}>
-            {currentScore < 1.0 ? (
+            {keyFeatureScore === undefined ? (
+              <>
+                {`👀 Hmm, what do we have here...?`}
+                <br />
+                <RatingBar key="progress" value={undefined} />
+              </>
+            ) : keyFeatureScore.score < 1.0 ? (
               <>
                 {`💁‍♀️ Okay, let's see some `}
-                <strong>{keyFeature}</strong>
+                <strong>{keyFeatureScore.feature}</strong>
                 <br />
-                <RatingBar value={currentScore} />
+                <RatingBar key="progress" value={keyFeatureScore.score} />
               </>
             ) : (
               <>
                 {`🥳 WOW! That was some great `}
-                <strong>{keyFeature}</strong>.
+                <strong>{keyFeatureScore.feature}</strong>.
               </>
             )}
           </span>
