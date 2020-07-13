@@ -24,7 +24,8 @@
     "*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "eslintIgnore": [
-    "build/*"
+    "build/*",
+    "*.css.d.ts"
   ],
   "dependencies": {
     "face-api.js": "^0.22.2",
