@@ -2,12 +2,9 @@ import { FunctionalComponent, h } from "preact"
 import { useEffect, useState, useCallback } from "preact/hooks"
 import * as style from "./style.css"
 import VideoSelfie from "../../components/videoselfie"
-import * as face from "../../lib/face-reader"
+import * as FaceReader from "../../lib/face-reader"
 import RatingBar from "../../components/rating-bar"
-
-interface FeatureRatingsProps {
-  data: face.FeatureRatingsData | null
-}
+import FeatureRatings from "../../components/feature-ratings"
 
 const keyFeatures = [
   "neutral",
@@ -19,55 +16,20 @@ const keyFeatures = [
   "surprised"
 ]
 
-const FeatureRatings: FunctionalComponent<FeatureRatingsProps> = (
-  props: FeatureRatingsProps
-) => {
-  if (props.data !== null) {
-    const expressionsValues = new Array<JSX.Element>()
-    for (const [k, v] of props.data.expressions) {
-      expressionsValues.push(
-        <li key={k}>
-          <b>{k}:</b> <RatingBar value={v} />
-          <span className="percentage">{` ${Math.trunc(v * 100)}%`}</span>
-        </li>
-      )
-    }
-    return (
-      <div>
-        <ul>
-          <li key="age">
-            <b>age:</b> {props.data.age}
-          </li>
-          <li key="gender">
-            <b>{props.data.gender.gender}:</b>
-            {` ${props.data.gender.probability}`}
-          </li>
-          {expressionsValues}
-        </ul>
-      </div>
-    )
-  }
-  return (
-    <div>
-      <i>waiting...</i>
-    </div>
-  )
-}
-
 const Versus: FunctionalComponent = () => {
   useEffect(() => {
-    face.initialize()
+    FaceReader.initialize()
   }, [])
   const [
     featureRatingsData,
     setFeatureRatingsData
-  ] = useState<face.FeatureRatingsData | null>(null)
+  ] = useState<FaceReader.FeatureRatingsData | null>(null)
   const [keyFeature, setKeyFeature] = useState<string>(
     keyFeatures[Math.round(Math.random() * keyFeatures.length - 1)]
   )
   const [currentScore, setCurrentScore] = useState<number>(0)
   const updateFeatureRatings = useCallback(
-    (ratings: face.FeatureRatingsData | null) => {
+    (ratings: FaceReader.FeatureRatingsData | null) => {
       setFeatureRatingsData(ratings)
       if (ratings !== null) {
         const additive = (ratings.expressions.get(keyFeature) || 0) / 10
@@ -78,7 +40,7 @@ const Versus: FunctionalComponent = () => {
   )
   const scheduleDetection = useCallback(
     (input: HTMLVideoElement) =>
-      face.scheduleDetection(input, updateFeatureRatings),
+      FaceReader.scheduleDetection(input, updateFeatureRatings),
     [updateFeatureRatings]
   )
   return (

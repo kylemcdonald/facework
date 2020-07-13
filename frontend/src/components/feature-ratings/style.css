@@ -1,0 +1,12 @@
+.feature-ratings {
+}
+
+.feature-ratings ul {
+  padding: 0;
+}
+
+.feature-ratings li {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
