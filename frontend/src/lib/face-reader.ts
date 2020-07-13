@@ -1,4 +1,5 @@
 import * as faceapi from "face-api.js"
+import { AssertionError } from "assert"
 
 export interface FeatureRatingsData {
   age: number
@@ -69,30 +70,71 @@ async function detect(
   input: HTMLVideoElement,
   stateUpdater: FeaturesUpdater
 ): Promise<void> {
-  if (!isFaceDetectionModelLoaded()) {
-    console.debug("model not yet ready")
-    rescheduleDetection(input, stateUpdater)
-    return
-  }
-  const detection = await faceapi
-    .detectSingleFace(input, tinyFaceOptions)
-    .withAgeAndGender()
-    .withFaceExpressions()
-  if (detection !== undefined) {
+  try {
+    assertIsDefined(
+      faceapi.nets.tinyFaceDetector.params,
+      "face detection model not yet loaded"
+    )
+
+    const detectedFace = await faceapi.detectSingleFace(input, tinyFaceOptions)
+    assertIsDefined(detectedFace, "no face found in input")
+
+    const faceCanvases = await faceapi.extractFaces(input, [detectedFace])
+    const faceCanvas = faceCanvases.length > 0 ? faceCanvases[0] : undefined
+    assertIsDefined(
+      faceCanvas,
+      "failed to extract detected face's canvas from input"
+    )
+
+    const [ageGenderPrediction, expressionRecognitions] = await Promise.all([
+      faceapi.predictAgeAndGender(faceCanvas),
+      faceapi.recognizeFaceExpressions(faceCanvas)
+    ])
+    assertIsNotArray(ageGenderPrediction, "age gender prediction")
+    assertIsNotArray(expressionRecognitions, "expression recognitions")
+
     const ratings: FeatureRatingsData = {
-      age: detection.age,
+      age: ageGenderPrediction.age,
       gender: {
-        gender: detection.gender,
-        probability: detection.genderProbability
+        gender: ageGenderPrediction.gender,
+        probability: ageGenderPrediction.genderProbability
       },
       expressions: new Map<string, number>(
-        Object.entries(detection.expressions)
+        Object.entries(expressionRecognitions)
       )
     }
     console.debug(ratings)
     stateUpdater(ratings)
-  } else {
+    rescheduleDetection(input, stateUpdater)
+  } catch (e) {
+    console.debug(e.message)
     stateUpdater(null)
+    rescheduleDetection(input, stateUpdater)
+    return
   }
-  rescheduleDetection(input, stateUpdater)
+}
+
+/** Asserts that something isn't an array */
+function assertIsNotArray<T>(
+  val: T | T[],
+  name = "something"
+): asserts val is T {
+  if (Array.isArray(val)) {
+    throw new AssertionError({
+      message: `Expected ${name} to NOT be an array, but received ${val}`
+    })
+  }
+}
+
+/** Asserts that something is defined */
+function assertIsDefined<T>(
+  val: T,
+  message?: string
+): asserts val is NonNullable<T> {
+  if (val === undefined || val === null) {
+    throw new AssertionError({
+      message:
+        message || `Expected something to be defined, but received ${val}`
+    })
+  }
 }
