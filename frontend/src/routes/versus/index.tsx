@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from "preact/hooks"
 import * as style from "./style.css"
 import VideoSelfie from "../../components/videoselfie"
 import * as face from "../../lib/face-reader"
-import FeatureRating from "../../components/feature-rating"
+import RatingBar from "../../components/rating-bar"
 
 interface FeatureRatingsProps {
   data: face.FeatureRatingsData | null
@@ -27,7 +27,7 @@ const FeatureRatings: FunctionalComponent<FeatureRatingsProps> = (
     for (const [k, v] of props.data.expressions) {
       expressionsValues.push(
         <li key={k}>
-          <b>{k}:</b> <FeatureRating value={v} />
+          <b>{k}:</b> <RatingBar value={v} />
           <span className="percentage">{` ${Math.trunc(v * 100)}%`}</span>
         </li>
       )
@@ -96,7 +96,7 @@ const Versus: FunctionalComponent = () => {
                 {`💁‍♀️ Okay, let's see some `}
                 <strong>{keyFeature}</strong>
                 <br />
-                <FeatureRating value={currentScore} />
+                <RatingBar value={currentScore} />
               </>
             ) : (
               <>
