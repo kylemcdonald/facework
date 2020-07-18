@@ -4,6 +4,7 @@ export interface UserMedia {
   stream: MediaStream | null
   error: MediaStreamError | null
 }
+
 // this is a simpler version of
 // https://github.com/vardius/react-user-media
 export function useUserMedia(
