@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.video-selfie-wrapper {
+  margin-bottom: 2rem;
+}
+
 .flex-row-wrap {
   display: flex;
   flex-flow: row wrap;

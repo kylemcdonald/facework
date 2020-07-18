@@ -49,7 +49,9 @@ const Versus: FunctionalComponent = () => {
         Get ready to <em>FACE OFF</em>.
       </p>
       <div class={style.flexRowWrap}>
-        <VideoSelfie key="selfie" onPlay={scheduleDetection} />
+        <div class={style.videoSelfieWrapper}>
+          <VideoSelfie key="selfie" onPlay={scheduleDetection} />
+        </div>
         <section class={style.accompaniment}>
           <span class={style.selfieStatus}>
             {keyFeatureScore === undefined ? (
