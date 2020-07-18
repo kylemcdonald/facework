@@ -7,7 +7,10 @@ export interface UserMedia {
 }
 
 export function useUserMedia(
-  constraints: MediaStreamConstraints = { audio: false, video: true }
+  constraints: MediaStreamConstraints = {
+    audio: false,
+    video: { facingMode: "user" }
+  }
 ): UserMedia {
   const [stream, setStream] = useState<MediaStream | null>(null)
   const [error, setError] = useState<MediaStreamError | null>(null)
