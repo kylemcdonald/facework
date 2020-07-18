@@ -65,6 +65,12 @@ const Versus: FunctionalComponent = () => {
                 {`💁‍♀️ Okay, let's see some `}
                 <strong>{keyFeatureScore.feature}</strong>
                 <br />
+                {featureRatingsData === null && (
+                  <>
+                    {`🕵🏼‍♀️ Wait, where'd you go?`}
+                    <br />
+                  </>
+                )}
                 <RatingBar key="progress" value={keyFeatureScore.score} />
               </>
             ) : (
