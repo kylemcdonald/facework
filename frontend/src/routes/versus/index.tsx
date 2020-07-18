@@ -23,13 +23,14 @@ const Versus: FunctionalComponent = () => {
       if (ratings !== null) {
         setKeyFeatureScore(prev => {
           if (prev !== undefined) {
+            // 10 is a magic number here, totally arbitrary
             const additive = (ratings.expressions.get(prev.feature) || 0) / 10
             return { ...prev, score: prev.score + additive }
           }
           // otherwise, init
           const keys = Array.from(ratings.expressions.keys())
           const newKey = keys[Math.round(Math.random() * keys.length - 1)]
-          console.log(`setting key feature to ${newKey}`)
+          console.debug(`setting key feature to ${newKey}`)
           return { feature: newKey, score: 0 }
         })
       }
