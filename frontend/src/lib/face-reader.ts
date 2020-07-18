@@ -1,5 +1,6 @@
 import * as faceapi from "face-api.js"
 import { AssertionError } from "assert"
+import { assertIsNotArray, assertIsDefined } from "./assert"
 
 export interface FeatureRatingsData {
   age: number
@@ -111,30 +112,5 @@ async function detect(
     stateUpdater(null)
     rescheduleDetection(input, stateUpdater)
     return
-  }
-}
-
-/** Asserts that something isn't an array */
-function assertIsNotArray<T>(
-  val: T | T[],
-  name = "something"
-): asserts val is T {
-  if (Array.isArray(val)) {
-    throw new AssertionError({
-      message: `Expected ${name} to NOT be an array, but received ${val}`
-    })
-  }
-}
-
-/** Asserts that something is defined */
-function assertIsDefined<T>(
-  val: T,
-  message?: string
-): asserts val is NonNullable<T> {
-  if (val === undefined || val === null) {
-    throw new AssertionError({
-      message:
-        message || `Expected something to be defined, but received ${val}`
-    })
   }
 }
