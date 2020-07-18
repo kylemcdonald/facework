@@ -1,3 +1,4 @@
 .self {
   display: flex;
+  max-width: 100%;
 }
