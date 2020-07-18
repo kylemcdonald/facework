@@ -1,11 +1,11 @@
-// this file is cribbed pretty directly from https://github.com/vardius/react-user-media
 import { useState, useEffect } from "preact/hooks"
 
 export interface UserMedia {
   stream: MediaStream | null
   error: MediaStreamError | null
 }
-
+// this is a simpler version of
+// https://github.com/vardius/react-user-media
 export function useUserMedia(
   constraints: MediaStreamConstraints = {
     audio: false,
