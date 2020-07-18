@@ -37,7 +37,7 @@ export async function initialize(): Promise<void> {
   faceInitialized = true
 }
 
-let requestAnimationFrameId: number | null = null
+let timeoutId: ReturnType<typeof setTimeout> | null = null
 
 type FeaturesUpdater = (ratings: FeatureRatingsData | null) => void
 
@@ -45,9 +45,9 @@ export function scheduleDetection(
   input: HTMLVideoElement,
   stateUpdater: FeaturesUpdater
 ): () => void {
-  requestAnimationFrameId = requestAnimationFrame(() =>
-    detect(input, stateUpdater)
-  )
+  // make the first detection run right away
+  const timeoutTime = timeoutId === null ? 0 : 150
+  timeoutId = setTimeout(() => detect(input, stateUpdater), timeoutTime)
   return stopDetection
 }
 
@@ -55,15 +55,15 @@ function rescheduleDetection(
   input: HTMLVideoElement,
   stateUpdater: FeaturesUpdater
 ): void {
-  if (requestAnimationFrameId !== null) {
+  if (timeoutId !== null) {
     scheduleDetection(input, stateUpdater)
   }
 }
 
 function stopDetection(): void {
-  if (requestAnimationFrameId !== null) {
-    cancelAnimationFrame(requestAnimationFrameId)
-    requestAnimationFrameId = null
+  if (timeoutId !== null) {
+    clearTimeout(timeoutId)
+    timeoutId = null
   }
 }
 
