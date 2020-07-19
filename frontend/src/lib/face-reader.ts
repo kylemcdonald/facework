@@ -28,12 +28,14 @@ export async function initialize(): Promise<void> {
     return
   }
   const netUri = "assets/models"
+  console.time("loadFaceModels")
   await Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri(netUri),
     faceapi.nets.faceRecognitionNet.loadFromUri(netUri),
     faceapi.nets.ageGenderNet.loadFromUri(netUri),
     faceapi.nets.faceExpressionNet.loadFromUri(netUri)
   ])
+  console.timeEnd("loadFaceModels")
   faceInitialized = true
 }
 
@@ -71,26 +73,33 @@ async function detect(
   input: HTMLVideoElement,
   stateUpdater: FeaturesUpdater
 ): Promise<void> {
+  console.time("totalDetect")
   try {
     assertIsDefined(
       faceapi.nets.tinyFaceDetector.params,
       "face detection model not yet loaded"
     )
 
+    console.time("detectFace")
     const detectedFace = await faceapi.detectSingleFace(input, tinyFaceOptions)
+    console.timeEnd("detectFace")
     assertIsDefined(detectedFace, "no face found in input")
 
+    console.time("extractFace")
     const faceCanvases = await faceapi.extractFaces(input, [detectedFace])
+    console.timeEnd("extractFace")
     const faceCanvas = faceCanvases.length > 0 ? faceCanvases[0] : undefined
     assertIsDefined(
       faceCanvas,
       "failed to extract detected face's canvas from input"
     )
 
+    console.time("recognizeFeatures")
     const [ageGenderPrediction, expressionRecognitions] = await Promise.all([
       faceapi.predictAgeAndGender(faceCanvas),
       faceapi.recognizeFaceExpressions(faceCanvas)
     ])
+    console.timeEnd("recognizeFeatures")
     assertIsNotArray(ageGenderPrediction, "age gender prediction")
     assertIsNotArray(expressionRecognitions, "expression recognitions")
 
@@ -106,11 +115,11 @@ async function detect(
     }
     console.debug(ratings)
     stateUpdater(ratings)
-    rescheduleDetection(input, stateUpdater)
   } catch (e) {
     console.debug(e.message)
     stateUpdater(null)
+  } finally {
     rescheduleDetection(input, stateUpdater)
-    return
+    console.timeEnd("totalDetect")
   }
 }
