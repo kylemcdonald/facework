@@ -48,7 +48,7 @@ export function scheduleDetection(
   stateUpdater: FeaturesUpdater
 ): () => void {
   // make the first detection run right away
-  const timeoutTime = timeoutId === null ? 0 : 150
+  const timeoutTime = timeoutId === null ? 0 : 200
   timeoutId = setTimeout(() => detect(input, stateUpdater), timeoutTime)
   return stopDetection
 }
