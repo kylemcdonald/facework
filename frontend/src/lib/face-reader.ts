@@ -12,7 +12,7 @@ export interface FeatureRatingsData {
 }
 
 const tinyFaceOptions = new faceapi.TinyFaceDetectorOptions({
-  inputSize: 160,
+  inputSize: 128,
   scoreThreshold: 0.5
 })
 
