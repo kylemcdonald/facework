@@ -30,5 +30,11 @@ export default {
       "src",
       "index"
     )
+
+    config.module.rules.push({
+      test: /workers\/.ts$/,
+      loader: "worker-loader",
+      options: { inline: true }
+    })
   }
 }
