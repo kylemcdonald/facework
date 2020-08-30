@@ -5,6 +5,26 @@ import VideoSelfie from "../../components/videoselfie"
 import * as FaceReader from "../../lib/face-reader"
 import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"
+import TimeLimitDisplay from "../../components/time-limit-display"
+
+type KeyFeatureScoring = {
+  /** the name of the feature we are judging */
+  feature?: string
+  /** the current score (between 0 and 1) */
+  score: number
+  /** how long does the user have to win this round? (in seconds) */
+  timeLimit: number
+  /** when did this round start? set with Date.now() */
+  startTime?: number
+  /** how much do we subtract from the score every detection frame? */
+  decayRate: number
+}
+
+const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
+  score: 0,
+  timeLimit: 60,
+  decayRate: 0.05
+})
 
 const Versus: FunctionalComponent = () => {
   useEffect(() => {
@@ -14,15 +34,15 @@ const Versus: FunctionalComponent = () => {
     featureRatingsData,
     setFeatureRatingsData
   ] = useState<FaceReader.FeatureRatingsData | null>(null)
-  const [keyFeatureScore, setKeyFeatureScore] = useState<
-    { feature: string; score: number } | undefined
-  >(undefined)
+  const [keyFeatureScoring, setKeyFeatureScoring] = useState<KeyFeatureScoring>(
+    InitKeyFeatureScoring()
+  )
   const updateFeatureRatings = useCallback(
     (ratings: FaceReader.FeatureRatingsData | null) => {
       setFeatureRatingsData(ratings)
       if (ratings !== null) {
-        setKeyFeatureScore(prev => {
-          if (prev !== undefined) {
+        setKeyFeatureScoring(prev => {
+          if (prev.feature !== undefined) {
             // 10 is a magic number here, totally arbitrary
             const additive = (ratings.expressions.get(prev.feature) || 0) / 10
             return { ...prev, score: prev.score + additive }
@@ -31,15 +51,17 @@ const Versus: FunctionalComponent = () => {
           const keys = Array.from(ratings.expressions.keys())
           const newKey = keys[Math.round(Math.random() * keys.length - 1)]
           console.debug(`setting key feature to ${newKey}`)
-          return { feature: newKey, score: 0 }
+          return { ...prev, feature: newKey }
         })
       }
     },
-    [setKeyFeatureScore]
+    [setKeyFeatureScoring]
   )
   const scheduleDetection = useCallback(
-    (input: HTMLVideoElement) =>
-      FaceReader.scheduleDetection(input, updateFeatureRatings),
+    (input: HTMLVideoElement) => {
+      FaceReader.scheduleDetection(input, updateFeatureRatings)
+      setKeyFeatureScoring(prev => ({ ...prev, startTime: Date.now() }))
+    },
     [updateFeatureRatings]
   )
   return (
@@ -54,16 +76,16 @@ const Versus: FunctionalComponent = () => {
         </div>
         <section class={style.accompaniment}>
           <span class={style.selfieStatus}>
-            {keyFeatureScore === undefined ? (
+            {keyFeatureScoring === undefined ? (
               <>
                 {`👀 Hmm, what do we have here...?`}
                 <br />
                 <RatingBar key="progress" value={undefined} />
               </>
-            ) : keyFeatureScore.score < 1.0 ? (
+            ) : keyFeatureScoring.score < 1.0 ? (
               <>
                 {`💁‍♀️ Okay, let's see some `}
-                <strong>{keyFeatureScore.feature}</strong>
+                <strong>{keyFeatureScoring.feature}</strong>
                 <br />
                 {featureRatingsData === null && (
                   <>
@@ -71,12 +93,18 @@ const Versus: FunctionalComponent = () => {
                     <br />
                   </>
                 )}
-                <RatingBar key="progress" value={keyFeatureScore.score} />
+                <RatingBar key="progress" value={keyFeatureScoring.score} />
+                <br />
+                <TimeLimitDisplay
+                  timeLimit={keyFeatureScoring.timeLimit}
+                  startTime={keyFeatureScoring.startTime}
+                  isPaused={false}
+                />
               </>
             ) : (
               <>
                 {`🥳 WOW! That was some great `}
-                <strong>{keyFeatureScore.feature}</strong>.
+                <strong>{keyFeatureScoring.feature}</strong>.
               </>
             )}
           </span>
