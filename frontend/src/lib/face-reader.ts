@@ -1,5 +1,4 @@
 import * as faceapi from "face-api.js"
-import { AssertionError } from "assert"
 import { assertIsNotArray, assertIsDefined } from "./assert"
 
 export interface FeatureRatingsData {
@@ -45,11 +44,11 @@ type FeaturesUpdater = (ratings: FeatureRatingsData | null) => void
 
 export function scheduleDetection(
   input: HTMLVideoElement,
-  stateUpdater: FeaturesUpdater
+  sendFace: (input: any) => void
 ): () => void {
   // make the first detection run right away
   const timeoutTime = timeoutId === null ? 0 : 200
-  timeoutId = setTimeout(() => detect(input, stateUpdater), timeoutTime)
+  timeoutId = setTimeout(() => sendFace(input), timeoutTime)
   return stopDetection
 }
 
@@ -69,10 +68,9 @@ function stopDetection(): void {
   }
 }
 
-async function detect(
-  input: HTMLVideoElement,
-  stateUpdater: FeaturesUpdater
-): Promise<void> {
+export async function detect(
+  input: faceapi.TNetInput
+): Promise<FeatureRatingsData | null> {
   console.time("totalDetect")
   try {
     assertIsDefined(
@@ -113,13 +111,10 @@ async function detect(
         Object.entries(expressionRecognitions)
       )
     }
-    console.debug(ratings)
-    stateUpdater(ratings)
-  } catch (e) {
-    console.debug(e.message)
-    stateUpdater(null)
-  } finally {
-    rescheduleDetection(input, stateUpdater)
     console.timeEnd("totalDetect")
+    return ratings
+  } catch (e) {
+    console.timeEnd("totalDetect")
+    return null
   }
 }

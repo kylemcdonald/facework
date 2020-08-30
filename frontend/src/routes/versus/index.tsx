@@ -5,6 +5,7 @@ import VideoSelfie from "../../components/videoselfie"
 import * as FaceReader from "../../lib/face-reader"
 import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"
+import { useFaceReader, sendFace } from "../../lib/face-reader-worker-relay"
 
 const Versus: FunctionalComponent = () => {
   useEffect(() => {
@@ -37,9 +38,9 @@ const Versus: FunctionalComponent = () => {
     },
     [setKeyFeatureScore]
   )
+  useFaceReader(updateFeatureRatings)
   const scheduleDetection = useCallback(
-    (input: HTMLVideoElement) =>
-      FaceReader.scheduleDetection(input, updateFeatureRatings),
+    (input: HTMLVideoElement) => FaceReader.scheduleDetection(input, sendFace),
     [updateFeatureRatings]
   )
   return (

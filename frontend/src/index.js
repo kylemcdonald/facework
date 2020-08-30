@@ -1,5 +1,7 @@
 import "./style/index.css"
 import App from "./components/app.tsx"
-import "./lib/run-worker"
+import { createWorker } from "./lib/face-reader-worker-relay"
+
+createWorker()
 
 export default App
