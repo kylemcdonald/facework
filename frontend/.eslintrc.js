@@ -32,6 +32,12 @@ module.exports = {
       rules: {
         "@typescript-eslint/explicit-function-return-type": "off"
       }
+    },
+    {
+      files: ["*.tsx"],
+      rules: {
+        "react/prop-types": 0,
+      }
     }
   ]
 }
