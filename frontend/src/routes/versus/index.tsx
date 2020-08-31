@@ -22,7 +22,7 @@ type KeyFeatureScoring = {
 
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
   score: 0,
-  timeLimit: 60,
+  timeLimit: 30,
   decayRate: 0.05
 })
 
