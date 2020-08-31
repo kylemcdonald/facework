@@ -5,7 +5,7 @@ import VideoSelfie from "../../components/videoselfie"
 import * as FaceReader from "../../lib/face-reader"
 import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"
-import TimeLimitDisplay from "../../components/time-limit-display"
+import TimeLimitDisplay, { timeLeft } from "../../components/time-limit-display"
 
 type KeyFeatureScoring = {
   /** the name of the feature we are judging */
@@ -38,29 +38,39 @@ const Versus: FunctionalComponent = () => {
     InitKeyFeatureScoring()
   )
   const updateFeatureRatings = useCallback(
-    (ratings: FaceReader.FeatureRatingsData | null) => {
+    (ratings: FaceReader.FeatureRatingsData | null): boolean => {
+      let keepGoing = true
       setFeatureRatingsData(ratings)
-      if (ratings !== null) {
-        setKeyFeatureScoring(prev => {
-          if (prev.feature !== undefined) {
-            // 10 is a magic number here, totally arbitrary
-            const additive = (ratings.expressions.get(prev.feature) || 0) / 10
-            return { ...prev, score: prev.score + additive }
+      setKeyFeatureScoring(prev => {
+        keepGoing = isPastTimeLimit(prev) ? false : true
+        // if no new ratings, don't update the score
+        if (ratings === null) {
+          return prev
+        }
+        if (prev.feature !== undefined) {
+          // 10 is a magic number here, totally arbitrary
+          const additive = (ratings.expressions.get(prev.feature) || 0) / 10
+          return {
+            ...prev,
+            score: prev.score + additive
           }
-          // otherwise, init
-          const keys = Array.from(ratings.expressions.keys())
-          const newKey = keys[Math.round(Math.random() * keys.length - 1)]
-          console.debug(`setting key feature to ${newKey}`)
-          return { ...prev, feature: newKey }
-        })
-      }
+        }
+        // otherwise, init
+        const keys = Array.from(ratings.expressions.keys())
+        const newKey = keys[Math.round(Math.random() * keys.length - 1)]
+        console.debug(`setting key feature to ${newKey}`)
+        return { ...prev, feature: newKey, startTime: Date.now() }
+      })
+
+      if (!keepGoing) console.debug("past time limit, stopping detections")
+      // false for stop scheduling, true for keep scheduling
+      return keepGoing
     },
     [setKeyFeatureScoring]
   )
   const scheduleDetection = useCallback(
     (input: HTMLVideoElement) => {
       FaceReader.scheduleDetection(input, updateFeatureRatings)
-      setKeyFeatureScoring(prev => ({ ...prev, startTime: Date.now() }))
     },
     [updateFeatureRatings]
   )
@@ -76,13 +86,20 @@ const Versus: FunctionalComponent = () => {
         </div>
         <section class={style.accompaniment}>
           <span class={style.selfieStatus}>
-            {keyFeatureScoring === undefined ? (
+            {keyFeatureScoring.feature === undefined ? (
               <>
                 {`👀 Hmm, what do we have here...?`}
                 <br />
                 <RatingBar key="progress" value={undefined} />
               </>
-            ) : keyFeatureScoring.score < 1.0 ? (
+            ) : keyFeatureScoring.score >= 1.0 ? (
+              <>
+                {`🥳 WOW! That was some great `}
+                <strong>{keyFeatureScoring.feature}</strong>.
+              </>
+            ) : isPastTimeLimit(keyFeatureScoring) ? (
+              <>{`🙅‍♀️ Yikes! You're out of time!`}</>
+            ) : (
               <>
                 {`💁‍♀️ Okay, let's see some `}
                 <strong>{keyFeatureScoring.feature}</strong>
@@ -101,11 +118,6 @@ const Versus: FunctionalComponent = () => {
                   isPaused={false}
                 />
               </>
-            ) : (
-              <>
-                {`🥳 WOW! That was some great `}
-                <strong>{keyFeatureScoring.feature}</strong>.
-              </>
             )}
           </span>
           <details>
@@ -116,6 +128,14 @@ const Versus: FunctionalComponent = () => {
       </div>
     </main>
   )
+}
+
+function isPastTimeLimit(scoring: KeyFeatureScoring): boolean {
+  const { startTime, timeLimit } = scoring
+  if (startTime === undefined) {
+    return false
+  }
+  return timeLeft(startTime, timeLimit) <= 0
 }
 
 export default Versus

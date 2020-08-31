@@ -41,7 +41,9 @@ export async function initialize(): Promise<void> {
 
 let timeoutId: ReturnType<typeof setTimeout> | null = null
 
-type FeaturesUpdater = (ratings: FeatureRatingsData | null) => void
+/** Function that sets state in game,
+ * then returns if another detection cycle is wanted */
+type FeaturesUpdater = (ratings: FeatureRatingsData | null) => boolean
 
 export function scheduleDetection(
   input: HTMLVideoElement,
@@ -73,6 +75,7 @@ async function detect(
   input: HTMLVideoElement,
   stateUpdater: FeaturesUpdater
 ): Promise<void> {
+  let shouldResched = true
   console.time("totalDetect")
   try {
     assertIsDefined(
@@ -114,12 +117,14 @@ async function detect(
       )
     }
     console.debug(ratings)
-    stateUpdater(ratings)
+    shouldResched = stateUpdater(ratings)
   } catch (e) {
     console.debug(e.message)
-    stateUpdater(null)
+    shouldResched = stateUpdater(null)
   } finally {
-    rescheduleDetection(input, stateUpdater)
+    if (shouldResched) {
+      rescheduleDetection(input, stateUpdater)
+    }
     console.timeEnd("totalDetect")
   }
 }

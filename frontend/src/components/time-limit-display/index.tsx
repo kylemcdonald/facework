@@ -15,7 +15,7 @@ const TimeLimitDisplay: FunctionalComponent<TimeLimitDisplayProps> = props => {
   )
 }
 
-function timeLeft(startTime: number, timeLimit: number): number {
+export function timeLeft(startTime: number, timeLimit: number): number {
   // convert to ms
   const timeLimitMs = timeLimit * 1000
   // format into whole seconds
