@@ -52,7 +52,8 @@ const Versus: FunctionalComponent = () => {
           const additive = (ratings.expressions.get(prev.feature) || 0) / 10
           return {
             ...prev,
-            score: prev.score + additive
+            // never go below 0
+            score: Math.max(prev.score + additive, 0)
           }
         }
         // otherwise, init
