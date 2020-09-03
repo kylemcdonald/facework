@@ -1,12 +1,12 @@
 import { useEffect } from "preact/hooks"
 import FaceReaderWorker from "worker-loader!../workers/face-reader-worker"
 import { FeatureRatingsData } from "./face-reader"
-import { OutgoingMessage } from "../workers/face-reader-worker"
-import { createCanvasFromMedia, toNetInput, imageToSquare } from "face-api.js"
-import { assertIsNotArray } from "./assert"
-import { browser as tfBrowser, tensor3d } from "@tensorflow/tfjs-core"
+import { WorkerResponse } from "../workers/face-reader-worker"
+import { assertIsDefined } from "./assert"
 
 let worker: FaceReaderWorker
+// create this once for use inside sendFace()
+const fromPixels2DContext = document.createElement("canvas").getContext("2d")
 
 export function createWorker(): void {
   worker = worker ?? new FaceReaderWorker()
@@ -17,20 +17,16 @@ export function initWorker(): void {
 }
 
 export const sendFace: (input: HTMLVideoElement) => void = async input => {
-  const canvas = createCanvasFromMedia(input)
-  const tensor = tfBrowser.fromPixels(
-    imageToSquare(canvas, Math.min(canvas.width, canvas.height), false)
-  )
-  const bytes = await tensor.bytes()
-  assertIsNotArray(bytes, "ohno")
+  assertIsDefined(fromPixels2DContext)
+  const width = input.videoWidth,
+    height = input.videoHeight
+  fromPixels2DContext.canvas.width = width
+  fromPixels2DContext.canvas.height = height
+  fromPixels2DContext.drawImage(input, 0, 0, width, height)
+  const buffer = fromPixels2DContext.getImageData(0, 0, width, height).data
+    .buffer
 
-  worker.postMessage(
-    {
-      kind: "read-face",
-      data: bytes
-    },
-    [bytes]
-  )
+  worker.postMessage({ kind: "read-face", buffer, width, height }, [buffer])
 }
 
 export function useFaceReader(
@@ -39,7 +35,7 @@ export function useFaceReader(
   //use effect
   useEffect(() => {
     worker.addEventListener("message", m => {
-      const msg: OutgoingMessage = m.data
+      const msg: WorkerResponse = m.data
       if (msg.kind === "face-read") {
         faceReadCallback(msg.ratings)
       }
