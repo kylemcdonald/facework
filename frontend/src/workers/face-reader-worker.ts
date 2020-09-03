@@ -1,9 +1,14 @@
-import * as TF from "@tensorflow/tfjs-core"
-import { tensor3d, tensor4d } from "@tensorflow/tfjs-core"
+import assert from "assert"
+import * as tf from "@tensorflow/tfjs-core"
+import "@tensorflow/tfjs-backend-wasm"
+import { loadGraphModel, GraphModel } from "@tensorflow/tfjs-converter"
+import * as blazeface from "@tensorflow-models/blazeface"
 import {
   convertArrayBufferRGBAToUInt8RGB,
   preprocess
 } from "../lib/arraybuffer-helpers"
+import { ArrayMap } from "@tensorflow/tfjs-core/dist/types"
+import { FeatureRatingsData } from "../lib/face-reader"
 
 // scale up the detection from blazeface to capture more context
 const SCALE_FACTOR = 1.25
@@ -27,10 +32,14 @@ export type WorkerResponse =
   | { kind: "model-loaded" }
   | {
       kind: "face-read"
-      ratings: FaceReader.FeatureRatingsData | null
+      ratings: FeatureRatingsData | null
     }
 
-const readFace = (data: ReadFaceRequest) => {
+const readFace = async (
+  data: ReadFaceRequest,
+  detector: blazeface.BlazeFaceModel,
+  model: GraphModel
+): Promise<ArrayMap["R4"] | null> => {
   const { buffer, width, height } = data
 
   // ArrayBuffer is untyped and in RGBA format, so we convert it to a
@@ -52,41 +61,62 @@ const readFace = (data: ReadFaceRequest) => {
     const detection = detections[0]
 
     // raw detection
-    const [x1, y1] = detection.topLeft
-    const [x2, y2] = detection.bottomRight
+    // don't keep this `as`
+    const [x1, y1] = detection.topLeft as [number, number]
+    // don't keep this `as`
+    const [x2, y2] = detection.bottomRight as [number, number]
 
     // scaled and equal aspect detection
     const size = Math.max(x2 - x1, y2 - y1) * SCALE_FACTOR
     const cx = (x1 + x2) / 2
     const cy = (y1 + y2) / 2
-    const x = cx - size / 2
-    const y = cy - size / 2
+    // const x = cx - size / 2
+    // const y = cy - size / 2
 
     const batch = preprocess(input, cx, cy, size, width, height)
     const modelStart = performance.now()
-    const prediction = model.predict(batch).arraySync()[0]
+    const amiguouslyFormedPrediction = model.predict(batch)
+    const singlePrediction = (amiguouslyFormedPrediction instanceof tf.Tensor
+      ? amiguouslyFormedPrediction
+      : Array.isArray(amiguouslyFormedPrediction)
+      ? amiguouslyFormedPrediction[0]
+      : amiguouslyFormedPrediction[
+          Object.keys(amiguouslyFormedPrediction)[0]
+        ]) as tf.Tensor4D
+    const prediction = singlePrediction.arraySync()
     const modelDuration = performance.now() - modelStart
 
     console.debug("model: " + modelDuration.toFixed() + "ms")
     console.debug("Tensors: " + tf.memory().numTensors)
-
+    tf.engine().startScope()
     return prediction
   }
+  tf.engine().startScope()
+  return null
 }
 
-const handleMessage = async (msg: WorkerRequest): Promise<void> => {
-  switch (msg.kind) {
-    case "load-model": {
-      await FaceReader.initialize()
-      ctx.postMessage({ kind: "model-loaded" })
-      return
-    }
-    case "read-face": {
-      const ratings = readFace(msg)
+const prepare = async (): Promise<void> => {
+  const loadStart = performance.now()
+  await tf.setBackend("wasm")
+  const detector = await blazeface.load()
+  const model = await loadGraphModel(
+    "assets/models/mobilenetv2-ferplus-0.830/model.json"
+  )
+  const loadDuration = performance.now() - loadStart
+  console.debug("model load: " + loadDuration.toFixed() + "ms")
+  ctx.addEventListener("message", e => {
+    if (e.data.kind) {
+      const ratings = readFace(e.data, detector, model)
       ctx.postMessage({ kind: "face-read", ratings })
-      return
     }
-  }
+  })
 }
 
-ctx.addEventListener("message", e => handleMessage(e.data))
+const handleFirstMessage = async (msg: WorkerRequest): Promise<void> => {
+  assert(msg.kind === "load-model", "first message wasn't a 'load-model'")
+  await prepare()
+  ctx.postMessage({ kind: "model-loaded" })
+  return
+}
+
+ctx.addEventListener("message", e => handleFirstMessage(e.data), { once: true })

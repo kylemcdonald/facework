@@ -1,4 +1,4 @@
-import { tf } from "face-api.js"
+import * as tf from "@tensorflow/tfjs-core"
 
 const IMG_SIZE: [number, number] = [96, 96]
 const SUB_FACTOR = 127.5
@@ -36,7 +36,7 @@ export function preprocess(
   size: number,
   width: number,
   height: number
-) {
+): tf.Tensor4D {
   return tf.tidy(() => {
     const top = cy - size / 2
     const left = cx - size / 2
@@ -46,7 +46,7 @@ export function preprocess(
     const boxIndices = [0]
     return tf.image
       .cropAndResize(img.toFloat().expandDims(), boxes, boxIndices, IMG_SIZE)
-      .sub(SUB_FACTOR)
-      .div(DIV_FACTOR)
+      .sub<tf.Tensor4D>(SUB_FACTOR)
+      .div<tf.Tensor4D>(DIV_FACTOR)
   })
 }

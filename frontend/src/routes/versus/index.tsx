@@ -5,11 +5,15 @@ import VideoSelfie from "../../components/videoselfie"
 import * as FaceReader from "../../lib/face-reader"
 import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"
-import { useFaceReader, sendFace } from "../../lib/face-reader-worker-relay"
+import {
+  useFaceReader,
+  sendFace,
+  initWorker
+} from "../../lib/face-reader-worker-relay"
 
 const Versus: FunctionalComponent = () => {
   useEffect(() => {
-    FaceReader.initialize()
+    initWorker()
   }, [])
   const [
     featureRatingsData,
