@@ -7,7 +7,6 @@ import {
   convertArrayBufferRGBAToUInt8RGB,
   preprocess
 } from "../lib/arraybuffer-helpers"
-import { ArrayMap } from "@tensorflow/tfjs-core/dist/types"
 import { FeatureRatingsData } from "../lib/face-reader"
 
 // scale up the detection from blazeface to capture more context
@@ -39,7 +38,7 @@ const readFace = async (
   data: ReadFaceRequest,
   detector: blazeface.BlazeFaceModel,
   model: GraphModel
-): Promise<ArrayMap["R4"] | null> => {
+): Promise<ReadonlyArray<number> | null> => {
   const { buffer, width, height } = data
 
   // ArrayBuffer is untyped and in RGBA format, so we convert it to a
@@ -75,15 +74,9 @@ const readFace = async (
 
     const batch = preprocess(input, cx, cy, size, width, height)
     const modelStart = performance.now()
-    const amiguouslyFormedPrediction = model.predict(batch)
-    const singlePrediction = (amiguouslyFormedPrediction instanceof tf.Tensor
-      ? amiguouslyFormedPrediction
-      : Array.isArray(amiguouslyFormedPrediction)
-      ? amiguouslyFormedPrediction[0]
-      : amiguouslyFormedPrediction[
-          Object.keys(amiguouslyFormedPrediction)[0]
-        ]) as tf.Tensor4D
-    const prediction = singlePrediction.arraySync()
+    const batchPrediction = model.predict(batch) as tf.Tensor2D
+    // [0] because there is only one element in this batch
+    const prediction = batchPrediction.arraySync()[0]
     const modelDuration = performance.now() - modelStart
 
     console.debug("model: " + modelDuration.toFixed() + "ms")
