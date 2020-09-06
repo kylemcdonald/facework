@@ -82,10 +82,10 @@ const readFace = async (
 
     console.debug("model: " + modelDuration.toFixed() + "ms")
     console.debug("Tensors: " + tf.memory().numTensors)
-    tf.engine().startScope()
+    tf.engine().endScope()
     return prediction
   }
-  tf.engine().startScope()
+  tf.engine().endScope()
   return null
 }
 
