@@ -22,16 +22,7 @@ const FeatureRatings: FunctionalComponent<FeatureRatingsProps> = (
     }
     return (
       <div class={style.featureRatings}>
-        <ul>
-          <li key="age">
-            <b>age:</b> {props.data.age}
-          </li>
-          <li key="gender">
-            <b>{props.data.gender.gender}:</b>
-            {` ${props.data.gender.probability}`}
-          </li>
-          {expressionsValues}
-        </ul>
+        <ul>{expressionsValues}</ul>
       </div>
     )
   }

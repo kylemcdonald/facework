@@ -1,9 +1,4 @@
 export interface FeatureRatingsData {
-  age: number
-  gender: {
-    gender: "male" | "female"
-    probability: number
-  }
   expressions: ReadonlyMap<string, number>
 }
 
