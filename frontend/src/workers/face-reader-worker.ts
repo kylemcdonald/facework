@@ -12,6 +12,7 @@ import { FeatureRatingsData } from "../lib/face-reader"
 // scale up the detection from blazeface to capture more context
 const SCALE_FACTOR = 1.25
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ctx: Worker = self as any
 
 type ReadFaceRequest = {
