@@ -35,6 +35,17 @@ export type WorkerResponse =
       ratings: FeatureRatingsData | null
     }
 
+const labels = [
+  "neutral",
+  "happiness",
+  "surprise",
+  "sadness",
+  "anger",
+  "disgust",
+  "fear",
+  "contempt"
+]
+
 const readFace = async (
   data: ReadFaceRequest,
   detector: blazeface.BlazeFaceModel,
@@ -89,6 +100,21 @@ const readFace = async (
   return null
 }
 
+const extractRatings = (
+  prediction: ReadonlyArray<number> | null
+): FeatureRatingsData | null => {
+  if (prediction === null) {
+    return null
+  }
+
+  const pairs = labels.map<[string, number]>((el, i) => [
+    el,
+    prediction[i] * 100
+  ])
+  const expressions = new Map<string, number>(pairs)
+  return { expressions }
+}
+
 const prepare = async (): Promise<void> => {
   const loadStart = performance.now()
   await tf.setBackend("wasm")
@@ -98,9 +124,10 @@ const prepare = async (): Promise<void> => {
   )
   const loadDuration = performance.now() - loadStart
   console.debug("model load: " + loadDuration.toFixed() + "ms")
-  ctx.addEventListener("message", e => {
+  ctx.addEventListener("message", async e => {
     if (e.data.kind) {
-      const ratings = readFace(e.data, detector, model)
+      const prediction = await readFace(e.data, detector, model)
+      const ratings = extractRatings(prediction)
       ctx.postMessage({ kind: "face-read", ratings })
     }
   })
