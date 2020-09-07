@@ -15,6 +15,17 @@ const SCALE_FACTOR = 1.25
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ctx: Worker = self as any
 
+/**
+ * the fact that i've committed this file to the assets
+ * repo is terrible but i've spent too much time fighting
+ * webpack and typescript to let me import it directly so...
+ * here we are.
+ *
+ * If our version of tfjs-backend-wasm ever changes, we'll
+ * need to update this asset file
+ */
+setWasmPath("assets/wasm/tfjs-backend-wasm-1.7.4.wasm")
+
 type ReadFaceRequest = {
   kind: "read-face"
   buffer: ArrayBufferLike
@@ -117,17 +128,6 @@ const extractRatings = (
 
 const prepare = async (): Promise<void> => {
   const loadStart = performance.now()
-
-  /**
-   * the fact that i've committed this file to the assets
-   * repo is terrible but i've spent too much time fighting
-   * webpack and typescript to let me import it directly so...
-   * here we are.
-   *
-   * If our version of tfjs-backend-wasm ever changes, we'll
-   * need to update that asset file
-   */
-  setWasmPath("assets/wasm/tfjs-backend-wasm-1.7.4.wasm")
   await tf.setBackend("wasm")
   const detector = await blazeface.load()
   const model = await loadGraphModel(
