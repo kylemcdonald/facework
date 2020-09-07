@@ -56,7 +56,7 @@ const Versus: FunctionalComponent = () => {
           // 10 is a magic number here, totally arbitrary
           const additive = (ratings.expressions.get(prev.feature) || 0) / 10
           // never go below 0
-          const newScore = Math.max(prev.score + additive, 0)
+          const newScore = Math.max(prev.score + additive - prev.decayRate, 0)
           keepGoing = newScore < 1.0 && !isPastTimeLimit(prev)
           return {
             ...prev,
