@@ -1,11 +1,15 @@
 import { FunctionalComponent, h } from "preact"
-import { useEffect, useState, useCallback } from "preact/hooks"
-import * as style from "./style.css"
+import { useState, useCallback, useRef } from "preact/hooks"
+import {
+  useFaceReader,
+  sendFace,
+  FeatureRatingsData
+} from "../../lib/face-reader-worker-relay"
 import VideoSelfie from "../../components/videoselfie"
-import * as FaceReader from "../../lib/face-reader"
 import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"
 import TimeLimitDisplay, { timeLeft } from "../../components/time-limit-display"
+import * as style from "./style.css"
 
 type KeyFeatureScoring = {
   /** the name of the feature we are judging */
@@ -27,22 +31,23 @@ const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
 })
 
 const Versus: FunctionalComponent = () => {
-  useEffect(() => {
-    FaceReader.initialize()
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const onPlay = useCallback((input: HTMLVideoElement) => {
+    videoRef.current = input
+    sendFace(videoRef.current)
   }, [])
   const [
     featureRatingsData,
     setFeatureRatingsData
-  ] = useState<FaceReader.FeatureRatingsData | null>(null)
+  ] = useState<FeatureRatingsData | null>(null)
   const [keyFeatureScoring, setKeyFeatureScoring] = useState<KeyFeatureScoring>(
     InitKeyFeatureScoring()
   )
   const updateFeatureRatings = useCallback(
-    (ratings: FaceReader.FeatureRatingsData | null): boolean => {
+    (ratings: FeatureRatingsData | null): void => {
       let keepGoing = true
       setFeatureRatingsData(ratings)
       setKeyFeatureScoring(prev => {
-        keepGoing = isPastTimeLimit(prev) ? false : true
         // if no new ratings, don't update the score
         if (ratings === null) {
           return prev
@@ -50,31 +55,29 @@ const Versus: FunctionalComponent = () => {
         if (prev.feature !== undefined) {
           // 10 is a magic number here, totally arbitrary
           const additive = (ratings.expressions.get(prev.feature) || 0) / 10
+          // never go below 0
+          const newScore = Math.max(prev.score + additive, 0)
+          keepGoing = newScore < 1.0 && !isPastTimeLimit(prev)
           return {
             ...prev,
-            // never go below 0
-            score: Math.max(prev.score + additive, 0)
+            score: newScore
           }
         }
         // otherwise, init
+        keepGoing = true
         const keys = Array.from(ratings.expressions.keys())
         const newKey = keys[Math.round(Math.random() * keys.length - 1)]
         console.debug(`setting key feature to ${newKey}`)
         return { ...prev, feature: newKey, startTime: Date.now() }
       })
 
-      if (!keepGoing) console.debug("past time limit, stopping detections")
-      // false for stop scheduling, true for keep scheduling
-      return keepGoing
+      if (keepGoing && videoRef.current !== null) {
+        sendFace(videoRef.current)
+      }
     },
     [setKeyFeatureScoring]
   )
-  const scheduleDetection = useCallback(
-    (input: HTMLVideoElement) => {
-      FaceReader.scheduleDetection(input, updateFeatureRatings)
-    },
-    [updateFeatureRatings]
-  )
+  useFaceReader(updateFeatureRatings)
   return (
     <main class={style.versus}>
       <h1>Versus</h1>
@@ -83,7 +86,7 @@ const Versus: FunctionalComponent = () => {
       </p>
       <div class={style.flexRowWrap}>
         <div class={style.videoSelfieWrapper}>
-          <VideoSelfie key="selfie" onPlay={scheduleDetection} />
+          <VideoSelfie key="selfie" onPlay={onPlay} />
         </div>
         <section class={style.accompaniment}>
           <span class={style.selfieStatus}>

@@ -28,7 +28,10 @@
     "*.css.d.ts"
   ],
   "dependencies": {
-    "face-api.js": "^0.22.2",
+    "@tensorflow-models/blazeface": "0.0.5",
+    "@tensorflow/tfjs-backend-wasm": "^1.5.2-alpha1",
+    "@tensorflow/tfjs-converter": "^1.5.2",
+    "@tensorflow/tfjs-core": "^1.5.2",
     "preact": "^10.3.1",
     "preact-jsx-chai": "^3.0.0",
     "preact-markup": "^2.0.0",
