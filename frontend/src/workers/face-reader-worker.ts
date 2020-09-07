@@ -1,4 +1,3 @@
-import assert from "assert"
 import * as tf from "@tensorflow/tfjs-core"
 import { setWasmPath } from "@tensorflow/tfjs-backend-wasm"
 import { loadGraphModel, GraphModel } from "@tensorflow/tfjs-converter"
