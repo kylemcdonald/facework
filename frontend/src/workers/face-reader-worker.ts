@@ -7,7 +7,7 @@ import {
   convertArrayBufferRGBAToUInt8RGB,
   preprocess
 } from "../lib/arraybuffer-helpers"
-import { FeatureRatingsData } from "../lib/face-reader"
+import { FeatureRatingsData } from "../lib/face-reader-worker-relay"
 
 // scale up the detection from blazeface to capture more context
 const SCALE_FACTOR = 1.25
@@ -118,15 +118,12 @@ const extractRatings = (
     return null
   }
 
-  const pairs = labels.map<[string, number]>((el, i) => [
-    el,
-    prediction[i] * 100
-  ])
+  const pairs = labels.map<[string, number]>((el, i) => [el, prediction[i]])
   const expressions = new Map<string, number>(pairs)
   return { expressions }
 }
 
-const prepare = async (): Promise<void> => {
+async function prepare(): Promise<void> {
   const loadStart = performance.now()
   await tf.setBackend("wasm")
   const detector = await blazeface.load()
@@ -142,13 +139,24 @@ const prepare = async (): Promise<void> => {
       ctx.postMessage({ kind: "face-read", ratings })
     }
   })
+  ctx.removeEventListener("message", handleFirstMessagesWrapper)
 }
 
-const handleFirstMessage = async (msg: WorkerRequest): Promise<void> => {
-  assert(msg.kind === "load-model", "first message wasn't a 'load-model'")
-  await prepare()
-  ctx.postMessage({ kind: "model-loaded" })
-  return
+async function handleFirstMessages(msg: WorkerRequest): Promise<void> {
+  if (msg.kind === "read-face") {
+    console.warn("face read requested before model is loaded")
+    // send a null answer back on the next tick
+    setTimeout(() => ctx.postMessage({ kind: "face-read", ratings: null }), 0)
+    return
+  }
+  if (msg.kind === "load-model") {
+    await prepare()
+    ctx.postMessage({ kind: "model-loaded" })
+  }
 }
 
-ctx.addEventListener("message", e => handleFirstMessage(e.data), { once: true })
+function handleFirstMessagesWrapper(e: MessageEvent): void {
+  handleFirstMessages(e.data)
+}
+
+ctx.addEventListener("message", handleFirstMessagesWrapper)

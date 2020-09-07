@@ -1,8 +1,11 @@
 import { useEffect } from "preact/hooks"
 import FaceReaderWorker from "worker-loader!../workers/face-reader-worker"
-import { FeatureRatingsData } from "./face-reader"
 import { WorkerResponse } from "../workers/face-reader-worker"
 import { assertIsDefined } from "./assert"
+
+export interface FeatureRatingsData {
+  expressions: ReadonlyMap<string, number>
+}
 
 let worker: FaceReaderWorker
 // create this once for use inside sendFace()
@@ -32,13 +35,14 @@ export const sendFace: (input: HTMLVideoElement) => void = async input => {
 export function useFaceReader(
   faceReadCallback: (ratings: FeatureRatingsData | null) => void
 ): void {
-  //use effect
   useEffect(() => {
+    createWorker()
     worker.addEventListener("message", m => {
       const msg: WorkerResponse = m.data
       if (msg.kind === "face-read") {
         faceReadCallback(msg.ratings)
       }
     })
+    initWorker()
   }, [])
 }

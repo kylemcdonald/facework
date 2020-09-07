@@ -1,52 +1,58 @@
 import { FunctionalComponent, h } from "preact"
-import { useEffect, useState, useCallback } from "preact/hooks"
+import { useState, useCallback, useRef } from "preact/hooks"
 import * as style from "./style.css"
 import VideoSelfie from "../../components/videoselfie"
-import * as FaceReader from "../../lib/face-reader"
 import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"
 import {
   useFaceReader,
   sendFace,
-  initWorker
+  FeatureRatingsData
 } from "../../lib/face-reader-worker-relay"
 
 const Versus: FunctionalComponent = () => {
-  useEffect(() => {
-    initWorker()
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const onPlay = useCallback((input: HTMLVideoElement) => {
+    videoRef.current = input
+    sendFace(videoRef.current)
   }, [])
   const [
     featureRatingsData,
     setFeatureRatingsData
-  ] = useState<FaceReader.FeatureRatingsData | null>(null)
+  ] = useState<FeatureRatingsData | null>(null)
   const [keyFeatureScore, setKeyFeatureScore] = useState<
     { feature: string; score: number } | undefined
   >(undefined)
   const updateFeatureRatings = useCallback(
-    (ratings: FaceReader.FeatureRatingsData | null) => {
+    (ratings: FeatureRatingsData | null) => {
       setFeatureRatingsData(ratings)
+      let shouldSendAgain = false
       if (ratings !== null) {
         setKeyFeatureScore(prev => {
           if (prev !== undefined) {
             // 10 is a magic number here, totally arbitrary
             const additive = (ratings.expressions.get(prev.feature) || 0) / 10
-            return { ...prev, score: prev.score + additive }
+            const newScore = prev.score + additive
+            if (newScore < 1.0) {
+              shouldSendAgain = true
+            }
+            return { ...prev, score: newScore }
           }
           // otherwise, init
+          shouldSendAgain = true
           const keys = Array.from(ratings.expressions.keys())
           const newKey = keys[Math.round(Math.random() * keys.length - 1)]
           console.debug(`setting key feature to ${newKey}`)
           return { feature: newKey, score: 0 }
         })
       }
+      if (shouldSendAgain && videoRef.current !== null) {
+        sendFace(videoRef.current)
+      }
     },
     [setKeyFeatureScore]
   )
   useFaceReader(updateFeatureRatings)
-  const scheduleDetection = useCallback(
-    (input: HTMLVideoElement) => FaceReader.scheduleDetection(input, sendFace),
-    [updateFeatureRatings]
-  )
   return (
     <main class={style.versus}>
       <h1>Versus</h1>
@@ -55,7 +61,7 @@ const Versus: FunctionalComponent = () => {
       </p>
       <div class={style.flexRowWrap}>
         <div class={style.videoSelfieWrapper}>
-          <VideoSelfie key="selfie" onPlay={scheduleDetection} />
+          <VideoSelfie key="selfie" onPlay={onPlay} />
         </div>
         <section class={style.accompaniment}>
           <span class={style.selfieStatus}>
