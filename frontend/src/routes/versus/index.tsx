@@ -25,7 +25,7 @@ type KeyFeatureScoring = {
 }
 
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
-  score: 0,
+  score: Number.MIN_VALUE,
   timeLimit: 30,
   decayRate: 0.05
 })
@@ -54,9 +54,12 @@ const Versus: FunctionalComponent = () => {
         }
         if (prev.feature !== undefined) {
           // 10 is a magic number here, totally arbitrary
-          const additive = (ratings.expressions.get(prev.feature) || 0) / 10
-          // never go below 0
-          const newScore = Math.max(prev.score + additive - prev.decayRate, 0)
+          const additive = (ratings.expressions.get(prev.feature) ?? 0) / 10
+          // never go below MIN_VALUE
+          const newScore = Math.max(
+            prev.score + additive - prev.decayRate,
+            Number.MIN_VALUE
+          )
           keepGoing = newScore < 1.0 && !isPastTimeLimit(prev)
           return {
             ...prev,
