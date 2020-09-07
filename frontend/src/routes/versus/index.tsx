@@ -27,7 +27,7 @@ type KeyFeatureScoring = {
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
   score: Number.MIN_VALUE,
   timeLimit: 30,
-  decayRate: 0.05
+  decayRate: 0.025
 })
 
 const Versus: FunctionalComponent = () => {
