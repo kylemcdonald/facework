@@ -7,6 +7,7 @@ import {
   preprocess
 } from "../lib/arraybuffer-helpers"
 import { FeatureRatingsData } from "../lib/face-reader-worker-relay"
+import expressionsLabels from "../lib/face-reader-labels"
 
 // scale up the detection from blazeface to capture more context
 const SCALE_FACTOR = 1.25
@@ -44,17 +45,6 @@ export type WorkerResponse =
       kind: "face-read"
       ratings: FeatureRatingsData | null
     }
-
-const labels = [
-  "neutral",
-  "happiness",
-  "surprise",
-  "sadness",
-  "anger",
-  "disgust",
-  "fear",
-  "contempt"
-]
 
 const readFace = async (
   data: ReadFaceRequest,
@@ -116,7 +106,7 @@ const extractRatings = (
   if (prediction === null) {
     return null
   }
-
+  const labels = Array.from(expressionsLabels)
   const pairs = labels.map<[string, number]>((el, i) => [el, prediction[i]])
   const expressions = new Map<string, number>(pairs)
   return { expressions }
@@ -127,7 +117,7 @@ async function prepare(): Promise<void> {
   await tf.setBackend("wasm")
   const detector = await blazeface.load()
   const model = await loadGraphModel(
-    "assets/models/mobilenetv2-ferplus-0.830/model.json"
+    "assets/models/lfwa+-mobilenetv2_1.00_96-13-0.127/model.json"
   )
   const loadDuration = performance.now() - loadStart
   console.debug("model load: " + loadDuration.toFixed() + "ms")
