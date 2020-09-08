@@ -1,6 +1,6 @@
 import { useEffect } from "preact/hooks"
-import FaceReaderWorker from "worker-loader!../workers/face-reader-worker"
-import { WorkerResponse } from "../workers/face-reader-worker"
+import FaceReaderWorker from "worker-loader!../workers/face-reader"
+import { WorkerResponse } from "../workers/face-reader"
 import { assertIsDefined } from "./assert"
 
 export interface FeatureRatingsData {

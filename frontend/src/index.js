@@ -1,6 +1,6 @@
 import "./style/index.css"
 import App from "./components/app.tsx"
-import { createWorker } from "./lib/face-reader-worker-relay"
+import { createWorker } from "./lib/use-face-reader"
 
 createWorker()
 

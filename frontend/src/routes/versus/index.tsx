@@ -4,7 +4,7 @@ import {
   useFaceReader,
   sendFace,
   FeatureRatingsData
-} from "../../lib/face-reader-worker-relay"
+} from "../../lib/use-face-reader"
 import VideoSelfie from "../../components/videoselfie"
 import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"

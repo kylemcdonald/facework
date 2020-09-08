@@ -1,7 +1,7 @@
 import { FunctionalComponent, h } from "preact"
 import RatingBar from "../rating-bar"
 import * as style from "./style.css"
-import { FeatureRatingsData } from "../../lib/face-reader-worker-relay"
+import { FeatureRatingsData } from "../../lib/use-face-reader"
 
 interface FeatureRatingsProps {
   data: FeatureRatingsData | null

@@ -6,7 +6,7 @@ import {
   convertArrayBufferRGBAToUInt8RGB,
   preprocess
 } from "../lib/arraybuffer-helpers"
-import { FeatureRatingsData } from "../lib/face-reader-worker-relay"
+import { FeatureRatingsData } from "../lib/use-face-reader"
 import expressionsLabels from "../lib/face-reader-labels"
 
 // scale up the detection from blazeface to capture more context
