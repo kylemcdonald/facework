@@ -10,8 +10,10 @@ import RatingBar from "../../components/rating-bar"
 import FeatureRatings from "../../components/feature-ratings"
 import TimeLimitDisplay, { timeLeft } from "../../components/time-limit-display"
 import * as style from "./style.css"
+import { isPastTimeLimit } from "./helpers"
+import VersusStatus from "../../components/versus-status"
 
-type KeyFeatureScoring = {
+export type KeyFeatureScoring = {
   /** the name of the feature we are judging */
   feature?: string
   /** the current score (between 0 and 1) */
@@ -92,41 +94,11 @@ const Versus: FunctionalComponent = () => {
           <VideoSelfie key="selfie" onPlay={onPlay} />
         </div>
         <section class={style.accompaniment}>
-          <span class={style.selfieStatus}>
-            {keyFeatureScoring.feature === undefined ? (
-              <>
-                {`👀 Hmm, what do we have here...?`}
-                <br />
-                <RatingBar key="progress" value={undefined} />
-              </>
-            ) : keyFeatureScoring.score >= 1.0 ? (
-              <>
-                {`🥳 WOW! That was some great `}
-                <strong>{keyFeatureScoring.feature}</strong>.
-              </>
-            ) : isPastTimeLimit(keyFeatureScoring) ? (
-              <>{`🙅‍♀️ Yikes! You're out of time!`}</>
-            ) : (
-              <>
-                {`💁‍♀️ Okay, let's see some `}
-                <strong>{keyFeatureScoring.feature}</strong>
-                <br />
-                {featureRatingsData === null && (
-                  <>
-                    {`🕵🏼‍♀️ Wait, where'd you go?`}
-                    <br />
-                  </>
-                )}
-                <RatingBar key="progress" value={keyFeatureScoring.score} />
-                <br />
-                <TimeLimitDisplay
-                  timeLimit={keyFeatureScoring.timeLimit}
-                  startTime={keyFeatureScoring.startTime}
-                  isPaused={false}
-                />
-              </>
-            )}
-          </span>
+          <VersusStatus
+            key={"status"}
+            scoring={keyFeatureScoring}
+            isFaceDetected={featureRatingsData === null}
+          />
           <details>
             <summary>Realtime ratings</summary>
             <FeatureRatings data={featureRatingsData} />
@@ -135,14 +107,6 @@ const Versus: FunctionalComponent = () => {
       </div>
     </main>
   )
-}
-
-function isPastTimeLimit(scoring: KeyFeatureScoring): boolean {
-  const { startTime, timeLimit } = scoring
-  if (startTime === undefined) {
-    return false
-  }
-  return timeLeft(startTime, timeLimit) <= 0
 }
 
 export default Versus

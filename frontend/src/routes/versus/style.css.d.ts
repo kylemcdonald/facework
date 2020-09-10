@@ -3,4 +3,3 @@ export const versus: string;
 export const videoSelfieWrapper: string;
 export const flexRowWrap: string;
 export const accompaniment: string;
-export const selfieStatus: string;
