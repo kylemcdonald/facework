@@ -7,6 +7,7 @@ import Versus from "../routes/versus"
 import ActOne from "../routes/act-one"
 import ActTwo from "../routes/act-two"
 import ActThree from "../routes/act-three"
+import Epilogue from "../routes/epilogue"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 if ((module as any).hot) {
