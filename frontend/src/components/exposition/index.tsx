@@ -1,4 +1,4 @@
-import { FunctionalComponent, h } from "preact"
+import { FunctionalComponent, h, ComponentChildren } from "preact"
 import * as style from "./style.css"
 
 const Exposition: FunctionalComponent = props => (
