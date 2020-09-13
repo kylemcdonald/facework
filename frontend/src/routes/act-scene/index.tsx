@@ -14,8 +14,10 @@ const ActScene: FunctionalComponent<ActSceneProps> = props => {
   const sceneContent = actContent.scenes[sceneIndex]
   const nextUrl =
     sceneIndex < actContent.scenes.length - 1
-      ? `/${props.id}/${sceneIndex + 1}`
-      : `/${actContent.next ?? "epilogue"}/`
+      ? `/act/${props.id}/${sceneIndex + 1}`
+      : actContent.next !== null
+      ? `/act/${actContent.next}/`
+      : "/epilogue"
   return (
     <Exposition>
       {sceneContent}
