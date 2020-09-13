@@ -88,3 +88,19 @@ const index: ActsScenesIndex = {
 }
 
 export default index
+
+export const actsUrl = (actId: string, more?: ReadonlyArray<string>): string =>
+  `/act/${actId}/${more?.filter(e => e.length > 0).join("/") ?? ""}`
+
+export const nextActUrl = (currentActId: string): string => {
+  const { next } = index[currentActId]
+  return next !== null ? actsUrl(next) : "/epilogue"
+}
+
+export const nextSceneUrl = (
+  currentActId: string,
+  currentSceneIdx: number
+): string =>
+  currentSceneIdx < index[currentActId].scenes.length - 1
+    ? actsUrl(currentActId, [(currentSceneIdx + 1).toFixed()])
+    : actsUrl(currentActId, ["choose"])

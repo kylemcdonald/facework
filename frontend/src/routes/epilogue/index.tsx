@@ -1,6 +1,6 @@
 import { FunctionalComponent, h } from "preact"
-import { Link } from "preact-router"
 import Exposition from "../../components/exposition"
+import { Link } from "preact-router"
 
 const Epilogue: FunctionalComponent = () => {
   return (
@@ -17,6 +17,10 @@ const Epilogue: FunctionalComponent = () => {
         paroxysm of global death rings of Uranus another world not a sunrise but
         a galaxyrise and billions upon billions upon billions upon billions upon
         billions upon billions upon billions.
+      </p>
+      <p>
+        <em>The End.</em>
+        <Link href="/">Home</Link>
       </p>
     </Exposition>
   )
