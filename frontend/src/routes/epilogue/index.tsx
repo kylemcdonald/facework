@@ -20,7 +20,9 @@ const Epilogue: FunctionalComponent = () => {
       </p>
       <p>
         <em>The End.</em>
-        <Link href="/">Home</Link>
+      </p>
+      <p>
+        <Link href="/">Go Home</Link>
       </p>
     </Exposition>
   )

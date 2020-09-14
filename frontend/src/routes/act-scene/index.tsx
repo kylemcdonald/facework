@@ -1,18 +1,23 @@
 import { FunctionalComponent, h } from "preact"
-import { Link } from "preact-router"
+import { Link, route } from "preact-router"
 import Exposition from "../../components/exposition"
-import ActSceneIndex, { nextSceneUrl } from "./acts-scenes"
+import ActSceneIndex, { nextSceneUrl, isActId } from "./acts-scenes"
 
 interface ActSceneProps {
-  id: string
+  actId: string
   sceneId?: string
 }
 
 const ActScene: FunctionalComponent<ActSceneProps> = props => {
-  const actContent = ActSceneIndex[props.id]
+  if (!isActId(props.actId)) {
+    console.error("invalid act id given")
+    route("/not-found", false)
+    return <>Redirecting...</>
+  }
+  const actContent = ActSceneIndex[props.actId]
   const sceneIndex = (new Number(props.sceneId) ?? 0).valueOf()
   const sceneContent = actContent.scenes[sceneIndex]
-  const nextUrl = nextSceneUrl(props.id, sceneIndex)
+  const nextUrl = nextSceneUrl(props.actId, sceneIndex)
   return (
     <Exposition>
       {sceneContent}

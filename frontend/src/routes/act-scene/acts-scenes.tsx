@@ -1,11 +1,27 @@
 import { h } from "preact"
 import { ComponentChild } from "preact"
+import { TraitLabel } from "../../lib/face-reader-labels"
+
+export type ActId = "one" | "two" | "three"
+
+export function isActId(
+  someString: string | null | undefined
+): someString is ActId {
+  switch (someString) {
+    case "one":
+    case "two":
+    case "three":
+      return true
+    default:
+      return false
+  }
+}
 
 type ActsScenesIndex = {
-  [act: string]: {
+  readonly [K in ActId]: {
     scenes: ReadonlyArray<ComponentChild>
-    next: string | null
-    opponents?: ReadonlyArray<string>
+    next: ActId | null
+    opponents?: ReadonlyArray<TraitLabel>
   }
 }
 
@@ -95,13 +111,13 @@ export default index
 export const actsUrl = (actId: string, more?: ReadonlyArray<string>): string =>
   `/act/${actId}/${more?.filter(e => e.length > 0).join("/") ?? ""}`
 
-export const nextActUrl = (currentActId: string): string => {
+export const nextActUrl = (currentActId: ActId): string => {
   const { next } = index[currentActId]
   return next !== null ? actsUrl(next) : "/epilogue"
 }
 
 export const nextSceneUrl = (
-  currentActId: string,
+  currentActId: ActId,
   currentSceneIdx: number
 ): string =>
   currentSceneIdx < index[currentActId].scenes.length - 1

@@ -1,13 +1,18 @@
 import { FunctionalComponent, h } from "preact"
-import ActSceneIndex, { actsUrl } from "../act-scene/acts-scenes"
+import ActSceneIndex, {
+  actsUrl,
+  isActId,
+  ActId
+} from "../act-scene/acts-scenes"
 import { route, Link } from "preact-router"
+import { TraitLabel } from "../../lib/face-reader-labels"
 
-const verusUrl = (actId: string, trait?: string): string =>
+const verusUrl = (actId: string, trait?: TraitLabel): string =>
   actsUrl(actId, ["versus", trait ?? ""])
 
 interface ChooseTraitProps {
-  actId: string
-  traits: ReadonlyArray<string>
+  actId: ActId
+  traits: ReadonlyArray<TraitLabel>
 }
 
 const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
@@ -24,16 +29,21 @@ const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
 )
 
 interface ChooseProps {
-  id: string
+  actId: string
 }
 
 const Choose: FunctionalComponent<ChooseProps> = props => {
-  const { opponents } = ActSceneIndex[props.id]
+  if (!isActId(props.actId)) {
+    console.error("invalid act id given")
+    route("/not-found", false)
+    return <>Redirecting...</>
+  }
+  const { opponents } = ActSceneIndex[props.actId]
   if (opponents === undefined) {
-    route(verusUrl(props.id))
+    route(verusUrl(props.actId))
     return <div>redirecting...</div>
   }
-  return <ChooseTrait actId={props.id} traits={opponents} />
+  return <ChooseTrait actId={props.actId} traits={opponents} />
 }
 
 export default Choose

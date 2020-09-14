@@ -10,6 +10,7 @@ import FeatureRatings from "../../components/feature-ratings"
 import * as style from "./style.css"
 import { isPastTimeLimit } from "./helpers"
 import BattleStatus from "../../components/versus-status"
+import { TraitLabel } from "../../lib/face-reader-labels"
 
 export type KeyFeatureScoring = {
   /** the name of the feature we are judging */
@@ -32,7 +33,7 @@ const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
 
 interface BattleProps {
   /** Get Trait to start with, chosen by user */
-  getInitialTrait: () => string | undefined
+  getInitialTrait: () => TraitLabel | undefined
 }
 
 const Battle: FunctionalComponent<BattleProps> = props => {

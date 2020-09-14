@@ -24,9 +24,9 @@ const App: FunctionalComponent = () => {
     <div id="app">
       <Router onChange={handleRoute}>
         <Route path="/" component={Home} />
-        <Route path="/act/:id/choose" component={Choose} />
+        <Route path="/act/:actId/choose" component={Choose} />
         <Route path="/act/:actId/versus/:trait?" component={Versus} />
-        <Route path="/act/:id/:sceneId?" component={ActScene} />
+        <Route path="/act/:actId/:sceneId?" component={ActScene} />
         <Route path="/epilogue" component={Epilogue} />
         <NotFoundPage default />
       </Router>
