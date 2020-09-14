@@ -10,7 +10,7 @@ interface VersusProps {
 
 const Versus: FunctionalComponent<VersusProps> = props => (
   <div>
-    <Battle />
+    <Battle getInitialTrait={() => props.trait} />
     <Link href={nextActUrl(props.actId)}>Continue</Link>
   </div>
 )

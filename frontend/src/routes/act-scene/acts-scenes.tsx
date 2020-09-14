@@ -5,12 +5,14 @@ type ActsScenesIndex = {
   [act: string]: {
     scenes: ReadonlyArray<ComponentChild>
     next: string | null
-    opponents?: [string]
+    opponents?: ReadonlyArray<string>
   }
 }
 
 const index: ActsScenesIndex = {
   one: {
+    opponents: ["Male", "Asian", "White"],
+    next: "two",
     scenes: [
       <>
         <p>
@@ -31,10 +33,11 @@ const index: ActsScenesIndex = {
           only through love invent the universe Cambrian explosion.
         </p>
       </>
-    ],
-    next: "two"
+    ]
   },
   two: {
+    opponents: ["Indian", "Gray Hair", "Bags Under Eyes"],
+    next: "three",
     scenes: [
       <>
         <p>
@@ -56,10 +59,11 @@ const index: ActsScenesIndex = {
           upon billions upon billions.
         </p>
       </>
-    ],
-    next: "three"
+    ]
   },
   three: {
+    opponents: ["Strong Nose-Mouth Lines", "Wearing Lipstick", "Flushed Face"],
+    next: null,
     scenes: [
       <>
         <p>
@@ -82,8 +86,7 @@ const index: ActsScenesIndex = {
           upon billions upon billions.
         </p>
       </>
-    ],
-    next: null
+    ]
   }
 }
 

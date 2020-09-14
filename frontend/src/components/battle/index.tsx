@@ -30,7 +30,12 @@ const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
   decayRate: 0.025
 })
 
-const Battle: FunctionalComponent = () => {
+interface BattleProps {
+  /** Get Trait to start with, chosen by user */
+  getInitialTrait: () => string | undefined
+}
+
+const Battle: FunctionalComponent<BattleProps> = props => {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const onPlay = useCallback((input: HTMLVideoElement) => {
     videoRef.current = input
@@ -69,7 +74,9 @@ const Battle: FunctionalComponent = () => {
         // otherwise, init
         keepGoing = true
         const keys = Array.from(ratings.expressions.keys())
-        const newKey = keys[Math.round(Math.random() * keys.length - 1)]
+        const newKey =
+          props.getInitialTrait() ??
+          keys[Math.round(Math.random() * keys.length - 1)]
         console.debug(`setting key feature to ${newKey}`)
         return { ...prev, feature: newKey, startTime: Date.now() }
       })

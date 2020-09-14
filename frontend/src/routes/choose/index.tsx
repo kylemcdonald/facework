@@ -12,6 +12,7 @@ interface ChooseTraitProps {
 
 const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
   <div>
+    <h2>Choose your challenge</h2>
     <ul>
       {props.traits.map(trait => (
         <li key={trait}>
