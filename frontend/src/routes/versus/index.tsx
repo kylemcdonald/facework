@@ -22,8 +22,15 @@ const Versus: FunctionalComponent<VersusProps> = props => {
   )
   return (
     <div>
+      <h1>Versus</h1>
+      <p>
+        {`Let's `}
+        <em>FACE OFF</em>.
+      </p>
+      <p>
+        <Link href={nextActUrl(props.actId)}>Continue</Link>
+      </p>
       <Battle getInitialTrait={getInitialTrait} />
-      <Link href={nextActUrl(props.actId)}>Continue</Link>
     </div>
   )
 }

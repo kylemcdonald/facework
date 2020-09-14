@@ -90,28 +90,22 @@ const Battle: FunctionalComponent<BattleProps> = props => {
   )
   useFaceReader(updateFeatureRatings)
   return (
-    <main class={style.versus}>
-      <h1>Versus</h1>
-      <p>
-        Get ready to <em>FACE OFF</em>.
-      </p>
-      <div class={style.flexRowWrap}>
-        <div class={style.videoSelfieWrapper}>
-          <VideoSelfie key="selfie" onPlay={onPlay} />
-        </div>
-        <section class={style.accompaniment}>
-          <BattleStatus
-            key={"status"}
-            scoring={keyFeatureScoring}
-            isFaceDetected={featureRatingsData === null}
-          />
-          <details>
-            <summary>Realtime ratings</summary>
-            <FeatureRatings data={featureRatingsData} />
-          </details>
-        </section>
+    <div class={style.battle}>
+      <div class={style.videoSelfieWrapper}>
+        <VideoSelfie key="selfie" onPlay={onPlay} />
       </div>
-    </main>
+      <section class={style.accompaniment}>
+        <BattleStatus
+          key={"status"}
+          scoring={keyFeatureScoring}
+          isFaceDetected={featureRatingsData === null}
+        />
+        <details>
+          <summary>Realtime ratings</summary>
+          <FeatureRatings data={featureRatingsData} />
+        </details>
+      </section>
+    </div>
   )
 }
 
