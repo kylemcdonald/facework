@@ -1,16 +1,16 @@
 import { FunctionalComponent, h } from "preact"
 import * as style from "./style.css"
-import { KeyFeatureScoring } from "../../routes/versus"
+import { KeyFeatureScoring } from "../battle"
 import RatingBar from "../rating-bar"
 import TimeLimitDisplay from "../time-limit-display"
-import { isPastTimeLimit } from "../../routes/versus/helpers"
+import { isPastTimeLimit } from "../battle/helpers"
 
-interface VersusStatusProps {
-  isFaceDetected: boolean
-  scoring: KeyFeatureScoring
+interface BattleStatusProps {
+  readonly isFaceDetected: boolean
+  readonly scoring: KeyFeatureScoring
 }
 
-const VersusStatus: FunctionalComponent<VersusStatusProps> = props => {
+const BattleStatus: FunctionalComponent<BattleStatusProps> = props => {
   const { scoring, isFaceDetected } = props
   return (
     <span class={style.selfieStatus}>
@@ -51,4 +51,4 @@ const VersusStatus: FunctionalComponent<VersusStatusProps> = props => {
   )
 }
 
-export default VersusStatus
+export default BattleStatus

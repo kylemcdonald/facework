@@ -1,16 +1,15 @@
-.versus {
+.battle {
   padding: 56px 20px;
   min-height: 100%;
   width: 100%;
+
+  /* flex row wrap */
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .video-selfie-wrapper {
   margin-bottom: 2rem;
-}
-
-.flex-row-wrap {
-  display: flex;
-  flex-flow: row wrap;
 }
 
 .accompaniment {

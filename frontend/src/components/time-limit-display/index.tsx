@@ -1,10 +1,10 @@
 import { FunctionalComponent, h } from "preact"
 
 interface TimeLimitDisplayProps {
-  startTime?: number
+  readonly startTime?: number
   // in seconds
-  timeLimit: number
-  isPaused: boolean
+  readonly timeLimit: number
+  readonly isPaused: boolean
 }
 
 const TimeLimitDisplay: FunctionalComponent<TimeLimitDisplayProps> = props => {

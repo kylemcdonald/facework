@@ -11,7 +11,7 @@ function setSrc(
 }
 
 interface VideoSelfieProps {
-  onPlay?: (videoElement: HTMLVideoElement) => void
+  readonly onPlay?: (videoElement: HTMLVideoElement) => void
 }
 
 const VideoSelfie: FunctionalComponent<VideoSelfieProps> = (
