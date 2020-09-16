@@ -11,8 +11,8 @@ const verusUrl = (actId: string, trait?: TraitLabel): string =>
   actsUrl(actId, ["versus", trait ?? ""])
 
 interface ChooseTraitProps {
-  actId: ActId
-  traits: ReadonlyArray<TraitLabel>
+  readonly actId: ActId
+  readonly traits: ReadonlyArray<TraitLabel>
 }
 
 const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
@@ -29,7 +29,7 @@ const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
 )
 
 interface ChooseProps {
-  actId: string
+  readonly actId: string
 }
 
 const Choose: FunctionalComponent<ChooseProps> = props => {

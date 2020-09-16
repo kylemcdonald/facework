@@ -27,23 +27,23 @@ const ctx: Worker = self as any
 setWasmPath("assets/wasm/tfjs-backend-wasm-1.7.4.wasm")
 
 type ReadFaceRequest = {
-  kind: "read-face"
-  buffer: ArrayBufferLike
-  width: number
-  height: number
+  readonly kind: "read-face"
+  readonly buffer: ArrayBufferLike
+  readonly width: number
+  readonly height: number
 }
 
 type LoadModelRequest = {
-  kind: "load-model"
+  readonly kind: "load-model"
 }
 
 type WorkerRequest = LoadModelRequest | ReadFaceRequest
 
 export type WorkerResponse =
-  | { kind: "model-loaded" }
+  | { readonly kind: "model-loaded" }
   | {
-      kind: "face-read"
-      ratings: FeatureRatingsData | null
+      readonly kind: "face-read"
+      readonly ratings: FeatureRatingsData | null
     }
 
 const readFace = async (

@@ -14,15 +14,15 @@ import { TraitLabel } from "../../lib/face-reader-labels"
 
 export type KeyFeatureScoring = {
   /** the name of the feature we are judging */
-  feature?: string
+  readonly feature?: string
   /** the current score (between 0 and 1) */
-  score: number
+  readonly score: number
   /** how long does the user have to win this round? (in seconds) */
-  timeLimit: number
+  readonly timeLimit: number
   /** when did this round start? set with Date.now() */
-  startTime?: number
+  readonly startTime?: number
   /** how much do we subtract from the score every detection frame? */
-  decayRate: number
+  readonly decayRate: number
 }
 
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
@@ -33,7 +33,7 @@ const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
 
 interface BattleProps {
   /** Get Trait to start with, chosen by user */
-  getInitialTrait: () => TraitLabel | undefined
+  readonly getInitialTrait: () => TraitLabel | undefined
 }
 
 const Battle: FunctionalComponent<BattleProps> = props => {

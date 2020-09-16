@@ -6,8 +6,8 @@ import TimeLimitDisplay from "../time-limit-display"
 import { isPastTimeLimit } from "../battle/helpers"
 
 interface BattleStatusProps {
-  isFaceDetected: boolean
-  scoring: KeyFeatureScoring
+  readonly isFaceDetected: boolean
+  readonly scoring: KeyFeatureScoring
 }
 
 const BattleStatus: FunctionalComponent<BattleStatusProps> = props => {

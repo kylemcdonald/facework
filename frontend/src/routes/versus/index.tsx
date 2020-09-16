@@ -6,8 +6,8 @@ import { useCallback } from "preact/hooks"
 import { isTraitLabel } from "../../lib/face-reader-labels"
 
 interface VersusProps {
-  actId: string
-  trait?: string
+  readonly actId: string
+  readonly trait?: string
 }
 
 const Versus: FunctionalComponent<VersusProps> = props => {

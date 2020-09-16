@@ -4,7 +4,7 @@ import * as style from "./style.css"
 import { FeatureRatingsData } from "../../lib/use-face-reader"
 
 interface FeatureRatingsProps {
-  data: FeatureRatingsData | null
+  readonly data: FeatureRatingsData | null
 }
 
 const FeatureRatings: FunctionalComponent<FeatureRatingsProps> = (

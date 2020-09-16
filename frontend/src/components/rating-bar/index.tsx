@@ -2,7 +2,7 @@ import { FunctionalComponent, h } from "preact"
 
 interface RatingBarProps {
   /** Must be between 0 and 1.0 */
-  value: number | undefined
+  readonly value: number | undefined
 }
 
 const RatingBar: FunctionalComponent<RatingBarProps> = (

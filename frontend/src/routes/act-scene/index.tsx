@@ -4,8 +4,8 @@ import Exposition from "../../components/exposition"
 import ActSceneIndex, { nextSceneUrl, isActId } from "./acts-scenes"
 
 interface ActSceneProps {
-  actId: string
-  sceneId?: string
+  readonly actId: string
+  readonly sceneId?: string
 }
 
 const ActScene: FunctionalComponent<ActSceneProps> = props => {

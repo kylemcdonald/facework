@@ -19,9 +19,9 @@ export function isActId(
 
 type ActsScenesIndex = {
   readonly [K in ActId]: {
-    scenes: ReadonlyArray<ComponentChild>
-    next: ActId | null
-    opponents?: ReadonlyArray<TraitLabel>
+    readonly scenes: ReadonlyArray<ComponentChild>
+    readonly next: ActId | null
+    readonly opponents?: ReadonlyArray<TraitLabel>
   }
 }
 
