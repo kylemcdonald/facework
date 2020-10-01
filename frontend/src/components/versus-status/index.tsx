@@ -20,13 +20,13 @@ const BattleStatus: FunctionalComponent<BattleStatusProps> = props => {
           <br />
           <RatingBar key="progress" value={undefined} />
         </>
-      ) : scoring.score >= 1.0 ? (
+      ) : isPastTimeLimit(scoring) ? (
         <>
           {`🥳 WOW! That was some great `}
           <strong>{scoring.feature}</strong>.
+          <br />
+          Have a tip! ({`rating: ${scoring.highestScore}`})
         </>
-      ) : isPastTimeLimit(scoring) ? (
-        <>{`🙅‍♀️ Yikes! You're out of time!`}</>
       ) : (
         <>
           {`💁‍♀️ Okay, let's see some `}

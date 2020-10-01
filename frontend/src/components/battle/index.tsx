@@ -17,18 +17,18 @@ export type KeyFeatureScoring = {
   readonly feature?: string
   /** the current score (between 0 and 1) */
   readonly score: number
+  /** highest score from this round (between 0 and 1) */
+  readonly highestScore: number
   /** how long does the user have to win this round? (in seconds) */
   readonly timeLimit: number
   /** when did this round start? set with Date.now() */
   readonly startTime?: number
-  /** how much do we subtract from the score every detection frame? */
-  readonly decayRate: number
 }
 
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
   score: Number.MIN_VALUE,
-  timeLimit: 30,
-  decayRate: 0.025
+  highestScore: Number.MIN_VALUE,
+  timeLimit: 30
 })
 
 interface BattleProps {
@@ -59,17 +59,13 @@ const Battle: FunctionalComponent<BattleProps> = props => {
           return prev
         }
         if (prev.feature !== undefined) {
-          // 10 is a magic number here, totally arbitrary
-          const additive = (ratings.expressions.get(prev.feature) ?? 0) / 10
-          // never go below MIN_VALUE
-          const newScore = Math.max(
-            prev.score + additive - prev.decayRate,
-            Number.MIN_VALUE
-          )
-          keepGoing = newScore < 1.0 && !isPastTimeLimit(prev)
+          const score =
+            ratings.expressions.get(prev.feature) ?? Number.MIN_VALUE
+          keepGoing = !isPastTimeLimit(prev)
           return {
             ...prev,
-            score: newScore
+            score,
+            highestScore: Math.max(prev.highestScore, score)
           }
         }
         // otherwise, init
