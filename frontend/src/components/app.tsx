@@ -8,6 +8,8 @@ import Versus from "../routes/versus"
 import Epilogue from "../routes/epilogue"
 import NotFoundPage from "../routes/notfound"
 import AutoAdvanceExample from "../routes/examples/auto-advance-button"
+import ChatPage from "../routes/chat"
+import JobSummary from "../routes/job-summary"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 if ((module as any).hot) {
@@ -17,7 +19,7 @@ if ((module as any).hot) {
 
 const App: FunctionalComponent = () => {
   let currentUrl: string
-  const handleRoute = (e: RouterOnChangeArgs) => {
+  const handleRoute = (e: RouterOnChangeArgs): void => {
     currentUrl = e.url
   }
 
@@ -29,6 +31,8 @@ const App: FunctionalComponent = () => {
         <Route path="/act/:actId/versus/:trait?" component={Versus} />
         <Route path="/act/:actId/:sceneId?" component={ActScene} />
         <Route path="/epilogue" component={Epilogue} />
+        <Route path="/chat" component={ChatPage} />
+        <Route path="/job-summary" component={JobSummary} />
         <Route
           path="/example/auto-advance-button"
           component={AutoAdvanceExample}
