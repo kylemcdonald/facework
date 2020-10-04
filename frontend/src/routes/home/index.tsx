@@ -6,9 +6,9 @@ const Home: FunctionalComponent = () => {
   return (
     <div class={style.home}>
       <h1>
-        Can you beat the <em>Most Face Ever</em>??
+        Welcome to <em>APP</em>
       </h1>
-      <Link href="/act/one">Start</Link>
+      <Link href="/act/choose/one">Start</Link>
     </div>
   )
 }

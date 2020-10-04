@@ -1,14 +1,10 @@
 import { FunctionalComponent, h } from "preact"
-import ActSceneIndex, {
-  actsUrl,
-  isActId,
-  ActId
-} from "../act-scene/acts-scenes"
+import ActSceneIndex, { isActId, ActId } from "../../lib/acts"
 import { route, Link } from "preact-router"
 import { TraitLabel } from "../../lib/face-reader-labels"
 
-const verusUrl = (actId: string, trait?: TraitLabel): string =>
-  actsUrl(actId, ["versus", trait ?? ""])
+const verusUrl = (trait?: TraitLabel): string =>
+  ["/act/versus/", trait ?? ""].join()
 
 interface ChooseTraitProps {
   readonly actId: ActId
@@ -17,11 +13,11 @@ interface ChooseTraitProps {
 
 const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
   <div>
-    <h2>Choose your challenge</h2>
+    <h2>New jobs!</h2>
     <ul>
       {props.traits.map(trait => (
         <li key={trait}>
-          <Link href={verusUrl(props.actId, trait)}>{trait}</Link>
+          <Link href={verusUrl(trait)}>{trait}</Link>
         </li>
       ))}
     </ul>
@@ -40,7 +36,7 @@ const Choose: FunctionalComponent<ChooseProps> = props => {
   }
   const { opponents } = ActSceneIndex[props.actId]
   if (opponents === undefined) {
-    route(verusUrl(props.actId))
+    route(verusUrl())
     return <div>redirecting...</div>
   }
   return <ChooseTrait actId={props.actId} traits={opponents} />

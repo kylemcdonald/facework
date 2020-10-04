@@ -9,9 +9,9 @@ const ChatPage: FunctionalComponent = () => {
       <ol>
         <li>Hey, I see you there</li>
         <li>Don&apos;t bother trying to chat. I disabled it.</li>
-        <li>Get ready for the next round. We have a better one for you.</li>
+        <li>Get ready for the next job. We have a better one for you.</li>
       </ol>
-      <Link href="/">Next</Link>
+      <Link href="/act/choose/one">Next</Link>
     </div>
   )
 }
