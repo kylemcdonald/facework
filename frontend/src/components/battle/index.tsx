@@ -11,6 +11,7 @@ import * as style from "./style.css"
 import { isPastTimeLimit } from "./helpers"
 import BattleStatus from "../../components/versus-status"
 import { TraitLabel } from "../../lib/face-reader-labels"
+import { keep } from "@tensorflow/tfjs-core"
 
 export type KeyFeatureScoring = {
   /** the name of the feature we are judging */
@@ -34,6 +35,8 @@ const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
 interface BattleProps {
   /** Get Trait to start with, chosen by user */
   readonly getInitialTrait: () => TraitLabel | undefined
+  /** Callback when the battle timer ends */
+  readonly onBattleFinished: () => void
 }
 
 const Battle: FunctionalComponent<BattleProps> = props => {
@@ -78,7 +81,9 @@ const Battle: FunctionalComponent<BattleProps> = props => {
         return { ...prev, feature: newKey, startTime: Date.now() }
       })
 
-      if (keepGoing && videoRef.current !== null) {
+      if (!keepGoing) {
+        props.onBattleFinished()
+      } else if (keepGoing && videoRef.current !== null) {
         sendFace(videoRef.current)
       }
     },

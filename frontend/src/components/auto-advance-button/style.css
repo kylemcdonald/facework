@@ -1,0 +1,16 @@
+.auto-advance-button {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  max-width: 150px;
+  border: 1px solid darkgray;
+  border-radius: 8px;
+}
+
+.auto-advance-button progress {
+  width: 100%;
+}
+
+.label {
+  font-weight: bold;
+}

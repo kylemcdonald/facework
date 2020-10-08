@@ -2,6 +2,7 @@ import { FunctionalComponent, h } from "preact"
 import ActSceneIndex, { isActId, ActId } from "../../lib/acts"
 import { route, Link } from "preact-router"
 import { TraitLabel } from "../../lib/face-reader-labels"
+import AutoAdvanceButton from "../../components/auto-advance-button"
 
 const verusUrl = (trait?: TraitLabel): string =>
   ["/act/versus/", trait ?? ""].join()
@@ -21,6 +22,11 @@ const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
         </li>
       ))}
     </ul>
+    <AutoAdvanceButton
+      label="Next"
+      timeLimit={4000}
+      onClick={() => route(verusUrl())}
+    />
   </div>
 )
 

@@ -1,7 +1,10 @@
 import { FunctionalComponent, h } from "preact"
 import { useEffect, useState } from "preact/hooks"
+import * as style from "./style.css"
 
 interface AutoAdvanceButtonProps {
+  /** Button label */
+  readonly label: string
   /** How long before the button fires on its own, in **milliseconds** */
   readonly timeLimit: number
   /** Called on user click or when timeout is reached */
@@ -25,15 +28,12 @@ const AutoAdvanceButton: FunctionalComponent<AutoAdvanceButtonProps> = (
     return (): void => clearInterval(intervalId)
   }, [props.timeLimit])
   return (
-    <meter
-      min={0}
-      value={timeLeftRatio}
-      max={1}
-      onClick={props.onClick}
-      key="auto-advance-button"
-    >
-      {timeLeftRatio}
-    </meter>
+    <div class={style.autoAdvanceButton} onClick={props.onClick}>
+      <progress value={timeLeftRatio} key="auto-advance-button">
+        {timeLeftRatio}
+      </progress>
+      <span class={style.label}>{props.label}</span>
+    </div>
   )
 }
 

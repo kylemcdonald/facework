@@ -1,5 +1,6 @@
 import { FunctionalComponent, h } from "preact"
-import { Link } from "preact-router"
+import { Link, route } from "preact-router"
+import AutoAdvanceButton from "../../components/auto-advance-button"
 import * as style from "./style.css"
 
 const JobSummary: FunctionalComponent = () => {
@@ -20,7 +21,11 @@ const JobSummary: FunctionalComponent = () => {
           <td>-$2</td>
         </tr>
       </table>
-      <Link href="/">Next</Link>
+      <AutoAdvanceButton
+        label="Next"
+        timeLimit={4000}
+        onClick={() => route("/chat")}
+      />
     </div>
   )
 }
