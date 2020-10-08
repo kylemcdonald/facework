@@ -6,7 +6,11 @@ const AutoAdvanceExample: FunctionalComponent = () => {
   return (
     <div>
       <h1>AutoAdvanceButton</h1>
-      <AutoAdvanceButton timeLimit={5000} onClick={(): void => alert("bang")} />
+      <AutoAdvanceButton
+        label="Next"
+        timeLimit={5000}
+        onClick={(): void => alert("bang")}
+      />
       <Link href="/">
         <h4>Back to Home</h4>
       </Link>
