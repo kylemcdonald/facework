@@ -1,6 +1,6 @@
 import { TraitLabel } from "./face-reader-labels"
 
-export type ActId = "one" | "two" | "three"
+export type ActId = "one" | "two" | "three" | "final"
 
 export function isActId(
   someString: string | null | undefined
@@ -9,36 +9,37 @@ export function isActId(
     case "one":
     case "two":
     case "three":
+    case "final":
       return true
     default:
       return false
   }
 }
 
-type ActsScenesIndex = {
+export const actsPlan: {
   readonly [K in ActId]: {
     readonly chats: ReadonlyArray<string>
     readonly next: ActId | null
     readonly opponents?: ReadonlyArray<TraitLabel>
   }
-}
-
-const index: ActsScenesIndex = {
+} = {
   one: {
     opponents: ["Male", "Asian", "White"],
     next: "two",
-    chats: ["hi", "this is scene 1"]
+    chats: ["hi", "this was scene 1", "now for scene 2"]
   },
   two: {
     opponents: ["Indian", "Gray Hair", "Bags Under Eyes"],
     next: "three",
-    chats: ["hi", "this is scene 2"]
+    chats: ["hi", "this has been scene 2", "let's do scene 3 now"]
   },
   three: {
     opponents: ["Strong Nose-Mouth Lines", "Wearing Lipstick", "Flushed Face"],
+    next: "final",
+    chats: ["hi", "this is the end of scene 3"]
+  },
+  final: {
     next: null,
-    chats: ["hi", "this is scene 3"]
+    chats: []
   }
 }
-
-export default index

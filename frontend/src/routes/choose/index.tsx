@@ -1,14 +1,13 @@
 import { FunctionalComponent, h } from "preact"
-import ActSceneIndex, { isActId, ActId } from "../../lib/acts"
+import { actsPlan } from "../../lib/acts"
 import { route, Link } from "preact-router"
 import { TraitLabel } from "../../lib/face-reader-labels"
 import AutoAdvanceButton from "../../components/auto-advance-button"
+import { useTypedSelector } from "../../lib/store"
 
-const verusUrl = (trait?: TraitLabel): string =>
-  ["/act/versus/", trait ?? ""].join()
+const verusUrl = "/versus/"
 
 interface ChooseTraitProps {
-  readonly actId: ActId
   readonly traits: ReadonlyArray<TraitLabel>
 }
 
@@ -18,34 +17,29 @@ const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
     <ul>
       {props.traits.map(trait => (
         <li key={trait}>
-          <Link href={verusUrl(trait)}>{trait}</Link>
+          <Link href={verusUrl}>{trait}</Link>
         </li>
       ))}
     </ul>
     <AutoAdvanceButton
       label="Next"
       timeLimit={4000}
-      onClick={() => route(verusUrl())}
+      onClick={() => route(verusUrl)}
     />
   </div>
 )
 
-interface ChooseProps {
-  readonly actId: string
-}
+const Choose: FunctionalComponent = () => {
+  const actId = useTypedSelector(state => state.act)
+  const { opponents } = actsPlan[actId]
 
-const Choose: FunctionalComponent<ChooseProps> = props => {
-  if (!isActId(props.actId)) {
-    console.error("invalid act id given")
-    route("/not-found", false)
-    return <>Redirecting...</>
-  }
-  const { opponents } = ActSceneIndex[props.actId]
+  // if no choices are specified in our scene config,
+  // just take user to the versus url
   if (opponents === undefined) {
-    route(verusUrl())
+    route(verusUrl)
     return <div>redirecting...</div>
   }
-  return <ChooseTrait actId={props.actId} traits={opponents} />
+  return <ChooseTrait traits={opponents} />
 }
 
 export default Choose

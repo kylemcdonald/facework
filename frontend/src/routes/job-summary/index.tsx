@@ -1,5 +1,5 @@
 import { FunctionalComponent, h } from "preact"
-import { Link, route } from "preact-router"
+import { route } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import * as style from "./style.css"
 

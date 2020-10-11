@@ -164,4 +164,9 @@ export function isTraitLabel(
   }
 }
 
+export function getRandomTraitLabel(): TraitLabel {
+  const labelsArray = Array.from(faceReaderLabels)
+  return labelsArray[Math.round(Math.random() * labelsArray.length - 1)]
+}
+
 export default faceReaderLabels

@@ -1,19 +1,14 @@
 import { FunctionalComponent, h } from "preact"
 import Battle from "../../components/battle"
 import { Link, route } from "preact-router"
-import { useCallback, useState } from "preact/hooks"
-import { isTraitLabel } from "../../lib/face-reader-labels"
+import { useState } from "preact/hooks"
 import AutoAdvanceButton from "../../components/auto-advance-button"
+import { useTypedSelector } from "../../lib/store"
+import { getRandomTraitLabel } from "../../lib/face-reader-labels"
 
-interface VersusProps {
-  readonly trait?: string
-}
+const Versus: FunctionalComponent = () => {
+  const trait = useTypedSelector(state => state.trait) ?? getRandomTraitLabel()
 
-const Versus: FunctionalComponent<VersusProps> = props => {
-  const getInitialTrait = useCallback(
-    () => (isTraitLabel(props.trait) ? props.trait : undefined),
-    [props.trait]
-  )
   const [isBattleFinished, setIsBattleFinished] = useState(false)
 
   return (
@@ -23,7 +18,7 @@ const Versus: FunctionalComponent<VersusProps> = props => {
         <Link href={"/job-summary"}>Continue</Link>
       </p>
       <Battle
-        getInitialTrait={getInitialTrait}
+        trait={trait}
         onBattleFinished={() => setIsBattleFinished(true)}
       />
       {isBattleFinished ? (

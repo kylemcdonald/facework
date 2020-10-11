@@ -4,15 +4,21 @@ import { Link } from "preact-router"
 const Epilogue: FunctionalComponent = () => {
   return (
     <div>
-      <p>ERR_APP_CRASH</p>
-      <p>
-        {`{
-          "gameState": "over",
-          "game credits": {
-            "creator": ["kyle mcdonald", "evelyn masso", "fei liu", "greg borenstein"]
-          }
-          }`}
-      </p>
+      <h2>ERR_APP_CRASH</h2>
+      <pre>
+        {`
+{
+  "gameState": "over",
+  "game credits": {
+    "creator": [
+        "kyle mcdonald",
+        "evelyn masso",
+        "fei liu",
+        "greg borenstein"
+      ]
+  }
+}`}
+      </pre>
       <p>
         <em>The End.</em>
       </p>

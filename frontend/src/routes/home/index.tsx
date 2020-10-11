@@ -8,7 +8,7 @@ const Home: FunctionalComponent = () => {
       <h1>
         Welcome to <em>APP</em>
       </h1>
-      <Link href="/act/choose/one">Start</Link>
+      <Link href="/choose">Start</Link>
     </div>
   )
 }
