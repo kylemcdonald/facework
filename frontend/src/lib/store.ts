@@ -4,7 +4,7 @@ import { useSelector, TypedUseSelectorHook } from "react-redux"
 import { TraitLabel } from "./face-reader-labels"
 import { Nullable } from "./type-helpers"
 
-const initialActState: ActId = "three"
+const initialActState: ActId = "one"
 
 const actSlice = createSlice({
   name: "act",
