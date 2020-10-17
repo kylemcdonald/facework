@@ -2,9 +2,9 @@ import { FunctionalComponent, h } from "preact"
 import { Route, Router, RouterOnChangeArgs } from "preact-router"
 import { Provider } from "react-redux"
 
-import Home from "../routes/home"
-import Choose from "../routes/choose"
-import Versus from "../routes/versus"
+import Welcome from "../routes/welcome"
+import ChooseJob from "../routes/choose-job"
+import DoJob from "../routes/do-job"
 import Epilogue from "../routes/epilogue"
 import NotFoundPage from "../routes/notfound"
 import AutoAdvanceExample from "../routes/examples/auto-advance-button"
@@ -28,9 +28,9 @@ const App: FunctionalComponent = () => {
     <div id="app">
       <Provider store={store}>
         <Router onChange={handleRoute}>
-          <Route path="/" component={Home} />
-          <Route path="/choose" component={Choose} />
-          <Route path="/versus" component={Versus} />
+          <Route path="/" component={Welcome} />
+          <Route path="/choose" component={ChooseJob} />
+          <Route path="/versus" component={DoJob} />
           <Route path="/epilogue" component={Epilogue} />
           <Route path="/chat" component={ChatPage} />
           <Route path="/job-summary" component={JobSummary} />

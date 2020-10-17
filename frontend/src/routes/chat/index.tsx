@@ -4,7 +4,13 @@ import AutoAdvanceButton from "../../components/auto-advance-button"
 import * as style from "./style.css"
 import { useCallback, useState, useEffect } from "preact/hooks"
 import { advanceAct, store, useTypedSelector } from "../../lib/store"
-import { actsPlan } from "../../lib/acts"
+import { ActsConfig } from "../../lib/app-acts-config"
+
+import { ChatPageConfig } from "../../lib/app-acts-config"
+const {
+  nextButton: { autoclickTimeout },
+  messageAppearanceInterval
+} = ChatPageConfig
 
 const ChatMessages: FunctionalComponent<{
   messages: ReadonlyArray<string>
@@ -18,7 +24,7 @@ const ChatMessages: FunctionalComponent<{
 
 const ChatPage: FunctionalComponent = () => {
   const actId = useTypedSelector(state => state.act)
-  const { chats } = actsPlan[actId]
+  const { chats } = ActsConfig[actId]
 
   const onAdvance = useCallback(() => {
     store.dispatch(advanceAct())
@@ -40,7 +46,7 @@ const ChatPage: FunctionalComponent = () => {
         }
         return prev + 1
       })
-    }, 1000)
+    }, messageAppearanceInterval)
   }, [])
 
   return (
@@ -48,7 +54,11 @@ const ChatPage: FunctionalComponent = () => {
       <h1>Chat</h1>
       <ChatMessages messages={chats.slice(0, chatMessageRenderCount)} />
       {chatMessageRenderCount === chats.length ? (
-        <AutoAdvanceButton label="Next" timeLimit={5000} onClick={onAdvance} />
+        <AutoAdvanceButton
+          label="Next"
+          autoClickTimeout={autoclickTimeout}
+          onClick={onAdvance}
+        />
       ) : null}
     </div>
   )

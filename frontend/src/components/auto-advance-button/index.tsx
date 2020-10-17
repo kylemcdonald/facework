@@ -6,7 +6,7 @@ interface AutoAdvanceButtonProps {
   /** Button label */
   readonly label: string
   /** How long before the button fires on its own, in **milliseconds** */
-  readonly timeLimit: number
+  readonly autoClickTimeout: number
   /** Called on user click or when timeout is reached */
   readonly onClick: () => void
 }
@@ -14,11 +14,11 @@ interface AutoAdvanceButtonProps {
 const AutoAdvanceButton: FunctionalComponent<AutoAdvanceButtonProps> = (
   props: AutoAdvanceButtonProps
 ) => {
-  const [timeLeftRatio, setTimeLeftRatio] = useState(props.timeLimit)
+  const [timeLeftRatio, setTimeLeftRatio] = useState(props.autoClickTimeout)
   useEffect(() => {
     const startTime = Date.now()
     const intervalId = setInterval(() => {
-      const newTimeLeft = (Date.now() - startTime) / props.timeLimit
+      const newTimeLeft = (Date.now() - startTime) / props.autoClickTimeout
       if (newTimeLeft >= 1) {
         clearInterval(intervalId)
         props.onClick()
@@ -26,7 +26,7 @@ const AutoAdvanceButton: FunctionalComponent<AutoAdvanceButtonProps> = (
       setTimeLeftRatio(newTimeLeft)
     }, 150)
     return (): void => clearInterval(intervalId)
-  }, [props.timeLimit])
+  }, [props.autoClickTimeout])
   return (
     <div class={style.autoAdvanceButton} onClick={props.onClick}>
       <progress value={timeLeftRatio} key="auto-advance-button">

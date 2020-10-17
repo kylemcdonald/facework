@@ -2,21 +2,7 @@ import { TraitLabel } from "./face-reader-labels"
 
 export type ActId = "one" | "two" | "three" | "final"
 
-export function isActId(
-  someString: string | null | undefined
-): someString is ActId {
-  switch (someString) {
-    case "one":
-    case "two":
-    case "three":
-    case "final":
-      return true
-    default:
-      return false
-  }
-}
-
-export const actsPlan: {
+export const ActsConfig: {
   readonly [K in ActId]: {
     readonly chats: ReadonlyArray<string>
     readonly next: ActId | null
@@ -42,4 +28,35 @@ export const actsPlan: {
     next: null,
     chats: []
   }
+}
+
+type BasePageConfig = {
+  readonly nextButton: {
+    /** in milliseconds */
+    readonly autoclickTimeout: number
+  }
+}
+
+export const ChooseJobConfig: BasePageConfig = {
+  nextButton: {
+    autoclickTimeout: 6000
+  }
+}
+export const DoJobConfig: BasePageConfig = {
+  nextButton: {
+    autoclickTimeout: 6000
+  }
+}
+export const JobSummaryConfig: BasePageConfig = {
+  nextButton: {
+    autoclickTimeout: 6000
+  }
+}
+export const ChatPageConfig: BasePageConfig & {
+  messageAppearanceInterval: number
+} = {
+  nextButton: {
+    autoclickTimeout: 6000
+  },
+  messageAppearanceInterval: 1000
 }

@@ -1,5 +1,5 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { actsPlan, ActId } from "./acts"
+import { ActsConfig, ActId } from "./app-acts-config"
 import { useSelector, TypedUseSelectorHook } from "react-redux"
 import { TraitLabel } from "./face-reader-labels"
 import { Nullable } from "./type-helpers"
@@ -10,7 +10,7 @@ const actSlice = createSlice({
   name: "act",
   initialState: initialActState as ActId,
   reducers: {
-    advance: state => actsPlan[state].next ?? "final"
+    advance: state => ActsConfig[state].next ?? "final"
   }
 })
 export const { advance: advanceAct } = actSlice.actions

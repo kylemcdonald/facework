@@ -6,7 +6,12 @@ import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector } from "../../lib/store"
 import { getRandomTraitLabel } from "../../lib/face-reader-labels"
 
-const Versus: FunctionalComponent = () => {
+import { DoJobConfig } from "../../lib/app-acts-config"
+const {
+  nextButton: { autoclickTimeout }
+} = DoJobConfig
+
+const DoJob: FunctionalComponent = () => {
   const trait = useTypedSelector(state => state.trait) ?? getRandomTraitLabel()
 
   const [isBattleFinished, setIsBattleFinished] = useState(false)
@@ -24,7 +29,7 @@ const Versus: FunctionalComponent = () => {
       {isBattleFinished ? (
         <AutoAdvanceButton
           label="Next"
-          timeLimit={3000}
+          autoClickTimeout={autoclickTimeout}
           onClick={() => route("/job-summary")}
         />
       ) : null}
@@ -32,4 +37,4 @@ const Versus: FunctionalComponent = () => {
   )
 }
 
-export default Versus
+export default DoJob

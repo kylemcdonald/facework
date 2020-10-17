@@ -3,6 +3,11 @@ import { route } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import * as style from "./style.css"
 
+import { JobSummaryConfig } from "../../lib/app-acts-config"
+const {
+  nextButton: { autoclickTimeout }
+} = JobSummaryConfig
+
 const JobSummary: FunctionalComponent = () => {
   return (
     <div class={style.jobSummaryPage}>
@@ -23,7 +28,7 @@ const JobSummary: FunctionalComponent = () => {
       </table>
       <AutoAdvanceButton
         label="Next"
-        timeLimit={4000}
+        autoClickTimeout={autoclickTimeout}
         onClick={() => route("/chat")}
       />
     </div>

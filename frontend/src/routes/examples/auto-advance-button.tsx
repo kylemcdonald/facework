@@ -8,7 +8,7 @@ const AutoAdvanceExample: FunctionalComponent = () => {
       <h1>AutoAdvanceButton</h1>
       <AutoAdvanceButton
         label="Next"
-        timeLimit={5000}
+        autoClickTimeout={5000}
         onClick={(): void => alert("bang")}
       />
       <Link href="/">

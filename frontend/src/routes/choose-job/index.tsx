@@ -1,9 +1,14 @@
 import { FunctionalComponent, h } from "preact"
-import { actsPlan } from "../../lib/acts"
+import { ActsConfig } from "../../lib/app-acts-config"
 import { route, Link } from "preact-router"
 import { TraitLabel } from "../../lib/face-reader-labels"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector } from "../../lib/store"
+
+import { ChooseJobConfig } from "../../lib/app-acts-config"
+const {
+  nextButton: { autoclickTimeout }
+} = ChooseJobConfig
 
 const verusUrl = "/versus/"
 
@@ -23,15 +28,15 @@ const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
     </ul>
     <AutoAdvanceButton
       label="Next"
-      timeLimit={4000}
+      autoClickTimeout={autoclickTimeout}
       onClick={() => route(verusUrl)}
     />
   </div>
 )
 
-const Choose: FunctionalComponent = () => {
+const ChooseJob: FunctionalComponent = () => {
   const actId = useTypedSelector(state => state.act)
-  const { opponents } = actsPlan[actId]
+  const { opponents } = ActsConfig[actId]
 
   // if no choices are specified in our scene config,
   // just take user to the versus url
@@ -42,4 +47,4 @@ const Choose: FunctionalComponent = () => {
   return <ChooseTrait traits={opponents} />
 }
 
-export default Choose
+export default ChooseJob

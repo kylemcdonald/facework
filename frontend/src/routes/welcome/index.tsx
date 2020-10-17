@@ -2,7 +2,7 @@ import { FunctionalComponent, h } from "preact"
 import * as style from "./style.css"
 import { Link } from "preact-router"
 
-const Home: FunctionalComponent = () => {
+const Welcome: FunctionalComponent = () => {
   return (
     <div class={style.home}>
       <h1>
@@ -13,4 +13,4 @@ const Home: FunctionalComponent = () => {
   )
 }
 
-export default Home
+export default Welcome
