@@ -6,20 +6,10 @@ export interface UserMedia {
 }
 
 function defaultMediaStreamConstraints(): MediaStreamConstraints {
-  const base = {
+  return {
     audio: false,
-    video: { facingMode: "user" }
+    video: { facingMode: "user", width: window?.innerWidth ?? undefined }
   }
-  if (window) {
-    return {
-      ...base,
-      video: {
-        facingMode: "user",
-        width: window.innerWidth
-      }
-    }
-  }
-  return base
 }
 
 // this is a simpler version of
@@ -27,7 +17,7 @@ function defaultMediaStreamConstraints(): MediaStreamConstraints {
 export function useUserMedia(constraints?: MediaStreamConstraints): UserMedia {
   const [stream, setStream] = useState<MediaStream | null>(null)
   const [error, setError] = useState<MediaStreamError | null>(null)
-  const constraintsToUse = constraints || defaultMediaStreamConstraints()
+  const constraintsToUse = constraints ?? defaultMediaStreamConstraints()
   useEffect(() => {
     if (stream) return
     navigator.mediaDevices

@@ -4,8 +4,10 @@ import { route, Link } from "preact-router"
 import { TraitLabel } from "../../lib/face-reader-labels"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector } from "../../lib/store"
+import VideoSelfie from "../../components/videoselfie"
 
 import { ChooseJobConfig } from "../../lib/app-acts-config"
+
 const {
   nextButton: { autoclickTimeout }
 } = ChooseJobConfig
@@ -31,6 +33,7 @@ const ChooseTrait: FunctionalComponent<ChooseTraitProps> = props => (
       autoClickTimeout={autoclickTimeout}
       onClick={() => route(verusUrl)}
     />
+    <VideoSelfie />
   </div>
 )
 

@@ -4,6 +4,8 @@ import { useSelector, TypedUseSelectorHook } from "react-redux"
 import { TraitLabel } from "./face-reader-labels"
 import { Nullable } from "./type-helpers"
 
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 const initialActState: ActId = "one"
 
 const actSlice = createSlice({

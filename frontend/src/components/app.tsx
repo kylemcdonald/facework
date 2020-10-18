@@ -11,6 +11,8 @@ import AutoAdvanceExample from "../routes/examples/auto-advance-button"
 import ChatPage from "../routes/chat"
 import JobSummary from "../routes/job-summary"
 import { store } from "../lib/store"
+import CameraError from "../routes/camera-error"
+import { ReloadLink } from "./reload-link"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 if ((module as any).hot) {
@@ -29,6 +31,7 @@ const App: FunctionalComponent = () => {
       <Provider store={store}>
         <Router onChange={handleRoute}>
           <Route path="/" component={Welcome} />
+          <Route path="/error" component={CameraError} />
           <Route path="/choose" component={ChooseJob} />
           <Route path="/versus" component={DoJob} />
           <Route path="/epilogue" component={Epilogue} />
@@ -38,6 +41,7 @@ const App: FunctionalComponent = () => {
             path="/example/auto-advance-button"
             component={AutoAdvanceExample}
           />
+          <Route path="/example/reload-link" component={ReloadLink} />
           <NotFoundPage default />
         </Router>
       </Provider>

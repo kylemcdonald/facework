@@ -1,6 +1,6 @@
 import { FunctionalComponent, h } from "preact"
 import { useRef, useEffect, useCallback } from "preact/hooks"
-import { useUserMedia } from "./helpers"
+import { useUserMedia } from "../../lib/use-user-media"
 import * as style from "./style.css"
 
 function setSrc(
