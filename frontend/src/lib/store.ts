@@ -3,7 +3,7 @@ import { ActsConfig, ActId } from "./app-acts-config"
 import { useSelector, TypedUseSelectorHook } from "react-redux"
 import { TraitLabel } from "./face-reader-labels"
 import { Nullable } from "./type-helpers"
-import { UserMedia } from "../components/videoselfie/helpers"
+import { UserMedia } from "./use-user-media"
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
