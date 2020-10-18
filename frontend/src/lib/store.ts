@@ -3,6 +3,7 @@ import { ActsConfig, ActId } from "./app-acts-config"
 import { useSelector, TypedUseSelectorHook } from "react-redux"
 import { TraitLabel } from "./face-reader-labels"
 import { Nullable } from "./type-helpers"
+import { UserMedia } from "../components/videoselfie/helpers"
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
@@ -26,8 +27,26 @@ const traitSlice = createSlice({
 })
 export const { set: setTrait } = traitSlice.actions
 
+const initialUserMediaState: UserMedia = {
+  stream: null,
+  error: null
+}
+
+const userMediaSlice = createSlice({
+  name: "userMedia",
+  initialState: initialUserMediaState,
+  reducers: {
+    set: (state, action: PayloadAction<UserMedia>) => action.payload
+  }
+})
+export const { set: setUserMedia } = userMediaSlice.actions
+
 export const store = configureStore({
-  reducer: { act: actSlice.reducer, trait: traitSlice.reducer }
+  reducer: {
+    act: actSlice.reducer,
+    trait: traitSlice.reducer,
+    userMedia: userMediaSlice.reducer
+  }
 })
 
 export type AppState = ReturnType<typeof store.getState>
