@@ -2,7 +2,7 @@ import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ActsConfig, ActId } from "./app-acts-config"
 import { useSelector, TypedUseSelectorHook } from "react-redux"
 import { Nullable } from "./type-helpers"
-import { BasicJob } from "./job"
+import { BasicJob, CompletedJob } from "./job"
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
@@ -26,8 +26,24 @@ const currentJobSlice = createSlice({
 })
 export const { set: setCurrentJob } = currentJobSlice.actions
 
+const completedJobsSlice = createSlice({
+  name: "completedJobs",
+  initialState: new Array<CompletedJob>(),
+  reducers: {
+    push: (state, action: PayloadAction<CompletedJob>) => [
+      ...state,
+      action.payload
+    ]
+  }
+})
+export const { push: pushCompletedJob } = completedJobsSlice.actions
+
 export const store = configureStore({
-  reducer: { act: actSlice.reducer, currentJob: currentJobSlice.reducer }
+  reducer: {
+    act: actSlice.reducer,
+    currentJob: currentJobSlice.reducer,
+    completedJobs: completedJobsSlice.reducer
+  }
 })
 
 export type AppState = ReturnType<typeof store.getState>

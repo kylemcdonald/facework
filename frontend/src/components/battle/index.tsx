@@ -35,7 +35,7 @@ interface BattleProps {
   /** Trait, chosen by user */
   readonly trait: TraitLabel
   /** Callback when the battle timer ends */
-  readonly onBattleFinished: () => void
+  readonly onBattleFinished: (highScore: number) => void
 }
 
 const Battle: FunctionalComponent<BattleProps> = props => {
@@ -77,7 +77,7 @@ const Battle: FunctionalComponent<BattleProps> = props => {
       })
 
       if (!keepGoing) {
-        props.onBattleFinished()
+        props.onBattleFinished(keyFeatureScoring.highestScore)
       } else if (keepGoing && videoRef.current !== null) {
         sendFace(videoRef.current)
       }
