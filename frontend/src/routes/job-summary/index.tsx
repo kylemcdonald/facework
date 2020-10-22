@@ -12,6 +12,7 @@ const JobSummary: FunctionalComponent = () => {
   return (
     <div class={style.jobSummaryPage}>
       <h1>Job Summary</h1>
+      <p>{`"That was pretty good I guess." —Your Client`}</p>
       <table>
         <tr>
           <td>Job Price</td>
