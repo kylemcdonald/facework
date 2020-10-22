@@ -1,8 +1,8 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ActsConfig, ActId } from "./app-acts-config"
 import { useSelector, TypedUseSelectorHook } from "react-redux"
-import { TraitLabel } from "./face-reader-labels"
 import { Nullable } from "./type-helpers"
+import { BasicJob } from "./job"
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
@@ -17,17 +17,17 @@ const actSlice = createSlice({
 })
 export const { advance: advanceAct } = actSlice.actions
 
-const traitSlice = createSlice({
-  name: "trait",
-  initialState: null as Nullable<TraitLabel>,
+const currentJobSlice = createSlice({
+  name: "currentJob",
+  initialState: null as Nullable<BasicJob>,
   reducers: {
-    set: (state, action: PayloadAction<Nullable<TraitLabel>>) => action.payload
+    set: (state, action: PayloadAction<Nullable<BasicJob>>) => action.payload
   }
 })
-export const { set: setTrait } = traitSlice.actions
+export const { set: setCurrentJob } = currentJobSlice.actions
 
 export const store = configureStore({
-  reducer: { act: actSlice.reducer, trait: traitSlice.reducer }
+  reducer: { act: actSlice.reducer, currentJob: currentJobSlice.reducer }
 })
 
 export type AppState = ReturnType<typeof store.getState>

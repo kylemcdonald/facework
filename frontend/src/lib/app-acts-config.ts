@@ -1,4 +1,4 @@
-import { TraitLabel } from "./face-reader-labels"
+import { BasicJob } from "./job"
 
 export type ActId = "one" | "two" | "three" | "final"
 
@@ -6,27 +6,112 @@ export const ActsConfig: {
   readonly [K in ActId]: {
     readonly chats: ReadonlyArray<string>
     readonly next: ActId | null
-    readonly opponents?: ReadonlyArray<TraitLabel>
+    readonly availableJobs: ReadonlyArray<BasicJob>
   }
 } = {
   one: {
-    opponents: ["Male", "Asian", "White"],
+    availableJobs: [
+      {
+        name: "Look male",
+        trait: "Male",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      },
+      {
+        name: "Look Asian",
+        trait: "Asian",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      },
+      {
+        name: "Look White",
+        trait: "White",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      }
+    ],
     next: "two",
     chats: ["hi", "this was scene 1", "now for scene 2"]
   },
   two: {
-    opponents: ["Indian", "Gray Hair", "Bags Under Eyes"],
+    availableJobs: [
+      {
+        name: "Look Indian",
+        trait: "Indian",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      },
+      {
+        name: "Look Gray Hair",
+        trait: "Gray Hair",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      },
+      {
+        name: "Look Bags Under Eyes",
+        trait: "Bags Under Eyes",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      }
+    ],
     next: "three",
     chats: ["hi", "this has been scene 2", "let's do scene 3 now"]
   },
   three: {
-    opponents: ["Strong Nose-Mouth Lines", "Wearing Lipstick", "Flushed Face"],
+    availableJobs: [
+      {
+        name: "Look Strong Nose-Mouth Lines",
+        trait: "Strong Nose-Mouth Lines",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      },
+      {
+        name: "Look Wearing Lipstick",
+        trait: "Wearing Lipstick",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      },
+      {
+        name: "Look Flushed Face",
+        trait: "Flushed Face",
+        maxPay: 500,
+        possibleReviews: new Map<number, string>([
+          [0, "Just okay"],
+          [0.4, "Very convincing look!"]
+        ])
+      }
+    ],
     next: "final",
     chats: ["hi", "this is the end of scene 3"]
   },
   final: {
     next: null,
-    chats: []
+    chats: [],
+    availableJobs: []
   }
 }
 

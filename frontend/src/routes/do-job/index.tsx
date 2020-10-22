@@ -4,15 +4,25 @@ import { Link, route } from "preact-router"
 import { useState } from "preact/hooks"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector } from "../../lib/store"
-import { getRandomTraitLabel } from "../../lib/face-reader-labels"
 
-import { DoJobConfig } from "../../lib/app-acts-config"
+import { DoJobConfig, ActsConfig } from "../../lib/app-acts-config"
+import { BasicJob } from "../../lib/job"
 const {
   nextButton: { autoclickTimeout }
 } = DoJobConfig
 
+const getCurrentJob = (): BasicJob => {
+  const currentJob = useTypedSelector(state => state.currentJob)
+  // this should really never be true, but just in case
+  if (currentJob === null) {
+    const { availableJobs } = ActsConfig[useTypedSelector(state => state.act)]
+    return availableJobs[Math.round(Math.random() * availableJobs.length - 1)]
+  }
+  return currentJob
+}
+
 const DoJob: FunctionalComponent = () => {
-  const trait = useTypedSelector(state => state.trait) ?? getRandomTraitLabel()
+  const job = getCurrentJob()
 
   const [isBattleFinished, setIsBattleFinished] = useState(false)
 
@@ -23,7 +33,7 @@ const DoJob: FunctionalComponent = () => {
         <Link href={"/job-summary"}>Continue</Link>
       </p>
       <Battle
-        trait={trait}
+        trait={job.trait}
         onBattleFinished={() => setIsBattleFinished(true)}
       />
       {isBattleFinished ? (
