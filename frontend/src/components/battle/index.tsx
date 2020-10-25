@@ -12,6 +12,9 @@ import { isPastTimeLimit } from "./helpers"
 import BattleStatus from "../../components/versus-status"
 import { TraitLabel } from "../../lib/face-reader-labels"
 
+import { DoJobConfig } from "../../lib/app-acts-config"
+const { scoringTimeLimit } = DoJobConfig
+
 export type KeyFeatureScoring = {
   /** the name of the feature we are judging */
   readonly feature?: string
@@ -28,7 +31,7 @@ export type KeyFeatureScoring = {
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
   score: Number.MIN_VALUE,
   highestScore: Number.MIN_VALUE,
-  timeLimit: 30
+  timeLimit: scoringTimeLimit / 1000
 })
 
 interface BattleProps {

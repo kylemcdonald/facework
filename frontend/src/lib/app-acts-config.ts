@@ -136,7 +136,8 @@ export const ChooseJobConfig: BasePageConfig = {
     autoclickTimeout: 6000
   }
 }
-export const DoJobConfig: BasePageConfig = {
+export const DoJobConfig: BasePageConfig & { scoringTimeLimit: number } = {
+  scoringTimeLimit: 15 * 1000,
   nextButton: {
     autoclickTimeout: 6000
   }
