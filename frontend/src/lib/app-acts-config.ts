@@ -1,4 +1,4 @@
-import { BasicJob } from "./job"
+import { PotentialJob } from "./job"
 
 export type ActId = "one" | "two" | "three" | "final"
 
@@ -6,7 +6,7 @@ export const ActsConfig: {
   readonly [K in ActId]: {
     readonly chats: ReadonlyArray<string>
     readonly next: ActId | null
-    readonly availableJobs: ReadonlyArray<BasicJob>
+    readonly availableJobs: ReadonlyArray<PotentialJob>
   }
 } = {
   one: {
@@ -14,29 +14,32 @@ export const ActsConfig: {
       {
         name: "Look male",
         trait: "Male",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       },
       {
         name: "Look Asian",
         trait: "Asian",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       },
       {
         name: "Look White",
         trait: "White",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       }
     ],
     next: "two",
@@ -47,29 +50,32 @@ export const ActsConfig: {
       {
         name: "Look Indian",
         trait: "Indian",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       },
       {
         name: "Look Gray Hair",
         trait: "Gray Hair",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       },
       {
         name: "Look Bags Under Eyes",
         trait: "Bags Under Eyes",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       }
     ],
     next: "three",
@@ -80,29 +86,32 @@ export const ActsConfig: {
       {
         name: "Look Strong Nose-Mouth Lines",
         trait: "Strong Nose-Mouth Lines",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       },
       {
         name: "Look Wearing Lipstick",
         trait: "Wearing Lipstick",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       },
       {
         name: "Look Flushed Face",
         trait: "Flushed Face",
-        maxPay: 500,
-        possibleReviews: new Map<number, string>([
-          [0, "Just okay"],
-          [0.4, "Very convincing look!"]
-        ])
+        basePay: 700,
+        maxTip: 500,
+        possibleReviews: [
+          { minScore: 0, review: "Eh, just okay." },
+          { minScore: 0.4, review: "That was pretty great!" }
+        ]
       }
     ],
     next: "final",

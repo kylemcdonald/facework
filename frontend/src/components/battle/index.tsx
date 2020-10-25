@@ -54,6 +54,7 @@ const Battle: FunctionalComponent<BattleProps> = props => {
   const updateFeatureRatings = useCallback(
     (ratings: FeatureRatingsData | null): void => {
       let keepGoing = true
+      let latestHighScore = keyFeatureScoring.highestScore
       setFeatureRatingsData(ratings)
       setKeyFeatureScoring(prev => {
         // if no new ratings, don't update the score
@@ -63,11 +64,12 @@ const Battle: FunctionalComponent<BattleProps> = props => {
         if (prev.feature !== undefined) {
           const score =
             ratings.expressions.get(prev.feature) ?? Number.MIN_VALUE
+          latestHighScore = Math.max(prev.highestScore, score)
           keepGoing = !isPastTimeLimit(prev)
           return {
             ...prev,
             score,
-            highestScore: Math.max(prev.highestScore, score)
+            highestScore: latestHighScore
           }
         }
         // otherwise, init
@@ -77,7 +79,7 @@ const Battle: FunctionalComponent<BattleProps> = props => {
       })
 
       if (!keepGoing) {
-        props.onBattleFinished(keyFeatureScoring.highestScore)
+        props.onBattleFinished(latestHighScore)
       } else if (keepGoing && videoRef.current !== null) {
         sendFace(videoRef.current)
       }

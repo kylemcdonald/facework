@@ -2,7 +2,7 @@ import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ActsConfig, ActId } from "./app-acts-config"
 import { useSelector, TypedUseSelectorHook } from "react-redux"
 import { Nullable } from "./type-helpers"
-import { BasicJob, CompletedJob } from "./job"
+import { PotentialJob, CompletedJob } from "./job"
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
@@ -19,9 +19,10 @@ export const { advance: advanceAct } = actSlice.actions
 
 const currentJobSlice = createSlice({
   name: "currentJob",
-  initialState: null as Nullable<BasicJob>,
+  initialState: null as Nullable<PotentialJob>,
   reducers: {
-    set: (state, action: PayloadAction<Nullable<BasicJob>>) => action.payload
+    set: (state, action: PayloadAction<Nullable<PotentialJob>>) =>
+      action.payload
   }
 })
 export const { set: setCurrentJob } = currentJobSlice.actions

@@ -6,12 +6,12 @@ import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector, pushCompletedJob, store } from "../../lib/store"
 
 import { DoJobConfig, ActsConfig } from "../../lib/app-acts-config"
-import { BasicJob } from "../../lib/job"
+import { PotentialJob, completeJob } from "../../lib/job"
 const {
   nextButton: { autoclickTimeout }
 } = DoJobConfig
 
-const getCurrentJob = (): BasicJob => {
+const getCurrentJob = (): PotentialJob => {
   const currentJob = useTypedSelector(state => state.currentJob)
   // this should really never be true, but just in case
   if (currentJob === null) {
@@ -28,8 +28,9 @@ const DoJob: FunctionalComponent = () => {
 
   const onBattleFinished = useCallback(
     (highScore: number) => {
-      store.dispatch(pushCompletedJob({ ...job, highScore }))
       setIsBattleFinished(true)
+      const completedJob = completeJob(job, highScore)
+      store.dispatch(pushCompletedJob(completedJob))
     },
     [job]
   )

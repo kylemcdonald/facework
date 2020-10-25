@@ -1,7 +1,6 @@
 import { TraitLabel } from "./face-reader-labels"
 
-/** Info for a Job */
-export type BasicJob = {
+type BaseJob = {
   /** Short name for job */
   readonly name: string
   /** Longer description for job */
@@ -9,32 +8,68 @@ export type BasicJob = {
   /** Face reader trait used to evaluate job */
   readonly trait: TraitLabel
   /** In cents (e.g. $2.50 is 250) */
-  readonly maxPay: number
-  /** Map of minimum scores to their customer rating text */
-  readonly possibleReviews: Map<number, string>
+  readonly basePay: number
 }
 
-export type CompletedJob = BasicJob & {
+/** Info for a Job */
+export type PotentialJob = BaseJob & {
+  /** In cents (e.g. $2.50 is 250) */
+  readonly maxTip: number
+  /** Map of minimum scores to their customer rating text */
+  readonly possibleReviews: { minScore: number; review: string }[]
+}
+
+export type CompletedJob = BaseJob & {
   /**
    * highest momentary score attained while doing job
    * (will be between 0 and 1)
    */
   highScore: number
+  review: string
+  /** In cents (e.g. $2.50 is 250) */
+  tip: number
 }
 
-export function getReview(completedJob: CompletedJob): string {
-  const { highScore, possibleReviews } = completedJob
+export const completeJob = (
+  job: PotentialJob,
+  highScore: number
+): CompletedJob => {
+  const { name, description, trait, basePay } = job
+  const review = getReview(job, highScore),
+    tip = getTip(job, highScore)
+  return {
+    name,
+    description,
+    trait,
+    basePay,
+    highScore,
+    review,
+    tip
+  }
+}
+
+export function getReview(job: PotentialJob, highScore: number): string {
+  const { possibleReviews } = job
   // sort values in from highest to lowest `[5, 3, 1]`
-  const scores = [...possibleReviews.keys()].sort((a, b) => b - a)
-  for (const score of scores) {
+  const reviewScores = [...possibleReviews].sort(
+    (a, b) => b.minScore - a.minScore
+  )
+  for (const reviewScore of reviewScores) {
     // if high score is higher than a score,
     // its also higher than the ones later in the list
     // so just get the review and return
-    if (highScore > score) {
-      // this should never be "missing" but freakin' tsc
-      return possibleReviews.get(score) ?? "ERROR_MISSING_REVIEW"
+    if (highScore > reviewScore.minScore) {
+      return reviewScore.review
     }
   }
-  // this also shouldn't be possible, unless the map is empty
+  // this also shouldn't be possible, unless there are no reviews >:(
   return "ERROR_MISSING_REVIEW"
+}
+
+export function getTip(job: PotentialJob, highScore: number): number {
+  return Math.trunc(highScore * job.maxTip)
+}
+
+export function toDollars(cents: number): string {
+  return `$${Math.trunc(cents) / 100}`
 }

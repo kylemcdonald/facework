@@ -4,10 +4,9 @@ import { route, Link } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector, setCurrentJob, store } from "../../lib/store"
 import VideoSelfie from "../../components/videoselfie"
+import { PotentialJob } from "../../lib/job"
 
 import { ChooseJobConfig } from "../../lib/app-acts-config"
-import { BasicJob } from "../../lib/job"
-
 const {
   nextButton: { autoclickTimeout }
 } = ChooseJobConfig
@@ -15,7 +14,7 @@ const {
 const verusUrl = "/versus/"
 
 interface JobListProps {
-  readonly jobs: ReadonlyArray<BasicJob>
+  readonly jobs: ReadonlyArray<PotentialJob>
 }
 
 const JobList: FunctionalComponent<JobListProps> = props => (
