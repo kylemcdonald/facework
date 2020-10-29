@@ -1,3 +1,36 @@
-.chat-page ol {
-  margin-bottom: 2rem;
+.chat-page {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.chat-message {
+  background: #882b77;
+  color: white;
+  list-style-type: none;
+  margin: 40px 0;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.chat-message::before {
+  height: 0px;
+  width: 0px;
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  border: 20px solid black;
+  border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #882b77;
+  z-index: -1;
+}
+
+.chat-message__list {
+  margin: 0;
+  padding: 0;
 }

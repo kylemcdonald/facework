@@ -2,4 +2,25 @@
   padding: 56px 20px;
   min-height: 100%;
   width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.get-started {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.get-started a {
+  color: white;
+  text-decoration: none;
+}
+
+.hero-text {
+  font-size: 70px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }

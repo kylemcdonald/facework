@@ -1,4 +1,5 @@
 import { FunctionalComponent, h } from "preact"
+import * as style from "./style.css"
 
 interface TimeLimitDisplayProps {
   readonly startTime?: number
@@ -8,10 +9,23 @@ interface TimeLimitDisplayProps {
 }
 
 const TimeLimitDisplay: FunctionalComponent<TimeLimitDisplayProps> = props => {
+  const secondsLeft =
+    props.startTime !== undefined
+      ? timeLeft(props.startTime, props.timeLimit)
+      : props.timeLimit
+  const percentLeft = 100 - (secondsLeft / props.timeLimit) * 100
+
   return props.startTime !== undefined ? (
-    <>Time Left:{timeLeft(props.startTime, props.timeLimit)}</>
+    <div>
+      <div className={style.progressBarContainer}>
+        <div
+          className={style.progressBarFill}
+          style={{ width: `${percentLeft}%` }}
+        />
+      </div>
+    </div>
   ) : (
-    <>Time Left: 🤔</>
+    <div> </div>
   )
 }
 

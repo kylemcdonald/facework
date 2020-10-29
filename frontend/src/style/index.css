@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "DIN Alternate Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/assets/fonts/DINAlternate-Bold.woff") format("woff");
+}
+
 html,
 body {
   height: 100%;
@@ -5,7 +12,7 @@ body {
   padding: 0;
   margin: 0;
   background: #fafafa;
-  font-family: "Helvetica Neue", arial, sans-serif;
+  font-family: "DIN Alternate Bold", "Helvetica Neue", arial, sans-serif;
   font-weight: 400;
   color: #444;
   -webkit-font-smoothing: antialiased;
@@ -18,4 +25,16 @@ body {
 
 #app {
   height: 100%;
+  background: #5cc989;
+  color: white;
+  font-size: 24px;
+}
+
+h2 {
+  color: black;
+  font-size: 24px;
+}
+
+.content {
+  padding: 15px;
 }

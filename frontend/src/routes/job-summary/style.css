@@ -1,3 +1,48 @@
 .job-summary-page table {
   margin-bottom: 2rem;
 }
+
+.job-summary__body {
+  background: white;
+  color: black;
+  padding: 15px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.job-summary__body h1 {
+  color: #5cc989;
+  font-size: 26px;
+  padding: 0;
+  margin: 0px;
+  margin-bottom: 30px;
+}
+
+.job-summary__line-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.job-summary__line-items--separator {
+  border-bottom: 1px solid #5cc989;
+  margin: 15px;
+}
+
+.job-summary__grand-total--container {
+  margin: 15px 0;
+}
+
+.job-summary__grand-total--header {
+  font-size: 29px;
+}
+
+.job-summary__grand-total {
+  color: #5cc989;
+}
+
+.job-summary__footer {
+  text-align: center;
+  margin: 15px;
+}

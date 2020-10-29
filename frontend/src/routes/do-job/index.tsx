@@ -36,12 +36,7 @@ const DoJob: FunctionalComponent = () => {
   )
 
   return (
-    <div>
-      <h1>Do Job</h1>
-      <p>
-        <Link href={"/job-summary"}>Continue</Link>
-      </p>
-      <Battle trait={job.trait} onBattleFinished={onBattleFinished} />
+    <div class="content">
       {isBattleFinished ? (
         <AutoAdvanceButton
           label="Next"
@@ -49,6 +44,7 @@ const DoJob: FunctionalComponent = () => {
           onClick={() => route("/job-summary")}
         />
       ) : null}
+      <Battle trait={job.trait} onBattleFinished={onBattleFinished} />
     </div>
   )
 }

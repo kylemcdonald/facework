@@ -6,11 +6,17 @@ import { useUserMedia } from "../../lib/use-user-media"
 const Welcome: FunctionalComponent = () => {
   const { error } = useUserMedia()
   return (
-    <div class={style.home}>
-      <h1>
-        Welcome to <em>APP</em>
-      </h1>
-      <Link href={error === null ? "/choose" : "/error"}>Start</Link>
+    <div className={style.home}>
+      <div>Welcome to</div>
+      <div className={style.heroText}>
+        <div>face</div>
+        <div>work</div>
+      </div>
+      <div className={style.getStarted}>
+        <Link href={error === null ? "/choose" : "/error"}>
+          Let&apos;s get started
+        </Link>
+      </div>
     </div>
   )
 }

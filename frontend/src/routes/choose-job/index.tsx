@@ -3,8 +3,8 @@ import { ActsConfig } from "../../lib/app-acts-config"
 import { route, Link } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector, setCurrentJob, store } from "../../lib/store"
-import VideoSelfie from "../../components/videoselfie"
-import { PotentialJob } from "../../lib/job"
+import { toDollars, PotentialJob } from "../../lib/job"
+import * as style from "./style.css"
 
 import { ChooseJobConfig } from "../../lib/app-acts-config"
 const {
@@ -18,23 +18,34 @@ interface JobListProps {
 }
 
 const JobList: FunctionalComponent<JobListProps> = props => (
-  <ul>
-    {props.jobs.map(job => (
-      <li key={job.name}>
-        <Link
-          onClick={() => {
-            store.dispatch(setCurrentJob(job))
-            route(verusUrl)
-          }}
-        >
-          <span>
-            <b>{job.name} </b>
-          </span>
-          <span>({job.trait})</span>
-        </Link>
-      </li>
-    ))}
-  </ul>
+  <div>
+    <div className={style.grandTotal}>
+      <span>Grand Total</span>
+      <span className={style.grandTotalAmount}>$0.00</span>
+    </div>
+    <div className="content">
+      <h2>Get started with your first job</h2>
+      <ul className={style.jobList}>
+        {props.jobs.map(job => (
+          <li key={job.name} className={style.job}>
+            <Link
+              onClick={() => {
+                store.dispatch(setCurrentJob(job))
+                route(verusUrl)
+              }}
+            >
+              <div className={style.jobImage}></div>
+              <div className={style.jobEarnings}>
+                Earn {toDollars(job.basePay)}
+              </div>
+              <div>{job.name}</div>
+              <span className={style.jobTrait}>{job.trait}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
 )
 
 const ChooseJob: FunctionalComponent = () => {
@@ -49,7 +60,6 @@ const ChooseJob: FunctionalComponent = () => {
   }
   return (
     <>
-      <h2>New jobs!</h2>
       <JobList jobs={availableJobs} />
       <AutoAdvanceButton
         label="Next"
@@ -67,7 +77,6 @@ const ChooseJob: FunctionalComponent = () => {
           route(verusUrl)
         }}
       />
-      <VideoSelfie />
     </>
   )
 }

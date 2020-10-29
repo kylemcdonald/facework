@@ -71,5 +71,5 @@ export function getTip(job: PotentialJob, highScore: number): number {
 }
 
 export function toDollars(cents: number): string {
-  return `$${Math.trunc(cents) / 100}`
+  return `$${Number(Math.trunc(cents) / 100).toFixed(2)}`
 }
