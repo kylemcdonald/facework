@@ -1,30 +1,29 @@
 import { FunctionalComponent, h } from "preact"
-import { Link } from "preact-router"
+import * as style from "./style.css"
 
 const Epilogue: FunctionalComponent = () => {
   return (
-    <div>
-      <h2>ERR_APP_CRASH</h2>
+    <div className={`content ${style.appError}`}>
       <pre>
         {`
-{
-  "gameState": "over",
-  "game credits": {
-    "creator": [
-        "kyle mcdonald",
-        "evelyn masso",
-        "fei liu",
-        "greg borenstein"
-      ]
-  }
-}`}
+DUMP: 10X jobs. $5.21
+total tips...
+
+ _ _ _ _ _ _ _ _ _ _ _ _ _
+|                         |
+|  NETWORK NOT RESPONDING |
+|_ _ _ _ _ _ _ _ _ _ _ _ _|
+
+FACEWORKS is built by:
+Kyle
+Evelyn
+Greg
+Sarah
+Fei
+
+funded by...
+`}
       </pre>
-      <p>
-        <em>The End.</em>
-      </p>
-      <p>
-        <Link href="/">Go Home</Link>
-      </p>
     </div>
   )
 }

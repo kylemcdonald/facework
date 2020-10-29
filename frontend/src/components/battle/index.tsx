@@ -6,11 +6,11 @@ import {
   FeatureRatingsData
 } from "../../lib/use-face-reader"
 import VideoSelfie from "../../components/videoselfie"
-import FeatureRatings from "../../components/feature-ratings"
 import * as style from "./style.css"
 import { isPastTimeLimit } from "./helpers"
-import BattleStatus from "../../components/versus-status"
 import { TraitLabel } from "../../lib/face-reader-labels"
+import TimeLimitDisplay from "../time-limit-display"
+import RatingBar from "../rating-bar"
 
 import { DoJobConfig } from "../../lib/app-acts-config"
 const { scoringTimeLimit } = DoJobConfig
@@ -92,20 +92,20 @@ const Battle: FunctionalComponent<BattleProps> = props => {
   useFaceReader(updateFeatureRatings)
   return (
     <div class={style.battle}>
+      <div className={style.faceHintContainer}>
+        <div className={style.faceHint}>{keyFeatureScoring.feature}</div>
+      </div>
+      <section class={style.accompaniment}>
+        <TimeLimitDisplay
+          timeLimit={keyFeatureScoring.timeLimit}
+          startTime={keyFeatureScoring.startTime}
+          isPaused={false}
+        />
+        <RatingBar key="progress" value={keyFeatureScoring.score} />
+      </section>
       <div class={style.videoSelfieWrapper}>
         <VideoSelfie key="selfie" onPlay={onPlay} />
       </div>
-      <section class={style.accompaniment}>
-        <BattleStatus
-          key={"status"}
-          scoring={keyFeatureScoring}
-          isFaceDetected={featureRatingsData === null}
-        />
-        <details>
-          <summary>Realtime ratings</summary>
-          <FeatureRatings data={featureRatingsData} />
-        </details>
-      </section>
     </div>
   )
 }

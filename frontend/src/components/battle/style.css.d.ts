@@ -2,3 +2,5 @@
 export const battle: string;
 export const videoSelfieWrapper: string;
 export const accompaniment: string;
+export const faceHintContainer: string;
+export const faceHint: string;

@@ -2,7 +2,7 @@ import { FunctionalComponent, h } from "preact"
 import { route } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector } from "../../lib/store"
-import { getReview, getTip, toDollars } from "../../lib/job"
+import { toDollars } from "../../lib/job"
 import * as style from "./style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
@@ -14,32 +14,39 @@ const JobSummary: FunctionalComponent = () => {
   const completedJobs = useTypedSelector(state => state.completedJobs)
   const lastJob = completedJobs[completedJobs.length - 1]
   return (
-    <div class={style.jobSummaryPage}>
-      <h1>Job Summary</h1>
-      <p>{`"${lastJob.review}" — Your customer`}</p>
-      <table>
-        <tr>
-          <td>{lastJob.name}</td>
-          <td>{toDollars(lastJob.basePay)}</td>
-        </tr>
-        <tr>
-          <td>Customer Tip</td>
-          <td>{toDollars(lastJob.tip)}</td>
-        </tr>
-        <tr>
-          <td>APP subscription</td>
-          <td>{toDollars(lastJob.basePay + lastJob.tip)}</td>
-        </tr>
-        <tr>
-          <td>Grand Total</td>
-          <td>$0</td>
-        </tr>
-      </table>
-      <AutoAdvanceButton
-        label="Next"
-        autoClickTimeout={autoclickTimeout}
-        onClick={() => route("/chat")}
-      />
+    <div>
+      <div class={style.jobSummaryBody}>
+        <h1>Job Summary</h1>
+        <div>
+          <div className={style.jobSummaryLineItem}>
+            <span>{lastJob.name}</span>
+            <span>{toDollars(lastJob.basePay)}</span>
+          </div>
+          <div className={style.jobSummaryLineItem}>
+            <span>Total Customer Tips</span>
+            <span>{toDollars(lastJob.tip)}</span>
+          </div>
+          <div className={style.jobSummaryLineItem}>
+            <span>APP Subscription</span>
+            <span>{toDollars(lastJob.basePay + lastJob.tip)}</span>
+          </div>
+        </div>
+        <div className={style.jobSummaryLineItemsSeparator} />
+        <div className={style.jobSummaryGrandTotalContainer}>
+          <div className={style.jobSummaryLineItem}>
+            <span className={style.jobSummaryGrandTotalHeader}>
+              Grand Total
+            </span>
+            <span className={style.jobSummaryGrandTotal}>$0</span>
+          </div>
+        </div>
+        <AutoAdvanceButton
+          label="Next"
+          autoClickTimeout={autoclickTimeout}
+          onClick={() => route("/chat")}
+        />
+      </div>
+      <div className={style.jobSummaryFooter}>See all new jobs -</div>
     </div>
   )
 }

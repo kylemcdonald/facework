@@ -1,0 +1,48 @@
+.grand-total {
+  background: white;
+  color: black;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 15px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  font-size: 34px;
+}
+
+.grand-total__amount {
+  color: #5cc989;
+}
+
+.job__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.job {
+  list-style-type: none;
+  width: calc(50vw - 15px);
+  margin: 25px 0;
+}
+
+.job__image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background: lightgrey;
+}
+
+.job a {
+  color: white;
+  text-decoration: none;
+}
+
+.job__earnings {
+  color: black;
+  text-transform: uppercase;
+}
+.job__trait {
+  text-transform: uppercase;
+}

@@ -15,9 +15,11 @@ const {
 const ChatMessages: FunctionalComponent<{
   messages: ReadonlyArray<string>
 }> = props => (
-  <ol>
+  <ol className={style.chatMessageList}>
     {props.messages.map(chatMessage => (
-      <li key={chatMessage}>{chatMessage}</li>
+      <li key={chatMessage} className={style.chatMessage}>
+        {chatMessage}
+      </li>
     ))}
   </ol>
 )
@@ -50,8 +52,7 @@ const ChatPage: FunctionalComponent = () => {
   }, [])
 
   return (
-    <div class={style.chatPage}>
-      <h1>Chat</h1>
+    <div class={`content ${style.chatPage}`}>
       <ChatMessages messages={chats.slice(0, chatMessageRenderCount)} />
       {chatMessageRenderCount === chats.length ? (
         <AutoAdvanceButton
