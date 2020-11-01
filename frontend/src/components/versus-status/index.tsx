@@ -42,7 +42,7 @@ const BattleStatus: FunctionalComponent<BattleStatusProps> = props => {
           <br />
           <TimeLimitDisplay
             timeLimit={scoring.timeLimit}
-            startTime={scoring.startTime}
+            started={scoring.startTime !== undefined}
             isPaused={false}
           />
         </>

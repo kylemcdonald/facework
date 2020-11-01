@@ -1,31 +1,26 @@
 import { FunctionalComponent, h } from "preact"
 import * as style from "./style.css"
+import { useCountdownTimer } from "../../lib/use-countdown-timer"
 
 interface TimeLimitDisplayProps {
-  readonly startTime?: number
-  // in seconds
+  readonly started: boolean
+  // in milliseconds
   readonly timeLimit: number
   readonly isPaused: boolean
 }
 
 const TimeLimitDisplay: FunctionalComponent<TimeLimitDisplayProps> = props => {
-  const secondsLeft =
-    props.startTime !== undefined
-      ? timeLeft(props.startTime, props.timeLimit)
-      : props.timeLimit
-  const percentLeft = 100 - (secondsLeft / props.timeLimit) * 100
+  const ratioTimeLeft = props.started ? useCountdownTimer(props.timeLimit) : 1.0
 
-  return props.startTime !== undefined ? (
+  return (
     <div>
       <div className={style.progressBarContainer}>
         <div
           className={style.progressBarFill}
-          style={{ width: `${percentLeft}%` }}
+          style={{ width: `${100 - Math.floor(ratioTimeLeft * 100)}%` }}
         />
       </div>
     </div>
-  ) : (
-    <div> </div>
   )
 }
 

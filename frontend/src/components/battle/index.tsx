@@ -22,7 +22,7 @@ export type KeyFeatureScoring = {
   readonly score: number
   /** highest score from this round (between 0 and 1) */
   readonly highestScore: number
-  /** how long does the user have to win this round? (in seconds) */
+  /** how long does the user have to win this round? (in milliseconds) */
   readonly timeLimit: number
   /** when did this round start? set with Date.now() */
   readonly startTime?: number
@@ -31,7 +31,7 @@ export type KeyFeatureScoring = {
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
   score: Number.MIN_VALUE,
   highestScore: Number.MIN_VALUE,
-  timeLimit: scoringTimeLimit / 1000
+  timeLimit: scoringTimeLimit
 })
 
 interface BattleProps {
@@ -98,7 +98,7 @@ const Battle: FunctionalComponent<BattleProps> = props => {
       <section class={style.accompaniment}>
         <TimeLimitDisplay
           timeLimit={keyFeatureScoring.timeLimit}
-          startTime={keyFeatureScoring.startTime}
+          started={keyFeatureScoring.startTime !== undefined}
           isPaused={false}
         />
         <RatingBar key="progress" value={keyFeatureScoring.score} />
