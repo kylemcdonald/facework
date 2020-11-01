@@ -8,6 +8,7 @@ import {
 } from "../lib/arraybuffer-helpers"
 import { FeatureRatingsData } from "../lib/use-face-reader"
 import expressionsLabels from "../lib/face-reader-labels"
+import { assertNever } from "../lib/assert"
 
 // scale up the detection from blazeface to capture more context
 const SCALE_FACTOR = 1.25
@@ -122,13 +123,30 @@ async function prepare(): Promise<void> {
   const loadDuration = performance.now() - loadStart
   console.debug("model load: " + loadDuration.toFixed() + "ms")
   ctx.addEventListener("message", async e => {
-    if (e.data.kind) {
-      const prediction = await readFace(e.data, detector, model)
-      const ratings = extractRatings(prediction)
-      ctx.postMessage({ kind: "face-read", ratings })
+    if (e.data?.kind) {
+      await handleLaterMessages(e.data, detector, model)
+    } else {
+      console.warn(`unexpected message to worker (${e.data})`)
     }
   })
   ctx.removeEventListener("message", handleFirstMessagesWrapper)
+}
+
+async function handleLaterMessages(
+  msg: WorkerRequest,
+  detector: blazeface.BlazeFaceModel,
+  model: GraphModel
+): Promise<void> {
+  if (msg.kind === "read-face") {
+    const prediction = await readFace(msg, detector, model)
+    const ratings = extractRatings(prediction)
+    ctx.postMessage({ kind: "face-read", ratings })
+  } else if (msg.kind === "load-model") {
+    console.debug("model was already loaded")
+    ctx.postMessage({ kind: "model-loaded" })
+  } else {
+    assertNever(msg, "FaceReaderWorker message")
+  }
 }
 
 async function handleFirstMessages(msg: WorkerRequest): Promise<void> {

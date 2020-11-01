@@ -24,3 +24,13 @@ export function assertIsDefined<T>(
     })
   }
 }
+
+/** Asserts that something is of type `never` */
+export function assertNever<T>(
+  val: T | never,
+  name = "something"
+): asserts val is never {
+  throw new AssertionError({
+    message: `Expected ${name} to be never, but received ${val}`
+  })
+}

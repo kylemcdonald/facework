@@ -7,16 +7,21 @@ export interface FeatureRatingsData {
   expressions: ReadonlyMap<string, number>
 }
 
-let worker: FaceReaderWorker
+let faceReaderWorker: FaceReaderWorker | null = null
 // create this once for use inside sendFace()
 const fromPixels2DContext = document.createElement("canvas").getContext("2d")
 
 export function createWorker(): void {
-  worker = worker ?? new FaceReaderWorker()
+  faceReaderWorker = faceReaderWorker ?? new FaceReaderWorker()
+}
+
+function getWorker(): FaceReaderWorker {
+  faceReaderWorker = faceReaderWorker ?? new FaceReaderWorker()
+  return faceReaderWorker
 }
 
 export function initWorker(): void {
-  worker.postMessage({ kind: "load-model" })
+  getWorker().postMessage({ kind: "load-model" })
 }
 
 export const sendFace: (input: HTMLVideoElement) => void = async input => {
@@ -29,20 +34,32 @@ export const sendFace: (input: HTMLVideoElement) => void = async input => {
   const buffer = fromPixels2DContext.getImageData(0, 0, width, height).data
     .buffer
 
-  worker.postMessage({ kind: "read-face", buffer, width, height }, [buffer])
+  getWorker().postMessage({ kind: "read-face", buffer, width, height }, [
+    buffer
+  ])
 }
+/**
+ * Last event listener attached to "message" event of FaceReaderWorker"
+ *
+ * We have to keep track of this ourselves so we can remove it and not pile up
+ * event listeners throughout gameplay
+ */
+let currentEventListener = (m: MessageEvent): void =>
+  console.debug("placeholer event listener called")
 
 export function useFaceReader(
   faceReadCallback: (ratings: FeatureRatingsData | null) => void
 ): void {
   useEffect(() => {
-    createWorker()
-    worker.addEventListener("message", m => {
+    const worker = getWorker()
+    worker.removeEventListener("message", currentEventListener)
+    currentEventListener = (m): void => {
       const msg: WorkerResponse = m.data
       if (msg.kind === "face-read") {
         faceReadCallback(msg.ratings)
       }
-    })
+    }
+    worker.addEventListener("message", currentEventListener)
     initWorker()
   }, [])
 }
