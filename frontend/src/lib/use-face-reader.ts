@@ -2,6 +2,7 @@ import { useEffect } from "preact/hooks"
 import FaceReaderWorker from "worker-loader!../workers/face-reader"
 import { WorkerResponse } from "../workers/face-reader"
 import { assertIsDefined } from "./assert"
+import { Nullable } from "./type-helpers"
 
 export interface FeatureRatingsData {
   expressions: ReadonlyMap<string, number>
@@ -44,15 +45,22 @@ export const sendFace: (input: HTMLVideoElement) => void = async input => {
  * We have to keep track of this ourselves so we can remove it and not pile up
  * event listeners throughout gameplay
  */
-let currentEventListener = (m: MessageEvent): void =>
-  console.debug("placeholer event listener called")
+let currentEventListener: Nullable<(m: MessageEvent) => void> = null
+
+/** Remove `currentEventListener`, if it exists */
+const cleanupEventListener = () => {
+  if (faceReaderWorker !== null && currentEventListener !== null) {
+    faceReaderWorker.removeEventListener("message", currentEventListener)
+    currentEventListener = null
+  }
+}
 
 export function useFaceReader(
   faceReadCallback: (ratings: FeatureRatingsData | null) => void
 ): void {
   useEffect(() => {
     const worker = getWorker()
-    worker.removeEventListener("message", currentEventListener)
+    cleanupEventListener()
     currentEventListener = (m): void => {
       const msg: WorkerResponse = m.data
       if (msg.kind === "face-read") {
@@ -61,5 +69,6 @@ export function useFaceReader(
     }
     worker.addEventListener("message", currentEventListener)
     initWorker()
+    return cleanupEventListener
   }, [])
 }
