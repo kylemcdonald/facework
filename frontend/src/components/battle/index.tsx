@@ -64,14 +64,18 @@ const Battle: FunctionalComponent<BattleProps> = props => {
         if (ratings === null) {
           return prev
         }
+        // if we have previous ratings, we're in the middle of the round
         if (prev.feature !== undefined) {
-          const score =
+          // pulled straight from the tf model results
+          const rawMomentaryScore =
             ratings.expressions.get(prev.feature) ?? Number.MIN_VALUE
-          latestHighScore = Math.max(prev.highestScore, score)
+          // blended with previous score to smooth data
+          const blendedScore = rawMomentaryScore * 0.5 + prev.score * 0.5
+          latestHighScore = Math.max(prev.highestScore, blendedScore)
           keepGoing = !isPastTimeLimit(prev)
           return {
             ...prev,
-            score,
+            score: blendedScore,
             highestScore: latestHighScore
           }
         }
