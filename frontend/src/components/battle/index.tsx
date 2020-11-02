@@ -7,7 +7,7 @@ import {
 } from "../../lib/use-face-reader"
 import VideoSelfie from "../../components/videoselfie"
 import * as style from "./style.css"
-import { isPastTimeLimit } from "./helpers"
+import { isPastTimeLimit, sendFaceOrSchedule } from "./helpers"
 import { TraitLabel } from "../../lib/face-reader-labels"
 import TimeLimitDisplay from "../time-limit-display"
 import RatingBar from "../rating-bar"
@@ -84,7 +84,7 @@ const Battle: FunctionalComponent<BattleProps> = props => {
       if (!keepGoing) {
         props.onBattleFinished(latestHighScore)
       } else if (keepGoing && videoRef.current !== null) {
-        sendFace(videoRef.current)
+        sendFaceOrSchedule(videoRef.current)
       }
     },
     [setKeyFeatureScoring]

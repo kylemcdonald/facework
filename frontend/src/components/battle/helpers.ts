@@ -1,10 +1,19 @@
 import { KeyFeatureScoring } from "."
+import { shouldSendFaceNow, sendFace } from "../../lib/use-face-reader"
 
-function timeLeft(startTime: number, timeLimit: number): number {
-  // convert to ms
-  const timeLimitMs = timeLimit * 1000
-  // format into whole seconds
-  return Math.ceil((startTime + timeLimitMs - Date.now()) / 1000)
+export const sendFaceOrSchedule = (videoElement: HTMLVideoElement) => {
+  const timeUntilSend = shouldSendFaceNow()
+  console.log(timeUntilSend)
+  if (timeUntilSend <= 0) {
+    sendFace(videoElement)
+  } else {
+    console.debug(
+      `Too soon to send video frame. Scheduling for ${timeUntilSend}ms from now.`
+    )
+    setTimeout(() => {
+      sendFace(videoElement)
+    }, timeUntilSend)
+  }
 }
 
 export function isPastTimeLimit(scoring: KeyFeatureScoring): boolean {
@@ -12,5 +21,5 @@ export function isPastTimeLimit(scoring: KeyFeatureScoring): boolean {
   if (startTime === undefined) {
     return false
   }
-  return timeLeft(startTime, timeLimit) <= 0
+  return Math.ceil((startTime + timeLimit - Date.now()) / 1000) <= 0
 }

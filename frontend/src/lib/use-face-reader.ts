@@ -4,6 +4,12 @@ import { WorkerResponse } from "../workers/face-reader"
 import { assertIsDefined } from "./assert"
 import { Nullable } from "./type-helpers"
 
+/** in milliseconds */
+const MAX_SEND_FACE_RATE = 250
+
+/** The last time a face was sent to the worker */
+let lastSendFaceTime = Date.now()
+
 export interface FeatureRatingsData {
   expressions: ReadonlyMap<string, number>
 }
@@ -23,6 +29,19 @@ function getWorker(): FaceReaderWorker {
 
 export function initWorker(): void {
   getWorker().postMessage({ kind: "load-model" })
+}
+
+export const shouldSendFaceNow = (): number => {
+  const now = Date.now()
+  const timeSinceLastSendFace = now - lastSendFaceTime
+  if (timeSinceLastSendFace < MAX_SEND_FACE_RATE) {
+    console.debug(
+      `Too soon to send another face frame (${timeSinceLastSendFace}ms)`
+    )
+    return MAX_SEND_FACE_RATE - timeSinceLastSendFace
+  }
+  lastSendFaceTime = now
+  return 0
 }
 
 export const sendFace: (input: HTMLVideoElement) => void = async input => {
