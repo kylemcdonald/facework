@@ -3,18 +3,22 @@ import { route } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector } from "../../lib/store"
 import { toDollars } from "../../lib/job"
+import Chat from "../chat"
 import * as style from "./style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
+import { useState } from "preact/hooks"
 const {
   nextButton: { autoclickTimeout }
 } = JobSummaryConfig
 
 const JobSummary: FunctionalComponent = () => {
+  const [showChat, setShowChat] = useState(false)
   const completedJobs = useTypedSelector(state => state.completedJobs)
   const lastJob = completedJobs[completedJobs.length - 1]
   return (
     <div>
+      {showChat && <Chat />}
       <div class={style.jobSummaryBody}>
         <h1>Job Summary</h1>
         <div>
@@ -43,7 +47,7 @@ const JobSummary: FunctionalComponent = () => {
         <AutoAdvanceButton
           label="Next"
           autoClickTimeout={autoclickTimeout}
-          onClick={() => route("/chat")}
+          onClick={() => setShowChat(true)}
         />
       </div>
       <div className={style.jobSummaryFooter}>See all new jobs -</div>
