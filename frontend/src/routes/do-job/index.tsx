@@ -16,7 +16,7 @@ const getCurrentJob = (): PotentialJob => {
   // this should really never be true, but just in case
   if (currentJob === null) {
     const { availableJobs } = ActsConfig[useTypedSelector(state => state.act)]
-    return availableJobs[Math.round(Math.random() * availableJobs.length - 1)]
+    return availableJobs[Math.floor(Math.random() * availableJobs.length)]
   }
   return currentJob
 }

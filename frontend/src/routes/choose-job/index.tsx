@@ -69,7 +69,7 @@ const ChooseJob: FunctionalComponent = () => {
           store.dispatch(
             setCurrentJob(
               availableJobs[
-                Math.round(Math.random() * availableJobs.length - 1)
+                Math.floor(Math.random() * availableJobs.length)
               ]
             )
           )
