@@ -1,5 +1,5 @@
 import { FunctionalComponent, h } from "preact"
-import { Route, Router, RouterOnChangeArgs } from "preact-router"
+import { Route, Router, RouterOnChangeArgs, Link } from "preact-router"
 import { Provider } from "react-redux"
 
 import Welcome from "../routes/welcome"
@@ -35,7 +35,6 @@ const App: FunctionalComponent = () => {
           <Route path="/choose" component={ChooseJob} />
           <Route path="/versus" component={DoJob} />
           <Route path="/epilogue" component={Epilogue} />
-          <Route path="/chat" component={ChatPage} />
           <Route path="/job-summary" component={JobSummary} />
           <Route
             path="/example/auto-advance-button"
