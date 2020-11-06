@@ -107,9 +107,7 @@ const Battle: FunctionalComponent<BattleProps> = props => {
         />
         <RatingBar key="progress" value={keyFeatureScoring.score} />
       </section>
-      <div class={style.videoSelfieWrapper}>
-        <VideoSelfie key="selfie" onPlay={onPlay} />
-      </div>
+      <VideoSelfie key="selfie" onPlay={onPlay} />
     </div>
   )
 }
