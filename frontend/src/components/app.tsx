@@ -34,13 +34,15 @@ const App: FunctionalComponent = () => {
           <Route path="/error" component={CameraError} />
           <Route path="/choose" component={ChooseJob} />
           <Route path="/versus" component={DoJob} />
-          <Route path="/epilogue" component={Epilogue} />
           <Route path="/job-summary" component={JobSummary} />
+          <Route path="/epilogue" component={Epilogue} />
+          {/* component example routes */}
           <Route
             path="/example/auto-advance-button"
             component={AutoAdvanceExample}
           />
           <Route path="/example/reload-link" component={ReloadLink} />
+          {/* end example routes */}
           <NotFoundPage default />
         </Router>
       </Provider>
