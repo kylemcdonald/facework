@@ -5,7 +5,7 @@ import { AtopVideoSelfie } from "../../components/videoselfie"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector, store, advanceAct } from "../../lib/store"
 import { toDollars } from "../../lib/job"
-import Chat from "../chat"
+import ChatOverlay from "../../components/chat-overlay"
 import {
   ActId,
   isIntermediateAct,
@@ -29,9 +29,10 @@ const JobSummary: FunctionalComponent = () => {
   return (
     <div>
       {showChat && actId !== firstActId && (
-        <Chat
+        <ChatOverlay
           actId={actId}
           chatMessages={getChatMessagesforAct(actId, lastJob.highScore)}
+          onAdvance={onAdvance}
         />
       )}
       <AtopVideoSelfie isBlurred={true}>

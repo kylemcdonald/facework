@@ -1,9 +1,8 @@
 import { FunctionalComponent, h } from "preact"
-import AutoAdvanceButton from "../../components/auto-advance-button"
+import AutoAdvanceButton from "../auto-advance-button"
 import * as style from "./style.css"
 import { useState, useEffect } from "preact/hooks"
 import { IntermediateAct, firstActId, ActId } from "../../lib/app-acts-config"
-import { onAdvance } from "../job-summary"
 
 import { ChatPageConfig } from "../../lib/app-acts-config"
 const {
@@ -23,13 +22,14 @@ const ChatMessages: FunctionalComponent<{
   </ol>
 )
 
-interface ChatProps {
+interface ChatOverlayProps {
   chatMessages: IntermediateAct["chats"]
   actId: Exclude<ActId, typeof firstActId>
+  onAdvance: (actId: ActId) => void
 }
 
-const Chat: FunctionalComponent<ChatProps> = props => {
-  const { chatMessages: chats, actId } = props
+const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
+  const { chatMessages, actId, onAdvance } = props
   const [chatMessageRenderCount, setchatMessageRenderCount] = useState(1)
   useEffect(() => {
     const intervalID = setInterval(() => {
@@ -45,16 +45,16 @@ const Chat: FunctionalComponent<ChatProps> = props => {
 
   return (
     <div class={`content ${style.chatPage}`}>
-      <ChatMessages messages={chats.slice(0, chatMessageRenderCount)} />
-      {chatMessageRenderCount === chats.length ? (
+      <ChatMessages messages={chatMessages.slice(0, chatMessageRenderCount)} />
+      {chatMessageRenderCount === chatMessages.length ? (
         <AutoAdvanceButton
           label="Next"
           autoClickTimeout={autoclickTimeout}
-          onClick={() => onAdvance(actId)}
+          onClick={(): void => onAdvance(actId)}
         />
       ) : null}
     </div>
   )
 }
 
-export default Chat
+export default ChatOverlay
