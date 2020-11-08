@@ -8,7 +8,7 @@ const StreamFound: FunctionalComponent = () => (
   <div>
     <p>If you can see your video below this, you are ready to start.</p>
     <Link href="/choose">Start</Link>
-    <VideoSelfie />
+    <VideoSelfie isBlurred={false} />
   </div>
 )
 
