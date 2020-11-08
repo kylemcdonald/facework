@@ -36,6 +36,8 @@ const JobList: FunctionalComponent<JobListProps> = props => (
               }}
             >
               <div className={style.jobImage}></div>
+              <div className={style.jobEarnings}></div>
+              Earn {toDollars(job.maxTip)}
               <div>{job.name}</div>
               <span className={style.jobTrait}>{job.trait}</span>
             </Link>

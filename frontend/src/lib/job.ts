@@ -8,12 +8,11 @@ type BaseJob = {
   /** Face reader trait used to evaluate job */
   readonly trait: TraitLabel
   /** In cents (e.g. $2.50 is 250) */
+  readonly maxTip: number
 }
 
 /** Info for a Job */
 export type PotentialJob = BaseJob & {
-  /** In cents (e.g. $2.50 is 250) */
-  readonly maxTip: number
   /** Map of minimum scores to their customer rating text */
   readonly possibleReviews: { minScore: number; review: string }[]
 }
@@ -33,7 +32,7 @@ export const completeJob = (
   job: PotentialJob,
   highScore: number
 ): CompletedJob => {
-  const { name, description, trait } = job
+  const { name, description, trait, maxTip } = job
   const review = getReview(job, highScore),
     tip = getTip(job, highScore)
   return {
@@ -42,7 +41,8 @@ export const completeJob = (
     trait,
     highScore,
     review,
-    tip
+    tip,
+    maxTip
   }
 }
 

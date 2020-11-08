@@ -26,6 +26,9 @@ const JobSummary: FunctionalComponent = () => {
   const completedJobs = useTypedSelector(state => state.completedJobs)
   const lastJob = completedJobs[completedJobs.length - 1]
   const actId = useTypedSelector(state => state.act)
+  const lastJobTip = toDollars(lastJob.tip),
+    subscriptionCost = toDollars(Math.ceil(lastJob.maxTip / 2)),
+    grandTotal = toDollars(lastJob.tip - Math.ceil(lastJob.maxTip / 2))
   return (
     <div>
       {showChat && actId !== firstActId && (
@@ -41,10 +44,11 @@ const JobSummary: FunctionalComponent = () => {
           <div>
             <div className={style.jobSummaryLineItem}>
               <span>Customer Tip</span>
-              <span>{toDollars(lastJob.tip)}</span>
+              <span>{lastJobTip}</span>
             </div>
             <div className={style.jobSummaryLineItem}>
               <span>APP Subscription</span>
+              <span>{subscriptionCost}</span>
             </div>
           </div>
           <div className={style.jobSummaryLineItemsSeparator} />
@@ -53,7 +57,7 @@ const JobSummary: FunctionalComponent = () => {
               <span className={style.jobSummaryGrandTotalHeader}>
                 Grand Total
               </span>
-              <span className={style.jobSummaryGrandTotal}>$0</span>
+              <span className={style.jobSummaryGrandTotal}>{grandTotal}</span>
             </div>
           </div>
           <AutoAdvanceButton
@@ -67,7 +71,7 @@ const JobSummary: FunctionalComponent = () => {
           />
         </div>
       </AtopVideoSelfie>
-      <div className={style.jobSummaryFooter}>See all new jobs -</div>
+      <div className={style.jobSummaryFooter}>See all new jobs</div>
     </div>
   )
 }
