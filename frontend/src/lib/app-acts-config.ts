@@ -1,14 +1,48 @@
 import { PotentialJob } from "./job"
 
-export type ActId = "one" | "two" | "three" | "final"
+/** (Literal) id for the first act */
+export const firstActId = "one"
+/** (Literal) id for the last act */
+export const finalActId = "final"
+/** Ids for all acts in-between */
+export type IntermediateActId = "two" | "three"
+
+/** Union of all possible Act Ids */
+export type ActId = typeof firstActId | IntermediateActId | typeof finalActId
+
+export const isIntermediateAct = (actId: ActId): actId is IntermediateActId =>
+  actId !== firstActId && actId !== finalActId
+
+/** Properties common to all acts in the game */
+type BaseAct = {
+  readonly availableJobs: ReadonlyArray<PotentialJob>
+}
+
+/** Properties of the first act */
+type FirstAct = BaseAct & {
+  readonly next: ActId
+}
+
+/** Properties of acts in the middle of the game (not first or last) */
+export type IntermediateAct = BaseAct & {
+  readonly chats: ReadonlyArray<string>
+  readonly next: ActId
+}
+
+/** Properties of the final act */
+type FinalAct = BaseAct & {
+  /** Between 0 and 1 */
+  readonly winLoseThreshold: number
+  /** Chats shown if user's score is *above* winLoseThreshold */
+  readonly winChats: IntermediateAct["chats"]
+  /** Chats shown if user's score is *below* winLoseThreshold */
+  readonly loseChats: IntermediateAct["chats"]
+}
 
 export const ActsConfig: {
-  readonly [K in ActId]: {
-    readonly chats: ReadonlyArray<string>
-    readonly next: ActId | null
-    readonly availableJobs: ReadonlyArray<PotentialJob>
-  }
-} = {
+  readonly [firstActId]: FirstAct
+  readonly [finalActId]: FinalAct
+} & { readonly [K in IntermediateActId]: IntermediateAct } = {
   one: {
     availableJobs: [
       {
@@ -42,8 +76,7 @@ export const ActsConfig: {
         ]
       }
     ],
-    next: "two",
-    chats: ["hi", "this was scene 1", "now for scene 2"]
+    next: "two"
   },
   two: {
     availableJobs: [
@@ -118,8 +151,9 @@ export const ActsConfig: {
     chats: ["hi", "this is the end of scene 3"]
   },
   final: {
-    next: null,
-    chats: [],
+    winLoseThreshold: 0.3,
+    winChats: [],
+    loseChats: [],
     availableJobs: []
   }
 }
