@@ -2,6 +2,7 @@ import { FunctionalComponent, h } from "preact"
 import { ActsConfig } from "../../lib/app-acts-config"
 import { route, Link } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
+import { AtopVideoSelfie } from "../../components/videoselfie"
 import { useTypedSelector, setCurrentJob, store } from "../../lib/store"
 import { toDollars, PotentialJob } from "../../lib/job"
 import * as style from "./style.css"
@@ -59,7 +60,7 @@ const ChooseJob: FunctionalComponent = () => {
     return <div>redirecting...</div>
   }
   return (
-    <>
+    <AtopVideoSelfie isBlurred={true}>
       <JobList jobs={availableJobs} />
       <AutoAdvanceButton
         label="Next"
@@ -68,16 +69,14 @@ const ChooseJob: FunctionalComponent = () => {
           // set a random job from this act
           store.dispatch(
             setCurrentJob(
-              availableJobs[
-                Math.floor(Math.random() * availableJobs.length)
-              ]
+              availableJobs[Math.floor(Math.random() * availableJobs.length)]
             )
           )
           // and start them on it
           route(verusUrl)
         }}
       />
-    </>
+    </AtopVideoSelfie>
   )
 }
 

@@ -12,6 +12,8 @@ function setSrc(
 
 interface VideoSelfieProps {
   readonly onPlay?: (videoElement: HTMLVideoElement) => void
+  /** defaults to false */
+  readonly isBlurred: boolean
 }
 
 const VideoSelfie: FunctionalComponent<VideoSelfieProps> = (
@@ -27,14 +29,27 @@ const VideoSelfie: FunctionalComponent<VideoSelfieProps> = (
   }, [props.onPlay, videoRef.current])
 
   return (
-    <video
-      autoPlay
-      ref={videoRef}
-      onPlay={onPlayCallback}
-      class={style.self}
-      playsInline={true}
-    />
+    <div
+      class={
+        style.wrapper + (props.isBlurred === true ? " " + style.blurred : "")
+      }
+    >
+      <video
+        autoPlay
+        ref={videoRef}
+        onPlay={onPlayCallback}
+        class={style.self}
+        playsInline={true}
+      />
+    </div>
   )
 }
+
+export const AtopVideoSelfie: FunctionalComponent<VideoSelfieProps> = props => (
+  <>
+    <div class={style.upperLayer}>{props.children}</div>
+    <VideoSelfie key="selfie" {...props} />
+  </>
+)
 
 export default VideoSelfie
