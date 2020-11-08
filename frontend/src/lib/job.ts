@@ -8,7 +8,6 @@ type BaseJob = {
   /** Face reader trait used to evaluate job */
   readonly trait: TraitLabel
   /** In cents (e.g. $2.50 is 250) */
-  readonly basePay: number
 }
 
 /** Info for a Job */
@@ -34,14 +33,13 @@ export const completeJob = (
   job: PotentialJob,
   highScore: number
 ): CompletedJob => {
-  const { name, description, trait, basePay } = job
+  const { name, description, trait } = job
   const review = getReview(job, highScore),
     tip = getTip(job, highScore)
   return {
     name,
     description,
     trait,
-    basePay,
     highScore,
     review,
     tip
@@ -71,5 +69,5 @@ export function getTip(job: PotentialJob, highScore: number): number {
 }
 
 export function toDollars(cents: number): string {
-  return `$${Number(Math.trunc(cents) / 100).toFixed(2)}`
+  return `$${Number(Math.trunc(cents) / 100).toFixed(0)}`
 }

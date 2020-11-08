@@ -36,9 +36,6 @@ const JobList: FunctionalComponent<JobListProps> = props => (
               }}
             >
               <div className={style.jobImage}></div>
-              <div className={style.jobEarnings}>
-                Earn {toDollars(job.basePay)}
-              </div>
               <div>{job.name}</div>
               <span className={style.jobTrait}>{job.trait}</span>
             </Link>

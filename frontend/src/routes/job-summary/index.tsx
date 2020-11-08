@@ -40,16 +40,11 @@ const JobSummary: FunctionalComponent = () => {
           <h1>Job Summary</h1>
           <div>
             <div className={style.jobSummaryLineItem}>
-              <span>{lastJob.name}</span>
-              <span>{toDollars(lastJob.basePay)}</span>
-            </div>
-            <div className={style.jobSummaryLineItem}>
-              <span>Total Customer Tips</span>
+              <span>Customer Tip</span>
               <span>{toDollars(lastJob.tip)}</span>
             </div>
             <div className={style.jobSummaryLineItem}>
               <span>APP Subscription</span>
-              <span>{toDollars(lastJob.basePay + lastJob.tip)}</span>
             </div>
           </div>
           <div className={style.jobSummaryLineItemsSeparator} />
