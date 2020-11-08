@@ -1,10 +1,9 @@
 import { FunctionalComponent, h } from "preact"
-import { route } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import * as style from "./style.css"
-import { useCallback, useState, useEffect } from "preact/hooks"
-import { advanceAct, store, useTypedSelector } from "../../lib/store"
-import { ActsConfig } from "../../lib/app-acts-config"
+import { useState, useEffect } from "preact/hooks"
+import { IntermediateAct, firstActId, ActId } from "../../lib/app-acts-config"
+import { onAdvance } from "../job-summary"
 
 import { ChatPageConfig } from "../../lib/app-acts-config"
 const {
@@ -24,25 +23,18 @@ const ChatMessages: FunctionalComponent<{
   </ol>
 )
 
-const ChatPage: FunctionalComponent = () => {
-  const actId = useTypedSelector(state => state.act)
-  const { chats } = ActsConfig[actId]
+interface ChatProps {
+  chatMessages: IntermediateAct["chats"]
+  actId: Exclude<ActId, typeof firstActId>
+}
 
-  const onAdvance = useCallback(() => {
-    store.dispatch(advanceAct())
-    // TODO: be smarter here
-    if (actId === "three" || actId === "final") {
-      route("/epilogue")
-    } else {
-      route("/choose")
-    }
-  }, [])
-
+const Chat: FunctionalComponent<ChatProps> = props => {
+  const { chatMessages: chats, actId } = props
   const [chatMessageRenderCount, setchatMessageRenderCount] = useState(1)
   useEffect(() => {
     const intervalID = setInterval(() => {
       setchatMessageRenderCount(prev => {
-        if (prev === chats.length) {
+        if (prev === props.chatMessages.length) {
           clearInterval(intervalID)
           return prev
         }
@@ -58,11 +50,11 @@ const ChatPage: FunctionalComponent = () => {
         <AutoAdvanceButton
           label="Next"
           autoClickTimeout={autoclickTimeout}
-          onClick={onAdvance}
+          onClick={() => onAdvance(actId)}
         />
       ) : null}
     </div>
   )
 }
 
-export default ChatPage
+export default Chat
