@@ -64,7 +64,11 @@ const JobSummary: FunctionalComponent = () => {
           <AutoAdvanceButton
             label="Next"
             autoClickTimeout={autoclickTimeout}
-            onClick={() => (showChat ? onAdvance(actId) : setShowChat(true))}
+            onClick={() =>
+              showChat || actId === firstActId
+                ? onAdvance(actId)
+                : setShowChat(true)
+            }
           />
         </div>
       </AtopVideoSelfie>
@@ -84,7 +88,7 @@ function getChatMessagesforAct(
     : ActsConfig[actId].loseChats
 }
 
-export function onAdvance(actId: ActId) {
+export function onAdvance(actId: ActId): void {
   store.dispatch(advanceAct())
   // TODO: be smarter here
   if (actId === finalActId) {
