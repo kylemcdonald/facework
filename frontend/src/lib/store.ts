@@ -12,9 +12,8 @@ const actSlice = createSlice({
   name: "act",
   initialState: initialActState as ActId,
   reducers: {
-    advance: state => {
+    advance: state =>
       state !== finalActId ? ActsConfig[state].next : finalActId
-    }
   }
 })
 export const { advance: advanceAct } = actSlice.actions
