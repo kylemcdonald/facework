@@ -48,7 +48,6 @@ export const ActsConfig: {
       {
         name: "Look male",
         trait: "Male",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },
@@ -58,7 +57,6 @@ export const ActsConfig: {
       {
         name: "Look Asian",
         trait: "Asian",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },
@@ -68,7 +66,6 @@ export const ActsConfig: {
       {
         name: "Look White",
         trait: "White",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },
@@ -83,7 +80,6 @@ export const ActsConfig: {
       {
         name: "Look Indian",
         trait: "Indian",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },
@@ -93,7 +89,6 @@ export const ActsConfig: {
       {
         name: "Look Gray Hair",
         trait: "Gray Hair",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },
@@ -103,7 +98,6 @@ export const ActsConfig: {
       {
         name: "Look Bags Under Eyes",
         trait: "Bags Under Eyes",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },
@@ -119,7 +113,6 @@ export const ActsConfig: {
       {
         name: "Look Strong Nose-Mouth Lines",
         trait: "Strong Nose-Mouth Lines",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },
@@ -129,7 +122,6 @@ export const ActsConfig: {
       {
         name: "Look Wearing Lipstick",
         trait: "Wearing Lipstick",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },
@@ -139,7 +131,6 @@ export const ActsConfig: {
       {
         name: "Look Flushed Face",
         trait: "Flushed Face",
-        basePay: 700,
         maxTip: 500,
         possibleReviews: [
           { minScore: 0, review: "Eh, just okay." },

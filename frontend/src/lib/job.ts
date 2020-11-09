@@ -8,13 +8,11 @@ type BaseJob = {
   /** Face reader trait used to evaluate job */
   readonly trait: TraitLabel
   /** In cents (e.g. $2.50 is 250) */
-  readonly basePay: number
+  readonly maxTip: number
 }
 
 /** Info for a Job */
 export type PotentialJob = BaseJob & {
-  /** In cents (e.g. $2.50 is 250) */
-  readonly maxTip: number
   /** Map of minimum scores to their customer rating text */
   readonly possibleReviews: { minScore: number; review: string }[]
 }
@@ -34,17 +32,17 @@ export const completeJob = (
   job: PotentialJob,
   highScore: number
 ): CompletedJob => {
-  const { name, description, trait, basePay } = job
+  const { name, description, trait, maxTip } = job
   const review = getReview(job, highScore),
     tip = getTip(job, highScore)
   return {
     name,
     description,
     trait,
-    basePay,
     highScore,
     review,
-    tip
+    tip,
+    maxTip
   }
 }
 
@@ -70,6 +68,18 @@ export function getTip(job: PotentialJob, highScore: number): number {
   return Math.trunc(highScore * job.maxTip)
 }
 
+export function getJobSubscriptionCost(job: BaseJob): number {
+  return Math.ceil(job.maxTip / 2)
+}
+
+export function getJobGrandTotal(job: CompletedJob): number {
+  return job.tip - getJobSubscriptionCost(job)
+}
+
+export function getStartingBalance(jobs: ReadonlyArray<CompletedJob>): number {
+  return jobs.reduce((total, job) => getJobGrandTotal(job) + total, 0)
+}
+
 export function toDollars(cents: number): string {
-  return `$${Number(Math.trunc(cents) / 100).toFixed(2)}`
+  return `$${Number(Math.trunc(cents) / 100).toFixed(0)}`
 }
