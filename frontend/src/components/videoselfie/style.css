@@ -24,6 +24,6 @@
 }
 
 .blurred {
-  filter: grayscale(0.1) blur(10px) brightness(0.75);
+  filter: blur(10px) brightness(0.75);
   transform: scale(1.1);
 }
