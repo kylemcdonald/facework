@@ -90,8 +90,8 @@ function getChatMessagesforAct(
 
 export function onAdvance(actId: ActId): void {
   store.dispatch(advanceAct())
-  // TODO: be smarter here
-  if (actId === finalActId) {
+  // TODO: be smarter here?
+  if (actId === finalActId || ActsConfig[actId].next === finalActId) {
     route("/epilogue")
   } else {
     route("/choose")
