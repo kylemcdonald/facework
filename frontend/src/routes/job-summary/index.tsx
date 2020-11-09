@@ -4,7 +4,6 @@ import { route } from "preact-router"
 import { AtopVideoSelfie } from "../../components/videoselfie"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector, store, advanceAct } from "../../lib/store"
-import { toDollars } from "../../lib/job"
 import ChatOverlay from "../../components/chat-overlay"
 import {
   ActId,
@@ -14,6 +13,12 @@ import {
   firstActId,
   finalActId
 } from "../../lib/app-acts-config"
+import {
+  toDollars,
+  getJobSubscriptionCost,
+  getJobGrandTotal,
+  getStartingBalance
+} from "../../lib/job"
 import * as style from "./style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
@@ -27,8 +32,9 @@ const JobSummary: FunctionalComponent = () => {
   const lastJob = completedJobs[completedJobs.length - 1]
   const actId = useTypedSelector(state => state.act)
   const lastJobTip = toDollars(lastJob.tip),
-    subscriptionCost = toDollars(Math.ceil(lastJob.maxTip / 2)),
-    grandTotal = toDollars(lastJob.tip - Math.ceil(lastJob.maxTip / 2))
+    subscriptionCost = toDollars(getJobSubscriptionCost(lastJob)),
+    grandTotal = toDollars(getJobGrandTotal(lastJob)),
+    startingBalance = toDollars(getStartingBalance(completedJobs))
   return (
     <div>
       {showChat && actId !== firstActId && (
@@ -42,6 +48,10 @@ const JobSummary: FunctionalComponent = () => {
         <div class={style.jobSummaryBody}>
           <h1>Job Summary</h1>
           <div>
+            <div className={style.jobSummaryLineItem}>
+              <span>Starting Balance</span>
+              <span>{startingBalance}</span>
+            </div>
             <div className={style.jobSummaryLineItem}>
               <span>Customer Tip</span>
               <span>{lastJobTip}</span>

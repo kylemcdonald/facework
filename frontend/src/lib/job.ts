@@ -68,6 +68,18 @@ export function getTip(job: PotentialJob, highScore: number): number {
   return Math.trunc(highScore * job.maxTip)
 }
 
+export function getJobSubscriptionCost(job: BaseJob): number {
+  return Math.ceil(job.maxTip / 2)
+}
+
+export function getJobGrandTotal(job: CompletedJob): number {
+  return job.tip - getJobSubscriptionCost(job)
+}
+
+export function getStartingBalance(jobs: ReadonlyArray<CompletedJob>): number {
+  return jobs.reduce((total, job) => getJobGrandTotal(job) + total, 0)
+}
+
 export function toDollars(cents: number): string {
   return `$${Number(Math.trunc(cents) / 100).toFixed(0)}`
 }
