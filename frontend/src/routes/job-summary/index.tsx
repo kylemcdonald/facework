@@ -1,10 +1,19 @@
 import { FunctionalComponent, h } from "preact"
 import { useState } from "preact/hooks"
+import { route } from "preact-router"
 import { AtopVideoSelfie } from "../../components/videoselfie"
 import AutoAdvanceButton from "../../components/auto-advance-button"
-import { useTypedSelector } from "../../lib/store"
+import { useTypedSelector, store, advanceAct } from "../../lib/store"
 import { toDollars } from "../../lib/job"
-import Chat from "../chat"
+import ChatOverlay from "../../components/chat-overlay"
+import {
+  ActId,
+  isIntermediateAct,
+  ActsConfig,
+  IntermediateAct,
+  firstActId,
+  finalActId
+} from "../../lib/app-acts-config"
 import * as style from "./style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
@@ -16,9 +25,16 @@ const JobSummary: FunctionalComponent = () => {
   const [showChat, setShowChat] = useState(false)
   const completedJobs = useTypedSelector(state => state.completedJobs)
   const lastJob = completedJobs[completedJobs.length - 1]
+  const actId = useTypedSelector(state => state.act)
   return (
     <div>
-      {showChat && <Chat />}
+      {showChat && actId !== firstActId && (
+        <ChatOverlay
+          actId={actId}
+          chatMessages={getChatMessagesforAct(actId, lastJob.highScore)}
+          onAdvance={onAdvance}
+        />
+      )}
       <AtopVideoSelfie isBlurred={true}>
         <div class={style.jobSummaryBody}>
           <h1>Job Summary</h1>
@@ -48,13 +64,38 @@ const JobSummary: FunctionalComponent = () => {
           <AutoAdvanceButton
             label="Next"
             autoClickTimeout={autoclickTimeout}
-            onClick={() => setShowChat(true)}
+            onClick={() =>
+              showChat || actId === firstActId
+                ? onAdvance(actId)
+                : setShowChat(true)
+            }
           />
         </div>
       </AtopVideoSelfie>
       <div className={style.jobSummaryFooter}>See all new jobs -</div>
     </div>
   )
+}
+
+function getChatMessagesforAct(
+  actId: Exclude<ActId, typeof firstActId>,
+  lastJobScore: number
+): IntermediateAct["chats"] {
+  return isIntermediateAct(actId)
+    ? ActsConfig[actId].chats
+    : lastJobScore >= ActsConfig[actId].winLoseThreshold
+    ? ActsConfig[actId].winChats
+    : ActsConfig[actId].loseChats
+}
+
+export function onAdvance(actId: ActId): void {
+  store.dispatch(advanceAct())
+  // TODO: be smarter here?
+  if (actId === finalActId || ActsConfig[actId].next === finalActId) {
+    route("/epilogue")
+  } else {
+    route("/choose")
+  }
 }
 
 export default JobSummary

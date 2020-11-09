@@ -1,18 +1,19 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ActsConfig, ActId } from "./app-acts-config"
+import { ActsConfig, ActId, firstActId, finalActId } from "./app-acts-config"
 import { useSelector, TypedUseSelectorHook } from "react-redux"
 import { Nullable } from "./type-helpers"
 import { PotentialJob, CompletedJob } from "./job"
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
-const initialActState: ActId = "one"
+const initialActState = firstActId
 
 const actSlice = createSlice({
   name: "act",
   initialState: initialActState as ActId,
   reducers: {
-    advance: state => ActsConfig[state].next ?? "final"
+    advance: state =>
+      state !== finalActId ? ActsConfig[state].next : finalActId
   }
 })
 export const { advance: advanceAct } = actSlice.actions
