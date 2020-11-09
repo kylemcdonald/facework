@@ -22,7 +22,7 @@
   z-index: 1;
 }
 
-.blurred {
-  filter: grayscale(0.1) blur(10px) brightness(0.75);
+.blurred .self {
+  filter: blur(10px) brightness(0.75);
   transform: scale(1.1);
 }
