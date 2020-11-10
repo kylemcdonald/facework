@@ -37,7 +37,7 @@ const JobSummary: FunctionalComponent = () => {
     grandTotal = toDollars(getJobGrandTotal(lastJob)),
     startingBalance = toDollars(getStartingBalance(completedJobs.slice(0, -1)))
   return (
-    <div>
+    <div className={style.jobSummaryContainer}>
       {showChat && actId !== firstActId && (
         <ChatOverlay
           actId={actId}
@@ -71,15 +71,17 @@ const JobSummary: FunctionalComponent = () => {
               <span className={style.jobSummaryGrandTotal}>{grandTotal}</span>
             </div>
           </div>
-          <AutoAdvanceButton
-            label="Next"
-            autoClickTimeout={autoclickTimeout}
-            onClick={() =>
-              showChat || actId === firstActId
-                ? onAdvance(actId)
-                : setShowChat(true)
-            }
-          />
+          <div className={showChat && style.hidden}>
+            <AutoAdvanceButton
+              label="Next"
+              autoClickTimeout={autoclickTimeout}
+              onClick={() =>
+                showChat || actId === firstActId
+                  ? onAdvance(actId)
+                  : setShowChat(true)
+              }
+            />
+          </div>
         </div>
       </AtopVideoSelfie>
       <div className={style.jobSummaryFooter}>See all new jobs</div>

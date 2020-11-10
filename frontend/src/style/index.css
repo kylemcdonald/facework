@@ -28,10 +28,11 @@ body {
   background: #5cc989;
   color: white;
   font-size: 24px;
+  text-shadow: 0px 0px 10px #000000;
 }
 
 h2 {
-  color: black;
+  color: white;
   font-size: 24px;
 }
 

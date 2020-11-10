@@ -14,3 +14,20 @@
 .label {
   font-weight: bold;
 }
+
+.progress-bar__container {
+  height: 15px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  width: 0px;
+  background: #5cc989;
+  transition: width 1s;
+  transition-timing-function: linear;
+}

@@ -97,6 +97,9 @@ const Battle: FunctionalComponent<BattleProps> = props => {
   return (
     <div class={style.battle}>
       <div className={style.faceHintContainer}>
+        <div className={style.faceHintShadow}>{keyFeatureScoring.feature}</div>
+      </div>
+      <div className={style.faceHintContainer}>
         <div className={style.faceHint}>{keyFeatureScoring.feature}</div>
       </div>
       <section class={style.accompaniment}>

@@ -15,11 +15,13 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: black;
 }
 
 .upper-layer {
   position: relative;
   z-index: 1;
+  height: 100%;
 }
 
 .blurred .self {

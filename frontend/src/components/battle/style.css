@@ -39,3 +39,14 @@
   padding: 5vw 15vw;
   font-weight: bold;
 }
+
+.face-hint--shadow {
+  border: 5px dashed black;
+  height: 55vh;
+  width: 40vh;
+  border-radius: 50%;
+  text-align: center;
+  padding: 5vw 15vw;
+  font-weight: bold;
+  filter: blur(5px);
+}

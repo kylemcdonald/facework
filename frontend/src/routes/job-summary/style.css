@@ -1,3 +1,7 @@
+.job-summary__container {
+  height: 100%;
+}
+
 .job-summary-page table {
   margin-bottom: 2rem;
 }
@@ -8,6 +12,7 @@
   padding: 15px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  text-shadow: none;
 }
 
 .job-summary__body h1 {
@@ -45,4 +50,8 @@
 .job-summary__footer {
   text-align: center;
   margin: 15px;
+}
+
+.hidden {
+  display: none;
 }
