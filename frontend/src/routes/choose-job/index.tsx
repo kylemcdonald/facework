@@ -35,9 +35,14 @@ const JobList: FunctionalComponent<JobListProps> = props => (
                 route(verusUrl)
               }}
             >
-              <div className={style.jobImage}></div>
-              <div className={style.jobEarnings}></div>
-              Earn {toDollars(job.maxTip)}
+              <div className={style.jobImageContainer}>
+                <div className={style.jobImage}></div>
+                <div className={style.jobEarningsContainer}>
+                  <div className={style.jobEarnings}>
+                    Earn {toDollars(job.maxTip)}
+                  </div>
+                </div>
+              </div>
               <div>{job.name}</div>
               <span className={style.jobTrait}>{job.trait}</span>
             </Link>
