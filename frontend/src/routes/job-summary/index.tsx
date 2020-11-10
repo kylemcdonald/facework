@@ -31,11 +31,11 @@ const JobSummary: FunctionalComponent = () => {
   const actId = useTypedSelector(state => state.act)
   const completedJobs = useTypedSelector(state => state.completedJobs),
     // there should always be at least one job in this list
-    lastJob = completedJobs.pop()!
+    lastJob = completedJobs[completedJobs.length - 1]
   const lastJobTip = toDollars(lastJob.tip),
     subscriptionCost = toDollars(getJobSubscriptionCost(lastJob)),
     grandTotal = toDollars(getJobGrandTotal(lastJob)),
-    startingBalance = toDollars(getStartingBalance(completedJobs))
+    startingBalance = toDollars(getStartingBalance(completedJobs.slice(0, -1)))
   return (
     <div>
       {showChat && actId !== firstActId && (
