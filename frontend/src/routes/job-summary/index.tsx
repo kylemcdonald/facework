@@ -71,20 +71,20 @@ const JobSummary: FunctionalComponent = () => {
               <span className={style.jobSummaryGrandTotal}>{grandTotal}</span>
             </div>
           </div>
-          <div className={showChat && style.hidden}>
-            <AutoAdvanceButton
-              label="Next"
-              autoClickTimeout={autoclickTimeout}
-              onClick={() =>
-                showChat || actId === firstActId
-                  ? onAdvance(actId)
-                  : setShowChat(true)
-              }
-            />
-          </div>
+        </div>
+        <div className={style.jobSummaryFooter}>See all new jobs →</div>
+        <div className={showChat && style.hidden}>
+          <AutoAdvanceButton
+            label="Next"
+            autoClickTimeout={autoclickTimeout}
+            onClick={() =>
+              showChat || actId === firstActId
+                ? onAdvance(actId)
+                : setShowChat(true)
+            }
+          />
         </div>
       </AtopVideoSelfie>
-      <div className={style.jobSummaryFooter}>See all new jobs</div>
     </div>
   )
 }
