@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   top: 0;
-  z-index: 2;
+  z-index: 9;
   text-shadow: none;
 }
 
@@ -41,5 +41,9 @@
   .chat-message__list {
     width: 800px;
     margin: auto;
+  }
+
+  .chat-page {
+    margin-top: -100px;
   }
 }

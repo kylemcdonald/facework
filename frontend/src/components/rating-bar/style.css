@@ -1,6 +1,6 @@
 .rating-gauge {
   z-index: 3;
-  height: 50%;
+  height: 60%;
   width: 100%;
   margin-bottom: 5px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='350' width='100'%3E%3Cpath d='M0,300 a1,1 0 0,0 100,0' fill='white' /%3E%3Cpolygon points='50,0 100,301 0,301' style='fill:white;' /%3E%3C/svg%3E");
@@ -50,6 +50,6 @@
 }
 @media (min-width: 470px) {
   .rating-gauge {
-    height: 70%;
+    height: 80%;
   }
 }

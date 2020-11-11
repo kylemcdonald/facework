@@ -8,3 +8,9 @@
   overflow: auto;
   text-shadow: none;
 }
+
+@media (min-width: 992px) {
+  .app-error {
+    min-height: 800px;
+  }
+}
