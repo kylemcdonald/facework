@@ -9,3 +9,5 @@ export const jobSummaryGrandTotalHeader: string;
 export const jobSummaryGrandTotal: string;
 export const jobSummaryFooter: string;
 export const hidden: string;
+export const jobSummaryFooterPadding: string;
+export const jobSummaryFooterMessage: string;

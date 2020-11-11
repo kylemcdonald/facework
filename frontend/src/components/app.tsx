@@ -27,6 +27,12 @@ const App: FunctionalComponent = () => {
 
   return (
     <div id="app">
+      <div className="desktop-banner">
+        <div>
+          <div>face</div>
+          <div>work</div>
+        </div>
+      </div>
       <Provider store={store}>
         <Router onChange={handleRoute}>
           <Route path="/" component={Welcome} />

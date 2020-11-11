@@ -37,15 +37,15 @@ const JobSummary: FunctionalComponent = () => {
     grandTotal = toDollars(getJobGrandTotal(lastJob)),
     startingBalance = toDollars(getStartingBalance(completedJobs.slice(0, -1)))
   return (
-    <div className={style.jobSummaryContainer}>
-      {showChat && actId !== firstActId && (
-        <ChatOverlay
-          actId={actId}
-          chatMessages={getChatMessagesforAct(actId, lastJob.highScore)}
-          onAdvance={onAdvance}
-        />
-      )}
-      <AtopVideoSelfie isBlurred={true}>
+    <AtopVideoSelfie isBlurred={true}>
+      <div className={style.jobSummaryContainer}>
+        {showChat && actId !== firstActId && (
+          <ChatOverlay
+            actId={actId}
+            chatMessages={getChatMessagesforAct(actId, lastJob.highScore)}
+            onAdvance={onAdvance}
+          />
+        )}
         <div class={style.jobSummaryBody}>
           <h1>Job Summary</h1>
           <div>
@@ -72,7 +72,13 @@ const JobSummary: FunctionalComponent = () => {
             </div>
           </div>
         </div>
-        <div className={style.jobSummaryFooter}>See all new jobs →</div>
+        <div className={style.jobSummaryFooter}>
+          <div className={style.jobSummaryFooterPadding}></div>
+          <div className={style.jobSummaryFooterMessage}>
+            See all new jobs →
+          </div>
+          <div className={style.jobSummaryFooterPadding}></div>
+        </div>
         <div className={showChat ? style.hidden : ""}>
           <AutoAdvanceButton
             label="Next"
@@ -84,8 +90,8 @@ const JobSummary: FunctionalComponent = () => {
             }
           />
         </div>
-      </AtopVideoSelfie>
-    </div>
+      </div>
+    </AtopVideoSelfie>
   )
 }
 

@@ -28,3 +28,25 @@
   filter: blur(10px) brightness(0.75);
   transform: scale(1.1);
 }
+
+@media (min-width: 992px) {
+  .wrapper {
+    max-width: 1000px;
+    margin: auto;
+    min-height: 800px;
+    margin-top: 100px;
+  }
+
+  .upper-layer {
+    height: calc(100% - 100px);
+  }
+
+  .blurred .self {
+    transform: none;
+    transform: scaleY(1.1);
+    transform: scaleX(0.95);
+  }
+  .wrapper {
+    background: none;
+  }
+}

@@ -12,3 +12,5 @@ export const job__earnings: string;
 export const jobEarnings: string;
 export const job__trait: string;
 export const jobTrait: string;
+export const chooseJobContainer: string;
+export const content: string;

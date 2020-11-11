@@ -7,7 +7,7 @@
 }
 
 .job-summary__body {
-  background: white;
+  background: rgba(255, 255, 255, 0.75);
   color: black;
   padding: 15px;
   border-bottom-left-radius: 8px;
@@ -54,4 +54,22 @@
 
 .hidden {
   display: none;
+}
+
+@media (min-width: 992px) {
+  .job-summary__body {
+    width: 375px;
+    margin-left: 60px;
+  }
+  .job-summary__footer {
+    display: flex;
+    justify-content: center;
+  }
+  .job-summary__footer--padding {
+    width: 440px;
+  }
+  .job-summary__footer--padding:nth-child(1),
+  .job-summary__footer--message {
+    flex-shrink: 0;
+  }
 }

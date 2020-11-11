@@ -19,36 +19,38 @@ interface JobListProps {
 }
 
 const JobList: FunctionalComponent<JobListProps> = props => (
-  <div>
+  <div className={style.chooseJobContainer}>
     <div className={style.grandTotal}>
       <span>Grand Total</span>
       <span className={style.grandTotalAmount}>$0.00</span>
     </div>
-    <div className="content">
-      <h2>Get started with your first job</h2>
-      <ul className={style.jobList}>
-        {props.jobs.map(job => (
-          <li key={job.name} className={style.job}>
-            <Link
-              onClick={() => {
-                store.dispatch(setCurrentJob(job))
-                route(verusUrl)
-              }}
-            >
-              <div className={style.jobImageContainer}>
-                <div className={style.jobImage}></div>
-                <div className={style.jobEarningsContainer}>
-                  <div className={style.jobEarnings}>
-                    Earn {toDollars(job.maxTip)}
+    <div className={`content ${style.content}`}>
+      <div>
+        <h2>Get started with your first job</h2>
+        <ul className={style.jobList}>
+          {props.jobs.map(job => (
+            <li key={job.name} className={style.job}>
+              <Link
+                onClick={() => {
+                  store.dispatch(setCurrentJob(job))
+                  route(verusUrl)
+                }}
+              >
+                <div className={style.jobImageContainer}>
+                  <div className={style.jobImage}></div>
+                  <div className={style.jobEarningsContainer}>
+                    <div className={style.jobEarnings}>
+                      Earn {toDollars(job.maxTip)}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div>{job.name}</div>
-              <span className={style.jobTrait}>{job.trait}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+                <div>{job.name}</div>
+                <span className={style.jobTrait}>{job.trait}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 )

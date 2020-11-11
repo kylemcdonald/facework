@@ -17,6 +17,7 @@
 .get-started a {
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .hero-text {
@@ -24,4 +25,14 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+}
+
+@media (min-width: 992px) {
+  .home {
+    background: #5cc989;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    min-height: 800px;
+  }
 }

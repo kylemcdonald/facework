@@ -31,3 +31,9 @@
   transition: width 1s;
   transition-timing-function: linear;
 }
+
+@media (min-width: 992px) {
+  .progress-bar__container {
+    background: #bbb8b6;
+  }
+}

@@ -16,3 +16,10 @@
   transition: width 1s;
   transition-timing-function: linear;
 }
+
+@media (min-width: 992px) {
+  .progress-bar__container {
+    height: 30px;
+    margin-top: 20px;
+  }
+}

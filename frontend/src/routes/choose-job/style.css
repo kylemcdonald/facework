@@ -1,5 +1,5 @@
 .grand-total {
-  background: white;
+  background: rgba(255, 255, 255, 0.75);
   color: black;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -66,4 +66,31 @@
 }
 .job__trait {
   text-transform: uppercase;
+}
+
+@media (min-width: 992px) {
+  .choose-job__container {
+    height: 100%;
+  }
+  .grand-total {
+    width: 375px;
+    margin-left: 60px;
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+  }
+
+  .job {
+    width: 200px;
+  }
 }
