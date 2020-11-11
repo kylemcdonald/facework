@@ -33,24 +33,28 @@
   justify-content: center;
 }
 .face-hint {
-  border: 5px dashed white;
   height: 55vh;
   width: 40vh;
-  border-radius: 50%;
   text-align: center;
-  padding: 5vw 15vw;
+  padding: 10vw 15vw;
   font-weight: bold;
+  background-image: url("/assets/images/face-outline.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .face-hint--shadow {
-  border: 5px dashed black;
   height: 55vh;
   width: 40vh;
-  border-radius: 50%;
+  background-image: url("/assets/images/face-outline.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
   text-align: center;
   padding: 5vw 15vw;
   font-weight: bold;
-  filter: blur(5px);
+  filter: blur(5px) brightness(0);
 }
 
 @media (min-width: 992px) {
@@ -67,5 +71,9 @@
     max-height: calc(100vh - 150px - 25vh);
     margin: auto;
     margin-top: 150px;
+  }
+
+  .face-hint {
+    padding: 5vw 5vw;
   }
 }
