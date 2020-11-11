@@ -1,6 +1,6 @@
 {
-  "name": "mfe-client",
-  "short_name": "mfe-client",
+  "name": "Facework",
+  "short_name": "Facework",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
