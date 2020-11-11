@@ -16,7 +16,7 @@
 }
 
 .job-summary__body h1 {
-  color: #5cc989;
+  color: #00cd83;
   font-size: 26px;
   padding: 0;
   margin: 0px;
@@ -31,7 +31,7 @@
 }
 
 .job-summary__line-items--separator {
-  border-bottom: 1px solid #5cc989;
+  border-bottom: 1px solid #00cd83;
   margin: 15px;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .job-summary__grand-total {
-  color: #5cc989;
+  color: #00cd83;
 }
 
 .job-summary__footer {

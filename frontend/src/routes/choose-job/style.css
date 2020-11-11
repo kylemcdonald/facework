@@ -12,7 +12,7 @@
 }
 
 .grand-total__amount {
-  color: #5cc989;
+  color: #00cd83;
 }
 
 .job__list {
@@ -40,7 +40,7 @@
 }
 
 .job__image:hover {
-  border: 5px solid #5cc989;
+  border: 5px solid #00cd83;
 }
 
 .job a {
@@ -57,7 +57,7 @@
 .job__earnings {
   color: black;
   text-transform: uppercase;
-  background: #5cc989;
+  background: #00cd83;
   display: inline-block;
   padding: 5px 10px;
   font-size: 1rem;

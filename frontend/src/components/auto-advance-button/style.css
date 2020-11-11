@@ -28,7 +28,7 @@
 .progress-bar__fill {
   height: 100%;
   width: 0px;
-  background: #5cc989;
+  background: #00cd83;
   transition: width 1s;
   transition-timing-function: linear;
 }
