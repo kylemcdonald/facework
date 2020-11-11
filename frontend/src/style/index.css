@@ -49,6 +49,15 @@ h2 {
   text-shadow: none;
 }
 
+.desktop-banner__logo {
+  background-image: url("/assets/images/facework-logo.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+
 @media (min-width: 992px) {
   #app {
     background: #bbb8b6;

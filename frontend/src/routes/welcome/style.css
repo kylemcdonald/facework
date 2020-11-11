@@ -25,6 +25,12 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  background-image: url("/assets/images/facework-logo.svg");
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 @media (min-width: 992px) {

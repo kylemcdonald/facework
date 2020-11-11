@@ -30,10 +30,7 @@ const Welcome: FunctionalComponent = () => {
   return (
     <div className={style.home}>
       <div>Welcome to</div>
-      <div className={style.heroText}>
-        <div>face</div>
-        <div>work</div>
-      </div>
+      <div className={style.heroText}></div>
       <GetStartedLink />
     </div>
   )
