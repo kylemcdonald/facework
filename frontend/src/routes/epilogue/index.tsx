@@ -14,7 +14,7 @@ total tips...
 |  NETWORK NOT RESPONDING |
 |_ _ _ _ _ _ _ _ _ _ _ _ _|
 
-FACEWORKS is built by:
+FACEWORK is built by:
 Kyle
 Evelyn
 Greg
