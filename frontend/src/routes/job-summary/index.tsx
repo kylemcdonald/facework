@@ -73,7 +73,7 @@ const JobSummary: FunctionalComponent = () => {
           </div>
         </div>
         <div className={style.jobSummaryFooter}>See all new jobs →</div>
-        <div className={showChat && style.hidden}>
+        <div className={showChat ? style.hidden : ""}>
           <AutoAdvanceButton
             label="Next"
             autoClickTimeout={autoclickTimeout}
