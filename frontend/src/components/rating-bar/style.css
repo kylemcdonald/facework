@@ -1,22 +1,29 @@
 .rating-gauge {
   z-index: 3;
-  height: 20vh;
-  width: 20vh;
-  margin-bottom: 15px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='350' width='100'%3E%3Cpath d='M0,300 a1,1 0 0,0 100,0' fill='white' /%3E%3Cpolygon points='50,0 100,300 0,300' style='fill:white;' /%3E%3C/svg%3E");
+  height: 60%;
+  width: 100%;
+  margin-bottom: 5px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='350' width='100'%3E%3Cpath d='M0,300 a1,1 0 0,0 100,0' fill='white' /%3E%3Cpolygon points='50,0 100,301 0,301' style='fill:white;' /%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   transform: rotate(-90deg);
-  transform-origin: 50% 90%;
+  transform-origin: 50% 100%;
   transition: transform 1s;
   position: absolute;
   bottom: 0;
-  left: calc(50% - 10vh);
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
 }
 
 .rating-gauge__container {
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-image: url("/assets/images/donut.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  margin: 0 30px;
+  min-width: 300px;
 }
 
 .rating-gauge__comment--container {
@@ -34,4 +41,15 @@
 .rating-gauge__value {
   font-weight: bold;
   font-size: 46px;
+}
+
+@media (min-width: 992px) {
+  .rating-gauge__container {
+    max-height: 200px;
+  }
+}
+@media (min-width: 470px) {
+  .rating-gauge {
+    height: 80%;
+  }
 }

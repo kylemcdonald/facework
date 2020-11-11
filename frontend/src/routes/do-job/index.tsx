@@ -4,7 +4,7 @@ import { Link, route } from "preact-router"
 import { useState, useCallback } from "preact/hooks"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector, pushCompletedJob, store } from "../../lib/store"
-
+import * as style from "./style.css"
 import { DoJobConfig, ActsConfig } from "../../lib/app-acts-config"
 import { PotentialJob, completeJob } from "../../lib/job"
 const {
@@ -37,14 +37,16 @@ const DoJob: FunctionalComponent = () => {
 
   return (
     <div class="content">
-      {isBattleFinished ? (
-        <AutoAdvanceButton
-          label="Next"
-          autoClickTimeout={autoclickTimeout}
-          onClick={() => route("/job-summary")}
-        />
-      ) : null}
       <Battle trait={job.trait} onBattleFinished={onBattleFinished} />
+      {isBattleFinished ? (
+        <div className={style.autoAdvanceContainer}>
+          <AutoAdvanceButton
+            label="Next"
+            autoClickTimeout={autoclickTimeout}
+            onClick={() => route("/job-summary")}
+          />
+        </div>
+      ) : null}
     </div>
   )
 }

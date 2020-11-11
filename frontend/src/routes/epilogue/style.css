@@ -1,9 +1,16 @@
 .app-error {
-  background: rgba(0, 0, 0, 0.5);
+  background: #000;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   overflow: auto;
+  text-shadow: none;
+}
+
+@media (min-width: 992px) {
+  .app-error {
+    min-height: 800px;
+  }
 }

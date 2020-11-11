@@ -3,3 +3,4 @@ export const battle: string;
 export const accompaniment: string;
 export const faceHintContainer: string;
 export const faceHint: string;
+export const faceHintShadow: string;

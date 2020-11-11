@@ -16,11 +16,11 @@ const AutoAdvanceButton: FunctionalComponent<AutoAdvanceButtonProps> = (
 ) => {
   const timeLeftRatio = useCountdownTimer(props.autoClickTimeout, props.onClick)
   return (
-    <div class={style.autoAdvanceButton} onClick={props.onClick}>
-      <progress value={timeLeftRatio} key="auto-advance-button">
-        {timeLeftRatio}
-      </progress>
-      <span class={style.label}>{props.label}</span>
+    <div className={style.progressBarContainer} onClick={props.onClick}>
+      <div
+        className={style.progressBarFill}
+        style={{ width: `${100 - Math.floor(timeLeftRatio * 100)}%` }}
+      />
     </div>
   )
 }

@@ -5,6 +5,7 @@
   border-radius: 10px;
   margin: 15px;
   overflow: hidden;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .progress-bar__fill {
@@ -14,4 +15,11 @@
   border-radius: 10px 0px 0px 10px;
   transition: width 1s;
   transition-timing-function: linear;
+}
+
+@media (min-width: 992px) {
+  .progress-bar__container {
+    height: 30px;
+    margin-top: 20px;
+  }
 }

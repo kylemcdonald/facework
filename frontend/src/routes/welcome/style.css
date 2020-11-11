@@ -5,6 +5,7 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  text-shadow: none;
 }
 
 .get-started {
@@ -16,6 +17,7 @@
 .get-started a {
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .hero-text {
@@ -23,4 +25,20 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  background-image: url("/assets/images/facework-logo.svg");
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (min-width: 992px) {
+  .home {
+    background: #5cc989;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    min-height: 800px;
+  }
 }
