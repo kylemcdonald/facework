@@ -1,24 +1,27 @@
 import { FunctionalComponent, h } from "preact"
 import * as style from "./style.css"
 
-interface RatingBarProps {
+interface JobScoreDisplayProps {
   /** Must be between 0 and 1.0 */
-  readonly value: number | undefined
+  readonly currentScore: number | undefined
+  /** Must be between 0 and 1.0 */
+  readonly highScore: number | undefined
 }
 
-const JobScoreDisplay: FunctionalComponent<RatingBarProps> = (
-  props: RatingBarProps
+const JobScoreDisplay: FunctionalComponent<JobScoreDisplayProps> = (
+  props: JobScoreDisplayProps
 ) => {
-  const ratingDegs = props.value !== undefined ? props.value * 180 - 90 : -90
+  const ratingDegs =
+    props.currentScore !== undefined ? props.currentScore * 180 - 90 : -90
   return (
     <div>
       <div className={style.ratingGaugeContainer}>
         <div className={style.ratingGaugeCommentContainer}>
-          {props.value !== undefined && (
+          {props.highScore !== undefined && (
             <div className={style.ratingGaugeComment}>
               <div>Great Job!</div>
               <div className={style.ratingGaugeValue}>
-                {Math.floor(props.value * 100)}
+                {Math.floor(props.highScore * 100)}
               </div>
             </div>
           )}

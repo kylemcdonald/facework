@@ -108,7 +108,11 @@ const Battle: FunctionalComponent<BattleProps> = props => {
           started={keyFeatureScoring.startTime !== undefined}
           isPaused={false}
         />
-        <JobScoreDisplay key="progress" value={keyFeatureScoring.score} />
+        <JobScoreDisplay
+          key="progress"
+          currentScore={keyFeatureScoring.score}
+          highScore={keyFeatureScoring.highestScore}
+        />
       </section>
       <VideoSelfie
         key="selfie"
