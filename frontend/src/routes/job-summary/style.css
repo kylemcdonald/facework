@@ -19,6 +19,13 @@
   margin-bottom: 30px;
 }
 
+.job__image {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: lightgrey;
+}
+
 .job-summary__image-review {
   display: flex;
   flex-flow: column nowrap;
