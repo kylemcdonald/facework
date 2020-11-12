@@ -1,4 +1,4 @@
-# Most Face Ever
+# Facework
 
 1. `training/` will contain Python scripts and notebooks for building the neural net.
 2. `frontend/` contains work on any prototypes or production work that is user-facing.
