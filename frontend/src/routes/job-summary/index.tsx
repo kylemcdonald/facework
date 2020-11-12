@@ -17,11 +17,13 @@ import {
   toDollars,
   getJobSubscriptionCost,
   getJobGrandTotal,
-  getStartingBalance
+  getStartingBalance,
+  getJobCaricaturePath
 } from "../../lib/job"
 import * as style from "./style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
+import JobCaricature from "../../components/job-caricature"
 const {
   nextButton: { autoclickTimeout }
 } = JobSummaryConfig
@@ -48,6 +50,10 @@ const JobSummary: FunctionalComponent = () => {
         )}
         <div class={style.jobSummaryBody}>
           <h1>Job Summary</h1>
+          <div className={style.jobSummaryImageReview}>
+            <JobCaricature job={lastJob} hoverable={false} />
+            <span>{`"${lastJob.review}"`}</span>
+          </div>
           <div>
             <div className={style.jobSummaryLineItem}>
               <span>Starting Balance</span>

@@ -169,4 +169,9 @@ export function getRandomTraitLabel(): TraitLabel {
   return labelsArray[Math.floor(Math.random() * labelsArray.length)]
 }
 
+/** Returns caricature image path for a given trait */
+export function getCaricaturePath(traitLabel: TraitLabel): string {
+  return `/assets/images/caricatures/${traitLabel}.jpg`
+}
+
 export default faceReaderLabels

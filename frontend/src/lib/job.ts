@@ -1,6 +1,6 @@
-import { TraitLabel } from "./face-reader-labels"
+import { TraitLabel, getCaricaturePath } from "./face-reader-labels"
 
-type BaseJob = {
+export type BaseJob = {
   /** Short name for job */
   readonly name: string
   /** Longer description for job */
@@ -82,4 +82,8 @@ export function getStartingBalance(jobs: ReadonlyArray<CompletedJob>): number {
 
 export function toDollars(cents: number): string {
   return `$${Number(Math.trunc(cents) / 100).toFixed(0)}`
+}
+
+export function getJobCaricaturePath(job: BaseJob): string {
+  return getCaricaturePath(job.trait)
 }

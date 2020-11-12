@@ -2,10 +2,6 @@
   height: 100%;
 }
 
-.job-summary-page table {
-  margin-bottom: 2rem;
-}
-
 .job-summary__body {
   background: rgba(255, 255, 255, 0.75);
   color: black;
@@ -18,6 +14,16 @@
 .job-summary__body h1 {
   color: #00cd83;
   font-size: 26px;
+  padding: 0;
+  margin: 0px;
+  margin-bottom: 30px;
+}
+
+.job-summary__image-review {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  text-align: center;
   padding: 0;
   margin: 0px;
   margin-bottom: 30px;
