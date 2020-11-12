@@ -8,6 +8,7 @@ import { toDollars, PotentialJob, getJobCaricaturePath } from "../../lib/job"
 import * as style from "./style.css"
 
 import { ChooseJobConfig } from "../../lib/app-acts-config"
+import JobCaricature from "../../components/job-caricature"
 const {
   nextButton: { autoclickTimeout }
 } = ChooseJobConfig
@@ -37,10 +38,7 @@ const JobList: FunctionalComponent<JobListProps> = props => (
                 }}
               >
                 <div className={style.jobImageContainer}>
-                  <img
-                    className={style.jobImage}
-                    src={getJobCaricaturePath(job)}
-                  ></img>
+                  <JobCaricature job={job} hoverable={true} />
                   <div className={style.jobEarningsContainer}>
                     <div className={style.jobEarnings}>
                       Earn {toDollars(job.maxTip)}

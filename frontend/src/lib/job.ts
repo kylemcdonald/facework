@@ -1,6 +1,6 @@
 import { TraitLabel, getCaricaturePath } from "./face-reader-labels"
 
-type BaseJob = {
+export type BaseJob = {
   /** Short name for job */
   readonly name: string
   /** Longer description for job */
