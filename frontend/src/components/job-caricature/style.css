@@ -1,0 +1,18 @@
+.job__image {
+  border-radius: 50%;
+  background: lightgrey;
+}
+
+.size-regular {
+  height: 100px;
+  width: 100px;
+}
+
+.size-small {
+  height: 50px;
+  width: 50px;
+}
+
+.job__hoverable:hover {
+  box-shadow: 0 0 0 5px #00cd83;
+}
