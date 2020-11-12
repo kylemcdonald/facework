@@ -40,7 +40,7 @@
 }
 
 .job__image:hover {
-  border: 5px solid #00cd83;
+  box-shadow: 0 0 0 5px #00cd83;
 }
 
 .job a {

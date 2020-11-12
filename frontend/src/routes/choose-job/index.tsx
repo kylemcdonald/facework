@@ -4,7 +4,7 @@ import { route, Link } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { AtopVideoSelfie } from "../../components/videoselfie"
 import { useTypedSelector, setCurrentJob, store } from "../../lib/store"
-import { toDollars, PotentialJob } from "../../lib/job"
+import { toDollars, PotentialJob, getJobCaricaturePath } from "../../lib/job"
 import * as style from "./style.css"
 
 import { ChooseJobConfig } from "../../lib/app-acts-config"
@@ -37,7 +37,10 @@ const JobList: FunctionalComponent<JobListProps> = props => (
                 }}
               >
                 <div className={style.jobImageContainer}>
-                  <div className={style.jobImage}></div>
+                  <img
+                    className={style.jobImage}
+                    src={getJobCaricaturePath(job)}
+                  ></img>
                   <div className={style.jobEarningsContainer}>
                     <div className={style.jobEarnings}>
                       Earn {toDollars(job.maxTip)}

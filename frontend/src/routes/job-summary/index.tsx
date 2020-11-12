@@ -17,7 +17,8 @@ import {
   toDollars,
   getJobSubscriptionCost,
   getJobGrandTotal,
-  getStartingBalance
+  getStartingBalance,
+  getJobCaricaturePath
 } from "../../lib/job"
 import * as style from "./style.css"
 
