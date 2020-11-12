@@ -1,7 +1,6 @@
 import { FunctionalComponent, h } from "preact"
 import * as style from "./style.css"
 import { KeyFeatureScoring } from "../battle"
-import RatingBar from "../rating-bar"
 import TimeLimitDisplay from "../time-limit-display"
 import { isPastTimeLimit } from "../battle/helpers"
 
@@ -18,7 +17,7 @@ const BattleStatus: FunctionalComponent<BattleStatusProps> = props => {
         <>
           {`👀 Hmm, what do we have here...?`}
           <br />
-          <RatingBar key="progress" value={undefined} />
+          <progress key="progress" value={undefined} />
         </>
       ) : isPastTimeLimit(scoring) ? (
         <>
@@ -38,7 +37,7 @@ const BattleStatus: FunctionalComponent<BattleStatusProps> = props => {
               <br />
             </>
           )}
-          <RatingBar key="progress" value={scoring.score} />
+          <progress key="progress" value={scoring.score} />
           <br />
           <TimeLimitDisplay
             timeLimit={scoring.timeLimit}

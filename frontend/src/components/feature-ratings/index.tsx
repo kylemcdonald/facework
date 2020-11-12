@@ -1,5 +1,4 @@
 import { FunctionalComponent, h } from "preact"
-import RatingBar from "../rating-bar"
 import * as style from "./style.css"
 import { FeatureRatingsData } from "../../lib/use-face-reader"
 
@@ -15,7 +14,7 @@ const FeatureRatings: FunctionalComponent<FeatureRatingsProps> = (
     for (const [k, v] of props.data.expressions) {
       expressionsValues.push(
         <li key={k}>
-          <b>{k}:</b> <RatingBar value={v} />
+          <b>{k}:</b> <progress value={v} />
           <span className="percentage">{` ${Math.trunc(v * 100)}%`}</span>
         </li>
       )

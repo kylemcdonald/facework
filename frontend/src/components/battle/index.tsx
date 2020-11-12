@@ -10,7 +10,7 @@ import * as style from "./style.css"
 import { isPastTimeLimit, sendFaceOrSchedule } from "./helpers"
 import { TraitLabel } from "../../lib/face-reader-labels"
 import TimeLimitDisplay from "../time-limit-display"
-import RatingBar from "../rating-bar"
+import JobScoreDisplay from "../job-score-display"
 
 import { DoJobConfig } from "../../lib/app-acts-config"
 const { scoringTimeLimit } = DoJobConfig
@@ -108,7 +108,11 @@ const Battle: FunctionalComponent<BattleProps> = props => {
           started={keyFeatureScoring.startTime !== undefined}
           isPaused={false}
         />
-        <RatingBar key="progress" value={keyFeatureScoring.score} />
+        <JobScoreDisplay
+          key="progress"
+          currentScore={keyFeatureScoring.score}
+          highScore={keyFeatureScoring.highestScore}
+        />
       </section>
       <VideoSelfie
         key="selfie"
