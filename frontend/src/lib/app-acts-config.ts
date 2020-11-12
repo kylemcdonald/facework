@@ -52,7 +52,8 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "What a disturbing experience! I couldn't tell if they were angry, confused, or just baring their teeth. But this delivery person almost ruined our meal"
+            review:
+              "What a disturbing experience! I couldn't tell if they were angry, confused, or just baring their teeth. But this delivery person almost ruined our meal"
           },
           {
             minScore: 0.4,
@@ -72,11 +73,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "This person's frown was about as intimidating as a baby kitten! My kids weren't scared at all. Terrible tutor."
+            review:
+              "This person's frown was about as intimidating as a baby kitten! My kids weren't scared at all. Terrible tutor."
           },
           {
             minScore: 0.4,
-            review: "Great strict tutor! Their intimidating frown kept my kids in line while studying."
+            review:
+              "Great strict tutor! Their intimidating frown kept my kids in line while studying."
           }
         ]
       },
@@ -87,11 +90,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "This Faceworker was clueless! Our kids were able to escape from them almost instantly. They had to call us back from our night out to chase down our kids in the neighborhood."
+            review:
+              "This Faceworker was clueless! Our kids were able to escape from them almost instantly. They had to call us back from our night out to chase down our kids in the neighborhood."
           },
           {
             minScore: 0.4,
-            review: "Our kids are escape artists! But this eagle-eyed Faceworker was able to stop their every breakout attempt. Could work as a prison guard! 10/10."
+            review:
+              "Our kids are escape artists! But this eagle-eyed Faceworker was able to stop their every breakout attempt. Could work as a prison guard! 10/10."
           }
         ]
       },
@@ -102,11 +107,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "A disaster! Couldn't keep their mouth open long enough for even the most basic exams. Even bit one student! Outrageous!"
+            review:
+              "A disaster! Couldn't keep their mouth open long enough for even the most basic exams. Even bit one student! Outrageous!"
           },
           {
             minScore: 0.4,
-            review: "Perfect for our students! They held their mouth open for hours without complaint. Plus it turned out they had some interesting tooth decay as well!"
+            review:
+              "Perfect for our students! They held their mouth open for hours without complaint. Plus it turned out they had some interesting tooth decay as well!"
           }
         ]
       },
@@ -117,11 +124,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "We absolutely HATE seeing teeth before we eat. It turns our stomachs. This delivery driver couldn't keep their nasty chompers behind their lips for 30 seconds. Meal ruined!"
+            review:
+              "We absolutely HATE seeing teeth before we eat. It turns our stomachs. This delivery driver couldn't keep their nasty chompers behind their lips for 30 seconds. Meal ruined!"
           },
           {
             minScore: 0.4,
-            review: "We absolutely HATE seeing teeth before we eat. It's disgusting and ruins our appetite. This delivery driver kept their nasty chompers safely hidden away. Thank you!"
+            review:
+              "We absolutely HATE seeing teeth before we eat. It's disgusting and ruins our appetite. This delivery driver kept their nasty chompers safely hidden away. Thank you!"
           }
         ]
       }
@@ -148,11 +157,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "We were hoping for the dignified formality of a true classical musician. But this Faceworker's getup was ridiculous! More like a clown than a concertmaster!"
+            review:
+              "We were hoping for the dignified formality of a true classical musician. But this Faceworker's getup was ridiculous! More like a clown than a concertmaster!"
           },
           {
             minScore: 0.4,
-            review: "We wanted a formal performance for our romantic beach dinner and this well-suited Faceworker delivered!"
+            review:
+              "We wanted a formal performance for our romantic beach dinner and this well-suited Faceworker delivered!"
           }
         ]
       },
@@ -163,11 +174,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "I don't think it's too much to ask to get a driving teacher that CAN SEE. And yet you sent us this four-eyed Faceworker. Might as well have been as blind as a bat. I was too scared to get in the car!"
+            review:
+              "I don't think it's too much to ask to get a driving teacher that CAN SEE. And yet you sent us this four-eyed Faceworker. Might as well have been as blind as a bat. I was too scared to get in the car!"
           },
           {
             minScore: 0.4,
-            review: "As the parent of a new driver there's enough to be scared about already. Thank you for sending a Faceworker with good crisp vision. It put our mind at ease."
+            review:
+              "As the parent of a new driver there's enough to be scared about already. Thank you for sending a Faceworker with good crisp vision. It put our mind at ease."
           }
         ]
       },
@@ -178,11 +191,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "Our kids are teenagers now and they absolutely HATE that we keep getting babysitters for them. And this Faceworker was SO UNCOOL they couldn't even be bothered to wear sunglasses. The kids hated them! Disaster!"
+            review:
+              "Our kids are teenagers now and they absolutely HATE that we keep getting babysitters for them. And this Faceworker was SO UNCOOL they couldn't even be bothered to wear sunglasses. The kids hated them! Disaster!"
           },
           {
             minScore: 0.4,
-            review: "Our kids are teenagers now and they absolutely HATE that we keep getting babysitters for them. So it helps when the babysitters are cool. And this cool cat wore their sunglasses indoors and won our kids' grudging respect."
+            review:
+              "Our kids are teenagers now and they absolutely HATE that we keep getting babysitters for them. So it helps when the babysitters are cool. And this cool cat wore their sunglasses indoors and won our kids' grudging respect."
           }
         ]
       },
@@ -193,11 +208,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "We just HATE getting our food delivered by sweaty creeps. It turns our stomachs. This FACEWORK's brow was hidden! Anything could have been lurking under there. TOTALLY DISGUSTING!"
+            review:
+              "We just HATE getting our food delivered by sweaty creeps. It turns our stomachs. This FACEWORK's brow was hidden! Anything could have been lurking under there. TOTALLY DISGUSTING!"
           },
           {
             minScore: 0.4,
-            review: "We just HATE getting our food delivered by sweaty creeps. It turns our stomachs. This Faceworker had a clean dry brow. The perfect appetizer for any meal."
+            review:
+              "We just HATE getting our food delivered by sweaty creeps. It turns our stomachs. This Faceworker had a clean dry brow. The perfect appetizer for any meal."
           }
         ]
       },
@@ -208,11 +225,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "We're not quite ready to tell our kids that Pop Pop passed on. We just wanted to give them one last day with their beloved grandpa spoiled everything and now the kids won't stop crying!"
+            review:
+              "We're not quite ready to tell our kids that Pop Pop passed on. We just wanted to give them one last day with their beloved grandpa spoiled everything and now the kids won't stop crying!"
           },
           {
             minScore: 0.4,
-            review: "We're not quite ready to tell our kids that Pop Pop passed on. This Faceworker helped us pretend so they could have one more nice day with their beloved \"grandfather\"."
+            review:
+              'We\'re not quite ready to tell our kids that Pop Pop passed on. This Faceworker helped us pretend so they could have one more nice day with their beloved "grandfather".'
           }
         ]
       },
@@ -223,11 +242,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "A real let down! Barely enough stubble for part of one shaving lesson. And complained constantly about getting just a few nicks and cuts."
+            review:
+              "A real let down! Barely enough stubble for part of one shaving lesson. And complained constantly about getting just a few nicks and cuts."
           },
           {
             minScore: 0.4,
-            review: "Our students loved this Faceworker! Their scraggly beard was perfect for our Intro to Shaving class and they didn't complain about the nicks and cuts!"
+            review:
+              "Our students loved this Faceworker! Their scraggly beard was perfect for our Intro to Shaving class and they didn't complain about the nicks and cuts!"
           }
         ]
       },
@@ -238,11 +259,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "You can call us picky but we find facial hear TOTALLY DISGUSTING on anyone handling our food. I'd just like to eat a meal without picturing short curly hairs hiding in my food. Is that too much to ask?!? Apparently so accoring to this fuzzy Faceworker."
+            review:
+              "You can call us picky but we find facial hear TOTALLY DISGUSTING on anyone handling our food. I'd just like to eat a meal without picturing short curly hairs hiding in my food. Is that too much to ask?!? Apparently so accoring to this fuzzy Faceworker."
           },
           {
             minScore: 0.4,
-            review: "Some may call us picky but we find facial hair so gross on food service workers. This Faceworker met our needs perfectly. Smooth, hairless, and hygenic."
+            review:
+              "Some may call us picky but we find facial hair so gross on food service workers. This Faceworker met our needs perfectly. Smooth, hairless, and hygenic."
           }
         ]
       }
@@ -271,11 +294,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "This Faceworker's brows barely qualified as bushy at all! How are we supposed to advertise our eyebrow threading service when these before and after pictures look identical! 1/5 stars!"
+            review:
+              "This Faceworker's brows barely qualified as bushy at all! How are we supposed to advertise our eyebrow threading service when these before and after pictures look identical! 1/5 stars!"
           },
           {
             minScore: 0.4,
-            review: "This Faceworker made the perfect before and after for our eyebrow threading service! A great bushy eyebrow for us to tame. Thank you!"
+            review:
+              "This Faceworker made the perfect before and after for our eyebrow threading service! A great bushy eyebrow for us to tame. Thank you!"
           }
         ]
       },
@@ -286,11 +311,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "Never trust a skinny chef they say! Well we feel the same about our delivery people! How are we supposed to trust a meal coming from someone who looks like they've never eaten one!"
+            review:
+              "Never trust a skinny chef they say! Well we feel the same about our delivery people! How are we supposed to trust a meal coming from someone who looks like they've never eaten one!"
           },
           {
             minScore: 0.4,
-            review: "Never trust a skinny chef they say! Well we feel the same about our delivery people! Nothing whets our appetites more for a meal than having it delivered by someone like this Facework who clearly enjoys food! Bon appetit!"
+            review:
+              "Never trust a skinny chef they say! Well we feel the same about our delivery people! Nothing whets our appetites more for a meal than having it delivered by someone like this Facework who clearly enjoys food! Bon appetit!"
           }
         ]
       }
@@ -322,11 +349,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "At Babysitting Academy we pride ourselves on giving our students real world babysitting training. But his Faceworker was far older than promised! They weren't fussy and they barely cried at bed time. A total waste of time."
+            review:
+              "At Babysitting Academy we pride ourselves on giving our students real world babysitting training. But his Faceworker was far older than promised! They weren't fussy and they barely cried at bed time. A total waste of time."
           },
           {
             minScore: 0.4,
-            review: "At Babysitting Academy we know there's no better prep for our students than practicing on real kids! This little tot was a great sport. They screamed and yelled and cried all through practice bed time. So realistic!"
+            review:
+              "At Babysitting Academy we know there's no better prep for our students than practicing on real kids! This little tot was a great sport. They screamed and yelled and cried all through practice bed time. So realistic!"
           }
         ]
       },
@@ -337,11 +366,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "We've been world travelers for years and love authentic experiences of other cultures. This Faceworker totally ruined our Indian takeout experience. Were they supposed to be Indian? Don't make me laugh! And the Biryani was little better!"
+            review:
+              "We've been world travelers for years and love authentic experiences of other cultures. This Faceworker totally ruined our Indian takeout experience. Were they supposed to be Indian? Don't make me laugh! And the Biryani was little better!"
           },
           {
             minScore: 0.4,
-            review: "We just love authentic experiences of other cultures! That's why it's so important to us that our Indian food be delivered by a real Indian. And this Faceworker was perfect. It felt like being in Mumbai!"
+            review:
+              "We just love authentic experiences of other cultures! That's why it's so important to us that our Indian food be delivered by a real Indian. And this Faceworker was perfect. It felt like being in Mumbai!"
           }
         ]
       }
