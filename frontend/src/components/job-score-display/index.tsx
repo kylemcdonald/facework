@@ -6,7 +6,7 @@ interface RatingBarProps {
   readonly value: number | undefined
 }
 
-const RatingBar: FunctionalComponent<RatingBarProps> = (
+const JobScoreDisplay: FunctionalComponent<RatingBarProps> = (
   props: RatingBarProps
 ) => {
   const ratingDegs = props.value !== undefined ? props.value * 180 - 90 : -90
@@ -37,4 +37,4 @@ export function normalizeValue(value: number, max: number): number {
   return value / max
 }
 
-export default RatingBar
+export default JobScoreDisplay
