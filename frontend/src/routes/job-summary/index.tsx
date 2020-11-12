@@ -107,13 +107,12 @@ function getChatMessagesforAct(
 }
 
 export function onAdvance(actId: ActId): void {
-  store.dispatch(advanceAct())
-  // TODO: be smarter here?
-  if (actId === finalActId || ActsConfig[actId].next === finalActId) {
-    route("/epilogue")
-  } else {
+  if (actId !== finalActId) {
     route("/choose")
+  } else {
+    route("/epilogue")
   }
+  store.dispatch(advanceAct())
 }
 
 export default JobSummary
