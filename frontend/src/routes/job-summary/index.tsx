@@ -22,6 +22,7 @@ import {
 import * as style from "./style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
+import { addMessage } from "../../lib/logging"
 const {
   nextButton: { autoclickTimeout }
 } = JobSummaryConfig
@@ -37,6 +38,11 @@ const JobSummary: FunctionalComponent = () => {
     subscriptionCost = toDollars(getJobSubscriptionCost(lastJob)),
     grandTotal = toDollars(getJobGrandTotal(lastJob)),
     startingBalance = toDollars(getStartingBalance(completedJobs.slice(0, -1)))
+  addMessage("job", {
+    name: lastJob.name,
+    trait: lastJob.trait,
+    highScore: lastJob.highScore
+  })
   return (
     <AtopVideoSelfie isBlurred={true}>
       <div className={style.jobSummaryContainer}>

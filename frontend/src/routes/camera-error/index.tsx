@@ -1,8 +1,10 @@
+import { useEffect } from "preact/hooks"
 import { FunctionalComponent, h } from "preact"
 import { Link } from "preact-router"
 import { useUserMedia } from "../../lib/use-user-media"
 import VideoSelfie from "../../components/videoselfie"
 import { ReloadLink } from "../../components/reload-link"
+import { addMessage } from "../../lib/logging"
 
 const StreamFound: FunctionalComponent = () => (
   <div>
@@ -12,12 +14,17 @@ const StreamFound: FunctionalComponent = () => (
   </div>
 )
 
-const ErrorFound: FunctionalComponent<{ error: MediaStreamError }> = props => (
-  <div>
-    <p>Error: {props.error.message}</p>
-    <ReloadLink />
-  </div>
-)
+const ErrorFound: FunctionalComponent<{ error: MediaStreamError }> = props => {
+  useEffect(() => {
+    addMessage("camera-error", { message: props.error.message })
+  }, [])
+  return (
+    <div>
+      <p>Error: {props.error.message}</p>
+      <ReloadLink />
+    </div>
+  )
+}
 
 const NothingFound: FunctionalComponent = () => (
   <div>
