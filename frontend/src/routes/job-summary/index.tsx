@@ -1,5 +1,5 @@
 import { FunctionalComponent, h } from "preact"
-import { useState } from "preact/hooks"
+import { useState, useMemo } from "preact/hooks"
 import { route } from "preact-router"
 import { AtopVideoSelfie } from "../../components/videoselfie"
 import AutoAdvanceButton from "../../components/auto-advance-button"
@@ -17,19 +17,18 @@ import {
   toDollars,
   getJobSubscriptionCost,
   getJobGrandTotal,
-  getStartingBalance,
-  getJobCaricaturePath
+  getStartingBalance
 } from "../../lib/job"
 import * as style from "./style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
-import JobCaricature from "../../components/job-caricature"
 const {
   nextButton: { autoclickTimeout }
 } = JobSummaryConfig
 
 const JobSummary: FunctionalComponent = () => {
   const [showChat, setShowChat] = useState(false)
+  const customerImagePath = useMemo(getCustomerImagePath, [])
   const actId = useTypedSelector(state => state.act)
   const completedJobs = useTypedSelector(state => state.completedJobs),
     // there should always be at least one job in this list
@@ -51,7 +50,7 @@ const JobSummary: FunctionalComponent = () => {
         <div class={style.jobSummaryBody}>
           <h1>Job Summary</h1>
           <div className={style.jobSummaryImageReview}>
-            <JobCaricature job={lastJob} hoverable={false} />
+            <img class={style.jobImage} src={customerImagePath} />
             <span>{`"${lastJob.review}"`}</span>
           </div>
           <div>
@@ -119,6 +118,11 @@ export function onAdvance(actId: ActId): void {
     route("/epilogue")
   }
   store.dispatch(advanceAct())
+}
+
+function getCustomerImagePath(): string {
+  const index = Math.floor(Math.random() * (77 + 1))
+  return `/assets/images/customers/${index}.jpg`
 }
 
 export default JobSummary
