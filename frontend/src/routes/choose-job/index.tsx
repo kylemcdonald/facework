@@ -4,11 +4,11 @@ import { route, Link } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { AtopVideoSelfie } from "../../components/videoselfie"
 import { useTypedSelector, setCurrentJob, store } from "../../lib/store"
-import { toDollars, PotentialJob, getJobCaricaturePath } from "../../lib/job"
+import { toDollars, PotentialJob, getStartingBalance } from "../../lib/job"
+import JobCaricature from "../../components/job-caricature"
 import * as style from "./style.css"
 
 import { ChooseJobConfig } from "../../lib/app-acts-config"
-import JobCaricature from "../../components/job-caricature"
 const {
   nextButton: { autoclickTimeout }
 } = ChooseJobConfig
@@ -17,13 +17,17 @@ const verusUrl = "/versus/"
 
 interface JobListProps {
   readonly jobs: ReadonlyArray<PotentialJob>
+  /** Amount in cents ($2.50 is 250) */
+  readonly grandTotal: number
 }
 
 const JobList: FunctionalComponent<JobListProps> = props => (
   <div className={style.chooseJobContainer}>
     <div className={style.grandTotal}>
       <span>Grand Total</span>
-      <span className={style.grandTotalAmount}>$0.00</span>
+      <span className={style.grandTotalAmount}>
+        {toDollars(props.grandTotal)}
+      </span>
     </div>
     <div className={`content ${style.content}`}>
       <div>
@@ -66,9 +70,13 @@ const ChooseJob: FunctionalComponent = () => {
     route(verusUrl)
     return <div>redirecting...</div>
   }
+
+  const completedJobs = useTypedSelector(state => state.completedJobs)
+  const grandTotal = getStartingBalance(completedJobs)
+
   return (
     <AtopVideoSelfie isBlurred={true}>
-      <JobList jobs={availableJobs} />
+      <JobList jobs={availableJobs} grandTotal={grandTotal} />
       <AutoAdvanceButton
         label="Next"
         autoClickTimeout={autoclickTimeout}
