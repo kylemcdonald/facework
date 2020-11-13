@@ -31,7 +31,7 @@ const JobList: FunctionalComponent<JobListProps> = props => (
     </div>
     <div className={`content ${style.content}`}>
       <div>
-        <h2>Get started with your first job</h2>
+        {props.actId == "one" && <h2>Get started with your first job</h2>}
         <ul className={style.jobList}>
           {props.jobs.map(job => (
             <li key={`${job.name} ${job.trait}`} className={style.job}>
@@ -76,7 +76,7 @@ const ChooseJob: FunctionalComponent = () => {
 
   return (
     <AtopVideoSelfie isBlurred={true}>
-      <JobList jobs={availableJobs} grandTotal={grandTotal} />
+      <JobList jobs={availableJobs} grandTotal={grandTotal} actId={actId} />
       <AutoAdvanceButton
         label="Next"
         autoClickTimeout={autoclickTimeout}
