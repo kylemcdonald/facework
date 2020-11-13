@@ -15,20 +15,17 @@ const Epilogue: FunctionalComponent = () => {
         {`
 DUMP: ${completedJobs.length}X jobs. ${toDollars(grandTotal)}
 total tips...
+   _                          
+ _|_ _.  _  _        _  ._ |  
+  | (_| (_ (/_ \\/\\/ (_) |  |< 
+  __________________________
+ |                          |
+ |  NETWORK NOT RESPONDING  |
+ *==========================*
 
- _ _ _ _ _ _ _ _ _ _ _ _ _
-|                         |
-|  NETWORK NOT RESPONDING |
-|_ _ _ _ _ _ _ _ _ _ _ _ _|
+Built with love by Kyle, Evelyn, Greg, Sarah and Fei.
 
-FACEWORK is built by:
-Kyle
-Evelyn
-Greg
-Sarah
-Fei
-
-funded by...
+Supported by Mozilla Creative Media Awards.
 `}
       </pre>
     </div>
