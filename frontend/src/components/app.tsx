@@ -12,6 +12,7 @@ import JobSummary from "../routes/job-summary"
 import { store } from "../lib/store"
 import CameraError from "../routes/camera-error"
 import { ReloadLink } from "./reload-link"
+import { addMessage } from "../lib/logging"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 if ((module as any).hot) {
@@ -23,6 +24,7 @@ const App: FunctionalComponent = () => {
   let currentUrl: string
   const handleRoute = (e: RouterOnChangeArgs): void => {
     currentUrl = e.url
+    addMessage("route", { location: currentUrl })
   }
 
   return (
