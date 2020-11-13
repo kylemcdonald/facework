@@ -2,3 +2,4 @@
 export const chatPage: string;
 export const chatMessage: string;
 export const chatMessageList: string;
+export const videoBackground: string;

@@ -40,6 +40,7 @@ const VideoSelfie: FunctionalComponent<VideoSelfieProps> = (
         onPlay={onPlayCallback}
         class={style.self}
         playsInline={true}
+        style={{ transform: "scaleX(-1)" }}
       />
     </div>
   )

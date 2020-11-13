@@ -39,6 +39,17 @@
   padding: 0;
 }
 
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.5;
+}
+
 @media (min-width: 992px) {
   .chat-message__list {
     width: 800px;
