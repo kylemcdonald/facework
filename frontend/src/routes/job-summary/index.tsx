@@ -69,7 +69,7 @@ const JobSummary: FunctionalComponent = () => {
               <span>{lastJobTip}</span>
             </div>
             <div className={style.jobSummaryLineItem}>
-              <span>APP Subscription</span>
+              <span>Facework Fee</span>
               <span>{subscriptionCost}</span>
             </div>
           </div>
