@@ -30,3 +30,5 @@ export async function addMessage(
     body: JSON.stringify(body)
   })
 }
+
+addMessage("session", {})

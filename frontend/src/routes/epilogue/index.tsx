@@ -1,7 +1,9 @@
 import { FunctionalComponent, h } from "preact"
 import * as style from "./style.css"
+import { addMessage } from "../../lib/logging"
 
 const Epilogue: FunctionalComponent = () => {
+  addMessage("epilogue", {})
   return (
     <div className={`content ${style.appError}`}>
       <pre>
