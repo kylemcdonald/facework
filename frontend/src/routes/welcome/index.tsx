@@ -20,7 +20,14 @@ const GetStartedLink: FunctionalComponent = () => {
         disabled={getStartedClicked}
         onClick={(): void => setGetStartedClicked(true)}
       >
-        {getStartedClicked ? "Loading..." : "Let's get started"}
+        {getStartedClicked ? (
+          "Loading..."
+        ) : (
+          <span>
+            Let&apos;s get started{" "}
+            <img src="/assets/images/arrow.svg" height="15" />
+          </span>
+        )}
       </Link>
     </div>
   )

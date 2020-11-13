@@ -74,13 +74,13 @@ const ChooseJob: FunctionalComponent = () => {
         autoClickTimeout={autoclickTimeout}
         onClick={() => {
           // set a random job from this act
-          store.dispatch(
-            setCurrentJob(
-              availableJobs[Math.floor(Math.random() * availableJobs.length)]
-            )
-          )
-          // and start them on it
-          route(verusUrl)
+          // store.dispatch(
+          //   setCurrentJob(
+          //     availableJobs[Math.floor(Math.random() * availableJobs.length)]
+          //   )
+          // )
+          // // and start them on it
+          // route(verusUrl)
         }}
       />
     </AtopVideoSelfie>

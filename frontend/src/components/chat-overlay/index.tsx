@@ -53,6 +53,9 @@ const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
           onClick={(): void => onAdvance(actId)}
         />
       ) : null}
+      <video class={style.videoBackground} autoPlay muted loop>
+        <source src="/assets/images/bg-15-15-gray-480p.mp4" type="video/mp4" />
+      </video>
     </div>
   )
 }
