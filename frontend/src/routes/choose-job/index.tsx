@@ -19,6 +19,7 @@ interface JobListProps {
   readonly jobs: ReadonlyArray<PotentialJob>
   /** Amount in cents ($2.50 is 250) */
   readonly grandTotal: number
+  readonly actId: ActId
 }
 
 const JobList: FunctionalComponent<JobListProps> = props => (
