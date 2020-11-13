@@ -1,0 +1,32 @@
+<html>
+
+<body>
+    <style>
+        * {
+            font-family: monospace;
+        }
+    </style>
+    <p>{headers}</p>
+    <script>
+        let body = {
+            'collection': 'errors',
+            'metadata': {
+                'screen': [screen.width, screen.height],
+                'inner': [innerWidth, innerHeight],
+                'window.devicePixelRatio': devicePixelRatio,
+                'original-referer': document.referrer
+            },
+            'content': {
+                'message': 'hello'
+            }
+        };
+        fetch('./addMessage', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body)
+        });
+    </script>
+</body>
+
+</html>
