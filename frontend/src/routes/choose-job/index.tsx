@@ -45,7 +45,7 @@ const JobList: FunctionalComponent<JobListProps> = props => (
                   <JobCaricature job={job} hoverable={true} />
                   <div className={style.jobEarningsContainer}>
                     <div className={style.jobEarnings}>
-                      Earn {toDollars(job.maxTip)}
+                      Earn {toDollars(job.maxTip, true)}
                     </div>
                   </div>
                 </div>
