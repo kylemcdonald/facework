@@ -33,6 +33,10 @@
   background-position: center;
 }
 
+.intro-text {
+  max-width: 400px;
+}
+
 @media (min-width: 992px) {
   .home {
     background: #00cd83;

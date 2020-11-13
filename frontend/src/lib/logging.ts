@@ -11,6 +11,10 @@ export async function addMessage(
   collection: string,
   content: any
 ): Promise<void> {
+  if (window.location.hostname == "localhost") {
+    // do not track locally
+    return
+  }
   const body = {
     collection: collection,
     metadata: {

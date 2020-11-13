@@ -9,6 +9,14 @@
   text-shadow: none;
 }
 
+pre {
+  max-width: 100%;
+  overflow-wrap: normal;
+  white-space: pre-wrap;
+  color:rgb(0,255,0);
+  font-family: "VT323";
+}
+
 @media (min-width: 992px) {
   .app-error {
     min-height: 800px;

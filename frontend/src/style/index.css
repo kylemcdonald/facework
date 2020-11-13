@@ -5,6 +5,13 @@
   src: url("/assets/fonts/DINAlternate-Bold.woff") format("woff");
 }
 
+@font-face {
+  font-family: "VT323";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/assets/fonts/vt323-v12-latin-regular.woff") format("woff");
+}
+
 html,
 body {
   height: 100%;
