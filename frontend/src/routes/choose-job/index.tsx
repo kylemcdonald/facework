@@ -8,7 +8,7 @@ import { toDollars, PotentialJob, getStartingBalance } from "../../lib/job"
 import JobCaricature from "../../components/job-caricature"
 import * as style from "./style.css"
 
-import { ChooseJobConfig } from "../../lib/app-acts-config"
+import { ActId, ChooseJobConfig } from "../../lib/app-acts-config"
 const {
   nextButton: { autoclickTimeout }
 } = ChooseJobConfig
@@ -19,6 +19,7 @@ interface JobListProps {
   readonly jobs: ReadonlyArray<PotentialJob>
   /** Amount in cents ($2.50 is 250) */
   readonly grandTotal: number
+  readonly actId: ActId
 }
 
 const JobList: FunctionalComponent<JobListProps> = props => (
