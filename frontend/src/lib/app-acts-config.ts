@@ -471,5 +471,5 @@ export const ChatPageConfig: BasePageConfig & {
   nextButton: {
     autoclickTimeout: 10 * 1000
   },
-  messageAppearanceInterval: 1000
+  messageAppearanceInterval: 2000
 }
