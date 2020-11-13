@@ -34,7 +34,7 @@ const JobList: FunctionalComponent<JobListProps> = props => (
         <h2>Get started with your first job</h2>
         <ul className={style.jobList}>
           {props.jobs.map(job => (
-            <li key={job.name} className={style.job}>
+            <li key={`${job.name} ${job.trait}`} className={style.job}>
               <Link
                 onClick={() => {
                   store.dispatch(setCurrentJob(job))
