@@ -3,7 +3,7 @@
   height: 60%;
   width: 100%;
   margin-bottom: 5px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='350' width='100'%3E%3Cpath d='M0,300 a1,1 0 0,0 100,0' fill='white' /%3E%3Cpolygon points='50,0 100,301 0,301' style='fill:white;' /%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='265' width='100'%3E%3Cpath d='M99.978,215.558c.005-.29.022-.5768.022-.8679h-.1661L50,0,.1661,214.69H0c0,.2911.017.5779.022.8679L0,215.69H.0253a49.9844,49.9844,0,0,0,99.9494,0H100Z' style='fill:white'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
