@@ -19,7 +19,7 @@ const JobScoreDisplay: FunctionalComponent<JobScoreDisplayProps> = (
         <div className={style.ratingGaugeCommentContainer}>
           {props.highScore !== undefined && (
             <div className={style.ratingGaugeComment}>
-              <div>Great Job!</div>
+              <div>{getScoreMessage(props.highScore)}</div>
               <div className={style.ratingGaugeValue}>
                 {Math.floor(props.highScore * 100)}
               </div>
@@ -33,6 +33,15 @@ const JobScoreDisplay: FunctionalComponent<JobScoreDisplayProps> = (
       </div>
     </div>
   )
+}
+
+function getScoreMessage(score: number): string {
+  if (score >= 0.99) return "Perfect"
+  else if (score > 0.9) return "Amazing"
+  else if (score > 0.8) return "Great job"
+  else if (score > 0.4) return "Just okay"
+  else if (score > 0.2) return "Do better"
+  else return "Try harder"
 }
 
 /** Return a number between 0 and 1.0 */

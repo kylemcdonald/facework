@@ -3,7 +3,6 @@ import { shouldSendFaceNow, sendFace } from "../../lib/use-face-reader"
 
 export const sendFaceOrSchedule = (videoElement: HTMLVideoElement) => {
   const timeUntilSend = shouldSendFaceNow()
-  console.log(timeUntilSend)
   if (timeUntilSend <= 0) {
     sendFace(videoElement)
   } else {

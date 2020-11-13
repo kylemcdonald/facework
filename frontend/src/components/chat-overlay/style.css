@@ -13,10 +13,12 @@
   background: #882b77;
   color: white;
   list-style-type: none;
-  margin: 40px 0;
+  margin: 20px 0;
   padding: 10px;
   border-radius: 10px;
   position: relative;
+  clear: both;
+  float: left;
   z-index: 1;
 }
 
@@ -35,6 +37,17 @@
 .chat-message__list {
   margin: 0;
   padding: 0;
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.5;
 }
 
 @media (min-width: 992px) {

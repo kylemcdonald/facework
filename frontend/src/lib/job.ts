@@ -80,8 +80,15 @@ export function getStartingBalance(jobs: ReadonlyArray<CompletedJob>): number {
   return jobs.reduce((total, job) => getJobGrandTotal(job) + total, 0)
 }
 
-export function toDollars(cents: number): string {
-  return `$${Number(Math.trunc(cents) / 100).toFixed(0)}`
+/**
+ * Format a cents amount into a nice string
+ * e.g. 250 -> "$2.50"
+ *
+ * Option to truncate cents
+ * e.g. 200 -> "$2" (not "$2.00")
+ */
+export function toDollars(cents: number, omitCents?: boolean): string {
+  return `$${Number(Math.trunc(cents) / 100).toFixed(omitCents ? 0 : 2)}`
 }
 
 export function getJobCaricaturePath(job: BaseJob): string {

@@ -18,7 +18,7 @@
 .progress-bar__container {
   height: 15px;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;

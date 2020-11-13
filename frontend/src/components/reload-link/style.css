@@ -1,0 +1,17 @@
+.start-over-link-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-grow: 1;
+}
+
+.start-over-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-over-link img {
+  margin-left: 15px;
+  margin-top: 4px;
+}
