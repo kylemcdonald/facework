@@ -36,6 +36,6 @@
 
 @media (min-width: 992px) {
   .progress-bar__container {
-    background: #bbb8b6;
+    /* background: #bbb8b6; */
   }
 }

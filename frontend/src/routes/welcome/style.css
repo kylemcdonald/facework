@@ -1,4 +1,7 @@
+.container {
+}
 .home {
+  background: #00cd83;
   padding: 56px 20px;
   min-height: 100%;
   width: 100%;
@@ -12,6 +15,7 @@
   flex-grow: 1;
   display: flex;
   align-items: flex-end;
+  margin-top: 56px;
 }
 
 .get-started a {
