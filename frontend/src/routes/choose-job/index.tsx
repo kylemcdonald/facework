@@ -50,7 +50,7 @@ const JobList: FunctionalComponent<JobListProps> = props => (
                     </div>
                   </div>
                 </div>
-                <div>{job.name}</div>
+                <div className={style.jobName}>{job.name}</div>
                 <span className={style.jobTrait}>{job.trait}</span>
               </Link>
             </li>

@@ -57,7 +57,7 @@ const JobSummary: FunctionalComponent = () => {
           <h1>Job Summary</h1>
           <div className={style.jobSummaryImageReview}>
             <img class={style.jobImage} src={customerImagePath} />
-            <span>{`"${lastJob.review}"`}</span>
+            <span className={style.jobReview}>{`"${lastJob.review}"`}</span>
           </div>
           <div>
             <div className={style.jobSummaryLineItem}>

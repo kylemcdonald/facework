@@ -3,6 +3,8 @@ export const jobSummaryContainer: string;
 export const jobSummaryBody: string;
 export const job__image: string;
 export const jobImage: string;
+export const job__review: string;
+export const jobReview: string;
 export const jobSummaryImageReview: string;
 export const jobSummaryLineItem: string;
 export const jobSummaryLineItemsSeparator: string;

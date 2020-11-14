@@ -16,13 +16,14 @@
 }
 
 .progress-bar__container {
-  height: 15px;
+  height: 12px;
   overflow: hidden;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 10;
+  opacity: 0.75;
 }
 
 .progress-bar__fill {
@@ -35,6 +36,6 @@
 
 @media (min-width: 992px) {
   .progress-bar__container {
-    background: #bbb8b6;
+    /* background: #bbb8b6; */
   }
 }
