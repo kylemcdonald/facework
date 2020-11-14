@@ -9,6 +9,7 @@
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   text-shadow: none;
+  padding-bottom: 1px;
 }
 
 .job-summary__body h1 {
@@ -24,6 +25,11 @@
   width: 50px;
   border-radius: 50%;
   background: lightgrey;
+}
+
+.job__review {
+  font-size: 18px;
+  margin-top: 20px;
 }
 
 .job-summary__image-review {
@@ -45,15 +51,14 @@
 
 .job-summary__line-items--separator {
   border-bottom: 1px solid #00cd83;
-  margin: 15px;
 }
 
 .job-summary__grand-total--container {
   margin: 15px 0;
+  font-size: 29px;
 }
 
 .job-summary__grand-total--header {
-  font-size: 29px;
 }
 
 .job-summary__grand-total {

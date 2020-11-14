@@ -17,7 +17,7 @@ const TimeLimitDisplay: FunctionalComponent<TimeLimitDisplayProps> = props => {
       <div className={style.progressBarContainer}>
         <div
           className={style.progressBarFill}
-          style={{ width: `${100 - Math.floor(ratioTimeLeft * 100)}%` }}
+          style={{ width: `${Math.floor(ratioTimeLeft * 100)}%` }}
         />
       </div>
     </div>

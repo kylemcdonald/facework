@@ -17,7 +17,6 @@
 
 .rating-gauge__container {
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0);
   background-image: url("/assets/images/donut.svg");
   background-size: contain;
   background-repeat: no-repeat;
@@ -31,7 +30,6 @@
   flex-flow: column;
   align-items: flex-end;
   height: 25vh;
-  margin: 15px;
 }
 .rating-gauge__comment {
   display: flex;

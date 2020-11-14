@@ -3,13 +3,6 @@
   width: 100%;
 }
 
-@media (min-width: 992px) {
-  .auto-advance-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    min-height: 800px;
-    height: 100%;
-  }
+.auto-advance-container {
+  display: none;
 }
