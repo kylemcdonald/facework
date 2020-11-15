@@ -1,5 +1,5 @@
 import { FunctionalComponent, h } from "preact"
-import { useState, useMemo } from "preact/hooks"
+import { useState, useMemo, useCallback } from "preact/hooks"
 import { route } from "preact-router"
 import { AtopVideoSelfie } from "../../components/videoselfie"
 import AutoAdvanceButton from "../../components/auto-advance-button"
@@ -43,6 +43,12 @@ const JobSummary: FunctionalComponent = () => {
     trait: lastJob.trait,
     highScore: lastJob.highScore
   })
+  const onClick = useCallback(
+    () =>
+      showChat || actId === firstActId ? onAdvance(actId) : setShowChat(true),
+    []
+  )
+
   return (
     <AtopVideoSelfie isBlurred={true}>
       <div className={style.jobSummaryContainer}>
@@ -85,7 +91,7 @@ const JobSummary: FunctionalComponent = () => {
         </div>
         <div className={style.jobSummaryFooter}>
           <div className={style.jobSummaryFooterPadding}></div>
-          <div className={style.jobSummaryFooterMessage}>
+          <div onClick={onClick} className={style.jobSummaryFooterMessage}>
             See all new jobs →
           </div>
           <div className={style.jobSummaryFooterPadding}></div>
@@ -94,11 +100,7 @@ const JobSummary: FunctionalComponent = () => {
           <AutoAdvanceButton
             label="Next"
             autoClickTimeout={autoclickTimeout}
-            onClick={() =>
-              showChat || actId === firstActId
-                ? onAdvance(actId)
-                : setShowChat(true)
-            }
+            onClick={onClick}
           />
         </div>
       </div>

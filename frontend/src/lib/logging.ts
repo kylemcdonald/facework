@@ -11,10 +11,6 @@ export async function addMessage(
   collection: string,
   content: any
 ): Promise<void> {
-  if (window.location.hostname == "localhost") {
-    // do not track locally
-    return
-  }
   const body = {
     collection: collection,
     metadata: {
@@ -26,6 +22,11 @@ export async function addMessage(
       documentReferrer: window.document.referrer
     },
     content: content
+  }
+  if (window.location.hostname == "localhost") {
+    // do not track locally
+    console.debug(body)
+    return
   }
   fetch("https://us-central1-facework-game.cloudfunctions.net/addMessage", {
     method: "POST",

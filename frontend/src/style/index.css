@@ -26,7 +26,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-width: 400px;
 }
-
+html {
+  overflow: hidden;
+}
+body {
+  overflow: auto;
+}
 * {
   box-sizing: border-box;
 }
@@ -64,6 +69,11 @@ h2 {
   background-repeat: no-repeat;
   width: 100px;
   height: 100px;
+}
+
+.hidden-video {
+  height: 0;
+  opacity: 0;
 }
 
 @media (min-width: 992px) {

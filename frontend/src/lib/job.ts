@@ -64,6 +64,10 @@ export function getReview(job: PotentialJob, highScore: number): string {
   return "ERROR_MISSING_REVIEW"
 }
 
+export function getJobCaricaturePath(job: BaseJob): string {
+  return getCaricaturePath(job.trait)
+}
+
 export function getTip(job: PotentialJob, highScore: number): number {
   return Math.trunc(highScore * job.maxTip)
 }
@@ -80,6 +84,18 @@ export function getStartingBalance(jobs: ReadonlyArray<CompletedJob>): number {
   return jobs.reduce((total, job) => getJobGrandTotal(job) + total, 0)
 }
 
+const dollarsAndCents = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2
+})
+
+const wholeDollars = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0
+})
+
 /**
  * Format a cents amount into a nice string
  * e.g. 250 -> "$2.50"
@@ -88,9 +104,8 @@ export function getStartingBalance(jobs: ReadonlyArray<CompletedJob>): number {
  * e.g. 200 -> "$2" (not "$2.00")
  */
 export function toDollars(cents: number, omitCents?: boolean): string {
-  return `$${Number(Math.trunc(cents) / 100).toFixed(omitCents ? 0 : 2)}`
-}
-
-export function getJobCaricaturePath(job: BaseJob): string {
-  return getCaricaturePath(job.trait)
+  const dollars = Math.trunc(cents) / 100
+  return omitCents === true
+    ? wholeDollars.format(dollars)
+    : dollarsAndCents.format(dollars)
 }

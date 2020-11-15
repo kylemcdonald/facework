@@ -68,6 +68,7 @@
 .job-summary__footer {
   text-align: center;
   margin: 15px;
+  cursor: pointer;
 }
 
 .hidden {

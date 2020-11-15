@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400&display=swap");
+
 .chat-page {
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
@@ -20,6 +22,7 @@
   clear: both;
   float: left;
   z-index: 1;
+  font-family: "Roboto Mono", monospace;
 }
 
 .chat-message::before {
