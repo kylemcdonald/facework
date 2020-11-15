@@ -6,8 +6,7 @@ import { IntermediateAct, firstActId, ActId } from "../../lib/app-acts-config"
 
 import { ChatPageConfig } from "../../lib/app-acts-config"
 const {
-  nextButton: { autoclickTimeout },
-  messageAppearanceInterval
+  nextButton: { autoclickTimeout }
 } = ChatPageConfig
 
 const ChatMessages: FunctionalComponent<{
@@ -30,17 +29,29 @@ interface ChatOverlayProps {
 
 const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
   const { chatMessages, actId, onAdvance } = props
-  const [chatMessageRenderCount, setchatMessageRenderCount] = useState(1)
+  const [chatMessageRenderCount, setchatMessageRenderCount] = useState(0)
   useEffect(() => {
-    const intervalID = setInterval(() => {
+    let timeoutId: ReturnType<typeof setTimeout>
+    const update = (): void => {
+      // in case this is called by the click handler
+      clearTimeout(timeoutId)
+      // bump up count to display next chat message
       setchatMessageRenderCount(prev => {
-        if (prev === props.chatMessages.length) {
-          clearInterval(intervalID)
+        if (prev === chatMessages.length) {
           return prev
         }
+        const nextNextMessage =
+          chatMessages[Math.min(prev + 2, chatMessages.length - 1)]
+        timeoutId = setTimeout(update, getTimoutLength(nextNextMessage))
         return prev + 1
       })
-    }, messageAppearanceInterval)
+    }
+    update()
+    window.addEventListener("pointerup", update)
+    return () => {
+      window.removeEventListener("pointerup", update)
+      clearTimeout(timeoutId)
+    }
   }, [])
 
   return (
@@ -58,6 +69,10 @@ const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
       </video>
     </div>
   )
+}
+
+function getTimoutLength(chatMessage: string): number {
+  return 300 + (chatMessage.split(" ").length + 1) * 150
 }
 
 export default ChatOverlay
