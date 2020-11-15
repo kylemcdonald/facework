@@ -20,3 +20,8 @@
 .error-page h1 {
   text-align: center;
 }
+
+.error-page--body {
+  max-width: 1000px;
+  margin: auto;
+}

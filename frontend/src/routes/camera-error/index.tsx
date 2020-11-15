@@ -25,9 +25,11 @@ const ErrorFound: FunctionalComponent<{ error: MediaStreamError }> = props => {
       <h1>
         <img src="/assets/images/camera-icon.svg" height="100" />
       </h1>
-      <p>Your camera is disabled.</p>
-      <p>Don&apos;t miss out on all the good jobs!</p>
-      <p>Error: {props.error.message}</p>
+      <div className={style.errorPageBody}>
+        <p>Your camera is disabled.</p>
+        <p>Don&apos;t miss out on all the good jobs!</p>
+        <p>Error: {props.error.message}</p>
+      </div>
       <ReloadLink />
     </div>
   )
@@ -39,7 +41,9 @@ const NothingFound: FunctionalComponent = () => (
     <h1>
       <img src="/assets/images/camera-icon.svg" height="100" />
     </h1>
-    <p>{`Your device's camera isn't working, but we're not sure why.`}</p>
+    <div className={style.errorPageBody}>
+      <p>{`Your device's camera isn't working, but we're not sure why.`}</p>
+    </div>
     <ReloadLink />
   </div>
 )

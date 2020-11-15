@@ -31,7 +31,6 @@
 
 @media (min-width: 992px) {
   .wrapper {
-    max-width: 1000px;
     margin: auto;
     min-height: 800px;
     margin-top: 100px;
