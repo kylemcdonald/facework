@@ -24,7 +24,7 @@ body {
   color: #444;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 400px;
+  min-width: 375px;
 }
 html {
   overflow: hidden;
@@ -72,8 +72,9 @@ h2 {
 }
 
 .hidden-video {
-  height: 0;
+  height: 1px;
   opacity: 0;
+  position: absolute;
 }
 
 @media (min-width: 992px) {
