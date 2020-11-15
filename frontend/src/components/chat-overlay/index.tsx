@@ -6,8 +6,7 @@ import { IntermediateAct, firstActId, ActId } from "../../lib/app-acts-config"
 
 import { ChatPageConfig } from "../../lib/app-acts-config"
 const {
-  nextButton: { autoclickTimeout },
-  messageAppearanceInterval
+  nextButton: { autoclickTimeout }
 } = ChatPageConfig
 
 const ChatMessages: FunctionalComponent<{
@@ -33,7 +32,10 @@ const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
   const [chatMessageRenderCount, setchatMessageRenderCount] = useState(0)
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>
-    const update = (): void =>
+    const update = (): void => {
+      // in case this is called by the click handler
+      clearTimeout(timeoutId)
+      // bump up count to display next chat message
       setchatMessageRenderCount(prev => {
         if (prev === chatMessages.length) {
           return prev
@@ -43,8 +45,13 @@ const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
         timeoutId = setTimeout(update, getTimoutLength(nextNextMessage))
         return prev + 1
       })
+    }
     update()
-    return () => clearTimeout(timeoutId)
+    window.addEventListener("pointerup", update)
+    return () => {
+      window.removeEventListener("pointerup", update)
+      clearTimeout(timeoutId)
+    }
   }, [])
 
   return (
