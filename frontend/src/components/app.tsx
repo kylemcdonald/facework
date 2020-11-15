@@ -11,7 +11,7 @@ import AutoAdvanceExample from "../routes/examples/auto-advance-button"
 import JobSummary from "../routes/job-summary"
 import { store } from "../lib/store"
 import CameraError from "../routes/camera-error"
-import { ReloadLink } from "./reload-link"
+import { RetryLink } from "./retry-link"
 import { addMessage } from "../lib/logging"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,7 +45,7 @@ const App: FunctionalComponent = () => {
             path="/example/auto-advance-button"
             component={AutoAdvanceExample}
           />
-          <Route path="/example/reload-link" component={ReloadLink} />
+          <Route path="/example/retry-link" component={RetryLink} />
           {/* end example routes */}
           <NotFoundPage default />
         </Router>
