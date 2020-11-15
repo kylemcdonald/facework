@@ -36,14 +36,45 @@
   width: 200px;
   margin: auto;
 }
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .rating-gauge__comment {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
+
+.rating-gauge__comment--only {
+  animation-name: fade;
+  animation-duration: 5s;
+  opacity: 0;
+}
+
 .rating-gauge__value {
   font-weight: bold;
   font-size: 46px;
+  animation-name: pop;
+  animation-duration: 1s;
 }
 
 @media (min-width: 992px) {
