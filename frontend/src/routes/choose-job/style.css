@@ -27,6 +27,7 @@
   list-style-type: none;
   width: 120px;
   margin: 25px 10px;
+  cursor: pointer;
 }
 .job__image--container {
   position: relative;
