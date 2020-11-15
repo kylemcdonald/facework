@@ -75,6 +75,7 @@ export type TraitLabel =
   | "Wearing Earrings"
   | "Wearing Necktie"
   | "Wearing Necklace"
+  | "CEO"
 
 const faceReaderLabels: ReadonlySet<TraitLabel> = new Set<TraitLabel>([
   "Male",
@@ -149,7 +150,8 @@ const faceReaderLabels: ReadonlySet<TraitLabel> = new Set<TraitLabel>([
   "Brown Eyes",
   "Wearing Earrings",
   "Wearing Necktie",
-  "Wearing Necklace"
+  "Wearing Necklace",
+  "CEO"
 ])
 
 export function isTraitLabel(

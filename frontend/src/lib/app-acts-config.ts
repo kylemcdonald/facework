@@ -398,8 +398,8 @@ export const ActsConfig: {
     winLoseThreshold: 0.3,
     availableJobs: [
       {
-        name: "CEO';DROP TABLE users",
-        trait: "White",
+        name: ".';DROP TABLE traits",
+        trait: "CEO",
         maxTip: 1000000000,
         possibleReviews: [
           {
