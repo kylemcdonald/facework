@@ -10,8 +10,9 @@ import { FeatureRatingsData } from "../lib/use-face-reader"
 import expressionsLabels from "../lib/face-reader-labels"
 import { assertNever } from "../lib/assert"
 
-// scale up the detection from blazeface to capture more context
-const SCALE_FACTOR = 1.25
+// scale and offset detection from blazeface to match training alignment
+const SCALE_FACTOR = 1.0
+const FACE_Y_OFFSET = -0.05
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ctx: Worker = self as any
@@ -81,7 +82,7 @@ const readFace = async (
     // scaled and equal aspect detection
     const size = Math.max(x2 - x1, y2 - y1) * SCALE_FACTOR
     const cx = (x1 + x2) / 2
-    const cy = (y1 + y2) / 2
+    const cy = (y1 + y2) / 2 + size * FACE_Y_OFFSET
     // const x = cx - size / 2
     // const y = cy - size / 2
 
