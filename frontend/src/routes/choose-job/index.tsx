@@ -1,15 +1,20 @@
 import { FunctionalComponent, h } from "preact"
+import { StateUpdater, useState } from "preact/hooks"
 import { ActsConfig } from "../../lib/app-acts-config"
 import { route, Link } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { AtopVideoSelfie } from "../../components/videoselfie"
 import { useTypedSelector, setCurrentJob, store } from "../../lib/store"
-import { toDollars, PotentialJob, getStartingBalance } from "../../lib/job"
+import {
+  toDollars,
+  PotentialJob,
+  getStartingBalance,
+  CompletedJob
+} from "../../lib/job"
 import JobCaricature from "../../components/job-caricature"
 import * as style from "./style.css"
 
 import { ActId, ChooseJobConfig } from "../../lib/app-acts-config"
-import { useState } from "preact/hooks"
 const {
   nextButton: { autoclickTimeout }
 } = ChooseJobConfig
@@ -21,11 +26,13 @@ interface JobListProps {
   /** Amount in cents ($2.50 is 250) */
   readonly grandTotal: number
   readonly actId: ActId
+  readonly completedJobs: ReadonlyArray<CompletedJob>
+  readonly showCompletedJobs: boolean
+  readonly setShowCompletedJobs: StateUpdater<boolean>
 }
 
 const JobList: FunctionalComponent<JobListProps> = props => {
-  const showCompletedJobs = props.showCompletedJobs
-  const setShowCompletedJobs = props.setShowCompletedJobs
+  const { showCompletedJobs, setShowCompletedJobs, completedJobs } = props
 
   return(
     <div className={style.chooseJobContainer}>
@@ -37,18 +44,15 @@ const JobList: FunctionalComponent<JobListProps> = props => {
         >
           <div>
             <h1>Job Summary</h1>
-            <div className={style.jobSummaryLineItem}>
-              <span>Grocery Pickup</span>
-              <span>$0.00</span>
-            </div>
-            <div className={style.jobSummaryLineItem}>
-              <span>Beach Trip</span>
-              <span>$0.00</span>
-            </div>
-            <div className={style.jobSummaryLineItem}>
-              <span>Subscription Fee</span>
-              <span>$0.00</span>
-            </div>
+            {completedJobs.map(cj => (
+              <div
+                className={style.jobSummaryLineItem}
+                key={`${cj.name} ${cj.tip}`}
+              >
+                <span>{cj.name}</span>
+                <span>{toDollars(cj.tip)}</span>
+              </div>
+            ))}
           </div>
           <div className={style.jobSummaryLineItemsSeparator} />
         </div>
@@ -147,6 +151,7 @@ const ChooseJob: FunctionalComponent = () => {
         jobs={availableJobs}
         grandTotal={grandTotal}
         actId={actId}
+        completedJobs={completedJobs}
         showCompletedJobs={showCompletedJobs}
         setShowCompletedJobs={setShowCompletedJobs}
       />
