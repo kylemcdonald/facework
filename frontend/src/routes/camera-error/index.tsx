@@ -3,7 +3,7 @@ import { FunctionalComponent, h } from "preact"
 import { Link } from "preact-router"
 import { useUserMedia } from "../../lib/use-user-media"
 import VideoSelfie from "../../components/videoselfie"
-import { ReloadLink } from "../../components/reload-link"
+import { RetryLink } from "../../components/retry-link"
 import { addMessage } from "../../lib/logging"
 import * as style from "./style.css"
 
@@ -30,7 +30,7 @@ const ErrorFound: FunctionalComponent<{ error: MediaStreamError }> = props => {
         <p>Don&apos;t miss out on all the good jobs!</p>
         <p>Error: {props.error.message}</p>
       </div>
-      <ReloadLink />
+      <RetryLink />
     </div>
   )
 }
@@ -44,7 +44,7 @@ const NothingFound: FunctionalComponent = () => (
     <div className={style.errorPageBody}>
       <p>{`Your device's camera isn't working, but we're not sure why.`}</p>
     </div>
-    <ReloadLink />
+    <RetryLink />
   </div>
 )
 
