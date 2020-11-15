@@ -50,7 +50,7 @@ const App: FunctionalComponent = () => {
           <NotFoundPage default />
         </Router>
       </Provider>
-      <video class="hidden-video" autoPlay muted>
+      <video class="hidden-video" autoplay muted playsinline>
         <source src="/assets/images/bg-15-15-gray-480p.mp4" type="video/mp4" />
       </video>
     </div>

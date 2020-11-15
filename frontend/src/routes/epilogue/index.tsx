@@ -28,7 +28,7 @@ Built with love by Kyle, Evelyn, Greg, Sarah and Fei.
 Supported by Mozilla Creative Media Awards.
 `}
       </pre>
-      <video class={style.videoBackground} autoPlay muted loop>
+      <video class={style.videoBackground} autoplay muted playsinline loop>
         <source src="/assets/images/bg-15-15-gray-480p.mp4" type="video/mp4" />
       </video>
     </div>
