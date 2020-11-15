@@ -10,5 +10,7 @@ export const job__earnings: string;
 export const jobEarnings: string;
 export const job__trait: string;
 export const jobTrait: string;
+export const job__name: string;
+export const jobName: string;
 export const chooseJobContainer: string;
 export const content: string;

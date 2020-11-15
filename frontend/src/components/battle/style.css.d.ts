@@ -4,3 +4,5 @@ export const accompaniment: string;
 export const faceHintContainer: string;
 export const faceHint: string;
 export const faceHintShadow: string;
+export const faceHintHelp: string;
+export const faceHintHelpHeadline: string;

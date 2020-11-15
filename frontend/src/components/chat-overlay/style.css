@@ -13,7 +13,7 @@
   background: #882b77;
   color: white;
   list-style-type: none;
-  margin: 20px 10px;
+  margin: 20px;
   padding: 10px;
   border-radius: 10px;
   position: relative;
@@ -40,7 +40,7 @@
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 20px;
   z-index: 5;
 }
 

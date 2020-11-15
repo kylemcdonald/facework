@@ -15,6 +15,29 @@ import JobScoreDisplay from "../job-score-display"
 import { DoJobConfig } from "../../lib/app-acts-config"
 const { scoringTimeLimit } = DoJobConfig
 
+/** Displays dotted circle and feature text */
+const FaceHint: FunctionalComponent<{
+  feature: string
+  isFaceNotFound: boolean
+}> = props =>
+  props.isFaceNotFound ? (
+    <div class={style.faceHintContainer}>
+      <div class={style.faceHintHelp}>
+        <span class={style.faceHintHelpHeadline}>FACE NOT FOUND</span>
+        <span>Try moving closer to the screen</span>
+      </div>
+    </div>
+  ) : (
+    <>
+      <div class={style.faceHintContainer}>
+        <div class={style.faceHint}>{props.feature}</div>
+      </div>
+      <div class={style.faceHintContainer}>
+        <div class={style.faceHintShadow}></div>
+      </div>
+    </>
+  )
+
 export type KeyFeatureScoring = {
   /** the name of the feature we are judging */
   readonly feature?: string
@@ -96,12 +119,10 @@ const Battle: FunctionalComponent<BattleProps> = props => {
   useFaceReader(updateFeatureRatings)
   return (
     <div class={style.battle}>
-      <div className={style.faceHintContainer}>
-        <div className={style.faceHintShadow}></div>
-      </div>
-      <div className={style.faceHintContainer}>
-        <div className={style.faceHint}>{keyFeatureScoring.feature}</div>
-      </div>
+      <FaceHint
+        feature={keyFeatureScoring.feature ?? ""}
+        isFaceNotFound={featureRatingsData === null}
+      />
       <section class={style.accompaniment}>
         <TimeLimitDisplay
           timeLimit={keyFeatureScoring.timeLimit}

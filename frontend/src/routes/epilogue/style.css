@@ -13,8 +13,23 @@ pre {
   max-width: 100%;
   overflow-wrap: normal;
   white-space: pre-wrap;
-  color:rgb(0,255,0);
+  color: rgb(0, 255, 0);
   font-family: "VT323";
+  z-index: 2;
+  position: relative;
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.25;
+  image-rendering: pixelated;
+  z-index: 0;
 }
 
 @media (min-width: 992px) {
