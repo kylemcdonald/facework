@@ -66,6 +66,11 @@ h2 {
   height: 100px;
 }
 
+.hidden-video {
+  height: 0;
+  opacity: 0;
+}
+
 @media (min-width: 992px) {
   #app {
     background: #bbb8b6;
