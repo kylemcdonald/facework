@@ -23,10 +23,13 @@ total tips...
  |  NETWORK NOT RESPONDING  |
  *==========================*
 
-Built with love by Kyle, Evelyn, Greg, Sarah and Fei.
-
-Supported by Mozilla Creative Media Awards.
 `}
+        Built with love by <a href="https://twitter.com/kcimc">Kyle</a>, Evelyn,
+        Greg, Sarah and Fei.
+        {`
+
+`}
+        Supported by Mozilla Creative Media Awards.
       </pre>
       <video class={style.videoBackground} autoPlay muted playsinline loop>
         <source src="/assets/images/bg-15-15-gray-480p.mp4" type="video/mp4" />
