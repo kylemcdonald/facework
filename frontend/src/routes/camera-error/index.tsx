@@ -1,19 +1,10 @@
 import { useEffect } from "preact/hooks"
 import { FunctionalComponent, h } from "preact"
-import { Link } from "preact-router"
+import { route } from "preact-router"
 import { useUserMedia } from "../../lib/use-user-media"
-import VideoSelfie from "../../components/videoselfie"
 import { RetryLink } from "../../components/retry-link"
 import { addMessage } from "../../lib/logging"
 import * as style from "./style.css"
-
-const StreamFound: FunctionalComponent = () => (
-  <div className={style.errorPage}>
-    <p>If you can see your video below this, you are ready to start.</p>
-    <Link href="/choose">Start</Link>
-    <VideoSelfie isBlurred={false} />
-  </div>
-)
 
 const ErrorFound: FunctionalComponent<{ error: MediaStreamError }> = props => {
   useEffect(() => {
@@ -51,7 +42,8 @@ const NothingFound: FunctionalComponent = () => (
 const CameraError: FunctionalComponent = () => {
   const { stream, error } = useUserMedia()
   if (stream !== null) {
-    return <StreamFound />
+    route("/choose")
+    return null
   } else if (error !== null) {
     return <ErrorFound error={error} />
   } else {
