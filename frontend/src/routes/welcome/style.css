@@ -41,6 +41,7 @@
   max-width: 350px;
   font-size: 18px;
   padding-top: 20px;
+  line-height: 130%;
 }
 
 @media (min-width: 992px) {

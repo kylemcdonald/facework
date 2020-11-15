@@ -51,6 +51,7 @@
 
 .job-summary__line-items--separator {
   border-bottom: 1px solid #00cd83;
+  margin: 15px 0px;
 }
 
 .job-summary__grand-total--container {
@@ -59,10 +60,6 @@
 }
 
 .job-summary__grand-total--header {
-}
-
-.job-summary__grand-total {
-  color: #00cd83;
 }
 
 .job-summary__footer {

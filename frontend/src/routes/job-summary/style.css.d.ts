@@ -10,7 +10,6 @@ export const jobSummaryLineItem: string;
 export const jobSummaryLineItemsSeparator: string;
 export const jobSummaryGrandTotalContainer: string;
 export const jobSummaryGrandTotalHeader: string;
-export const jobSummaryGrandTotal: string;
 export const jobSummaryFooter: string;
 export const hidden: string;
 export const jobSummaryFooterPadding: string;
