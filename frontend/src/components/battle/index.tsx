@@ -12,8 +12,8 @@ import { TraitLabel } from "../../lib/face-reader-labels"
 import TimeLimitDisplay from "../time-limit-display"
 import JobScoreDisplay from "../job-score-display"
 
-import { DoJobConfig } from "../../lib/app-acts-config"
-const { scoringTimeLimit } = DoJobConfig
+import { DoJobConfig, getScoringTimeLimit } from "../../lib/app-acts-config"
+const scoringTimeLimit = getScoringTimeLimit(DoJobConfig)
 
 /** Displays dotted circle and feature text */
 const FaceHint: FunctionalComponent<{

@@ -11,7 +11,8 @@ import {
   ActsConfig,
   IntermediateAct,
   firstActId,
-  finalActId
+  finalActId,
+  getAutoclickTimeout
 } from "../../lib/app-acts-config"
 import {
   toDollars,
@@ -19,13 +20,11 @@ import {
   getJobGrandTotal,
   getStartingBalance
 } from "../../lib/job"
+import { addMessage } from "../../lib/logging"
 import * as style from "./style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
-import { addMessage } from "../../lib/logging"
-const {
-  nextButton: { autoclickTimeout }
-} = JobSummaryConfig
+const autoclickTimeout = getAutoclickTimeout(JobSummaryConfig)
 
 const JobSummary: FunctionalComponent = () => {
   const [showChat, setShowChat] = useState(false)

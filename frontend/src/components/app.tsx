@@ -1,5 +1,6 @@
 import { FunctionalComponent, h } from "preact"
-import { Route, Router, RouterOnChangeArgs, Link } from "preact-router"
+import { route, Route, Router, RouterOnChangeArgs } from "preact-router"
+import { Match } from "preact-router/match"
 import { Provider } from "react-redux"
 
 import Welcome from "../routes/welcome"
@@ -13,6 +14,7 @@ import { store } from "../lib/store"
 import CameraError from "../routes/camera-error"
 import { ReloadLink } from "./reload-link"
 import { addMessage } from "../lib/logging"
+import { setDebugMode } from "../lib/app-acts-config"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 if ((module as any).hot) {
@@ -40,6 +42,16 @@ const App: FunctionalComponent = () => {
           <Route path="/versus" component={DoJob} />
           <Route path="/job-summary" component={JobSummary} />
           <Route path="/epilogue" component={Epilogue} />
+          <Match path="/debug">
+            {({ matches }: { matches: boolean }): null => {
+              if (matches) {
+                console.warn("Entering debug mode")
+                setDebugMode(true)
+                route("/", true)
+              }
+              return null
+            }}
+          </Match>
           {/* component example routes */}
           <Route
             path="/example/auto-advance-button"
@@ -50,7 +62,7 @@ const App: FunctionalComponent = () => {
           <NotFoundPage default />
         </Router>
       </Provider>
-      <video class="hidden-video" autoplay muted playsinline>
+      <video class="hidden-video" autoPlay muted playsinline>
         <source src="/assets/images/bg-15-15-gray-480p.mp4" type="video/mp4" />
       </video>
     </div>

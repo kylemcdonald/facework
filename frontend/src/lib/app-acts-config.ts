@@ -1,3 +1,4 @@
+import DoJob from "../routes/do-job"
 import { PotentialJob } from "./job"
 
 /** (Literal) id for the first act */
@@ -449,6 +450,12 @@ type BasePageConfig = {
   }
 }
 
+let debugMode = false
+
+export const setDebugMode = (val: boolean): void => {
+  debugMode = val
+}
+
 export const ChooseJobConfig: BasePageConfig = {
   nextButton: {
     autoclickTimeout: 10 * 1000
@@ -465,11 +472,16 @@ export const JobSummaryConfig: BasePageConfig = {
     autoclickTimeout: 10 * 1000
   }
 }
-export const ChatPageConfig: BasePageConfig & {
-  messageAppearanceInterval: number
-} = {
+export const ChatPageConfig: BasePageConfig = {
   nextButton: {
     autoclickTimeout: 10 * 1000
-  },
-  messageAppearanceInterval: 2000
+  }
 }
+
+export const getAutoclickTimeout = (config: BasePageConfig): number =>
+  !debugMode
+    ? config.nextButton.autoclickTimeout
+    : config.nextButton.autoclickTimeout / 3
+
+export const getScoringTimeLimit = (config: typeof DoJobConfig): number =>
+  !debugMode ? config.scoringTimeLimit : 5000

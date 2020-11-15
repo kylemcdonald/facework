@@ -1,15 +1,18 @@
 import { FunctionalComponent, h } from "preact"
 import Battle from "../../components/battle"
-import { Link, route } from "preact-router"
+import { route } from "preact-router"
 import { useState, useCallback } from "preact/hooks"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { useTypedSelector, pushCompletedJob, store } from "../../lib/store"
 import * as style from "./style.css"
-import { DoJobConfig, ActsConfig } from "../../lib/app-acts-config"
+import {
+  DoJobConfig,
+  ActsConfig,
+  getAutoclickTimeout
+} from "../../lib/app-acts-config"
 import { PotentialJob, completeJob } from "../../lib/job"
-const {
-  nextButton: { autoclickTimeout }
-} = DoJobConfig
+
+const autoclickTimeout = getAutoclickTimeout(DoJobConfig)
 
 const getCurrentJob = (): PotentialJob => {
   const currentJob = useTypedSelector(state => state.currentJob)

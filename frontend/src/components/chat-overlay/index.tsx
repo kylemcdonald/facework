@@ -2,12 +2,15 @@ import { FunctionalComponent, h } from "preact"
 import AutoAdvanceButton from "../auto-advance-button"
 import * as style from "./style.css"
 import { useState, useEffect } from "preact/hooks"
-import { IntermediateAct, firstActId, ActId } from "../../lib/app-acts-config"
+import {
+  IntermediateAct,
+  firstActId,
+  ActId,
+  getAutoclickTimeout
+} from "../../lib/app-acts-config"
 
 import { ChatPageConfig } from "../../lib/app-acts-config"
-const {
-  nextButton: { autoclickTimeout }
-} = ChatPageConfig
+const autoclickTimeout = getAutoclickTimeout(ChatPageConfig)
 
 const ChatMessages: FunctionalComponent<{
   messages: ReadonlyArray<string>
@@ -64,7 +67,7 @@ const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
           onClick={(): void => onAdvance(actId)}
         />
       ) : null}
-      <video class={style.videoBackground} autoplay muted playsinline loop>
+      <video class={style.videoBackground} autoPlay muted playsinline loop>
         <source src="/assets/images/bg-15-15-gray-480p.mp4" type="video/mp4" />
       </video>
     </div>

@@ -1,5 +1,9 @@
 import { FunctionalComponent, h } from "preact"
-import { ActsConfig } from "../../lib/app-acts-config"
+import {
+  ActId,
+  ActsConfig,
+  getAutoclickTimeout
+} from "../../lib/app-acts-config"
 import { route, Link } from "preact-router"
 import AutoAdvanceButton from "../../components/auto-advance-button"
 import { AtopVideoSelfie } from "../../components/videoselfie"
@@ -8,10 +12,8 @@ import { toDollars, PotentialJob, getStartingBalance } from "../../lib/job"
 import JobCaricature from "../../components/job-caricature"
 import * as style from "./style.css"
 
-import { ActId, ChooseJobConfig } from "../../lib/app-acts-config"
-const {
-  nextButton: { autoclickTimeout }
-} = ChooseJobConfig
+import { ChooseJobConfig } from "../../lib/app-acts-config"
+const autoclickTimeout = getAutoclickTimeout(ChooseJobConfig)
 
 const verusUrl = "/versus/"
 
