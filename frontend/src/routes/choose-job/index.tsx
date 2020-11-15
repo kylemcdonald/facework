@@ -156,19 +156,25 @@ const ChooseJob: FunctionalComponent = () => {
         setShowCompletedJobs={setShowCompletedJobs}
       />
       <AutoAdvanceButton
+        key={showCompletedJobs}
         label="Next"
         autoClickTimeout={autoclickTimeout}
-        onClick={() => {
-          // TODO: stop the timer when user views job history
-          // set a random job from this act
-          store.dispatch(
-            setCurrentJob(
-              availableJobs[Math.floor(Math.random() * availableJobs.length)]
-            )
-          )
-          // and start them on it
-          route(verusUrl)
-        }}
+        onClick={
+          showCompletedJobs
+            ? () => setShowCompletedJobs(false)
+            : () => {
+                // set a random job from this act
+                store.dispatch(
+                  setCurrentJob(
+                    availableJobs[
+                      Math.floor(Math.random() * availableJobs.length)
+                    ]
+                  )
+                )
+                // and start them on it
+                route(verusUrl)
+              }
+        }
       />
     </AtopVideoSelfie>
   )
