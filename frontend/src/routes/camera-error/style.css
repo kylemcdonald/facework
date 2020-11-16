@@ -10,6 +10,7 @@
   padding: 20px;
   display: flex;
   flex-flow: column nowrap;
+  z-index: 3000;
 }
 
 .error-page h1,
