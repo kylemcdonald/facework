@@ -1,7 +1,12 @@
 .container {
 }
-.home {
+
+.home-container {
   background: #00cd83;
+  width: 100%;
+}
+
+.home {
   padding: 56px 20px;
   min-height: 100%;
   width: 100%;
@@ -9,6 +14,10 @@
   flex-flow: column nowrap;
   align-items: center;
   text-shadow: none;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: auto;
 }
 
 .get-started {
@@ -35,6 +44,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  flex-shrink: 0;
 }
 
 .intro-text {
@@ -45,11 +55,14 @@
 }
 
 @media (min-width: 992px) {
+  .home-container {
+    min-height: 800px;
+  }
+
   .home {
     background: #00cd83;
-    position: absolute;
     top: 0;
     height: 100%;
-    min-height: 800px;
+    z-index: 2000;
   }
 }

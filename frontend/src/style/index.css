@@ -60,6 +60,9 @@ h2 {
   justify-content: center;
   height: 100px;
   text-shadow: none;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .desktop-banner__logo {
