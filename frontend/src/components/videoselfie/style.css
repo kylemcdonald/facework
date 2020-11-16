@@ -38,6 +38,7 @@
 
   .upper-layer {
     height: calc(100% - 100px);
+    min-height: 700px;
   }
 
   .blurred .self {
@@ -47,5 +48,8 @@
   }
   .wrapper {
     background: none;
+  }
+  .above-header {
+    z-index: 3000;
   }
 }

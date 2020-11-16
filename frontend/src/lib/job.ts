@@ -105,7 +105,7 @@ const wholeDollars = new Intl.NumberFormat("en-US", {
  * Format a cents amount into a nice string
  * e.g. 250 -> "$2.50"
  *
- * Option to truncate cents
+ * Option to truncate cents (defaults to `false`)
  * e.g. 200 -> "$2" (not "$2.00")
  */
 export function toDollars(cents: number, omitCents?: boolean): string {
