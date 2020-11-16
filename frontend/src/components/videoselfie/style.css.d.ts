@@ -3,3 +3,4 @@ export const self: string;
 export const wrapper: string;
 export const upperLayer: string;
 export const blurred: string;
+export const aboveHeader: string;

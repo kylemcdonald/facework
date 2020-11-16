@@ -83,10 +83,11 @@ h2 {
 @media (min-width: 992px) {
   #app {
     background: #bbb8b6;
+    overflow: auto;
   }
   body,
   html {
-    min-height: 800px;
+    /* min-height: 800px; */
   }
 }
 

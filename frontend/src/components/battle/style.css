@@ -92,4 +92,24 @@
   .face-hint {
     padding: 5vw 5vw;
   }
+
+  @media (max-height: 800px) {
+    .battle {
+      position: relative;
+      top: -100px;
+    }
+    .face-hint__container {
+      min-height: auto;
+      max-height: auto;
+      top: 240px;
+    }
+    .face-hint {
+      height: 450px;
+      width: 327px;
+    }
+    .face-hint--shadow {
+      height: 450px;
+      width: 327px;
+    }
+  }
 }
