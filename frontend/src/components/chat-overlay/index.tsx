@@ -1,6 +1,8 @@
 import { FunctionalComponent, h } from "preact"
 import AutoAdvanceButton from "../auto-advance-button"
 import * as style from "./style.css"
+import { useTypedSelector } from "../../lib/store"
+import { getStartingBalance, toDollars } from "../../lib/job"
 import { useState, useEffect } from "preact/hooks"
 import { IntermediateAct, firstActId, ActId } from "../../lib/app-acts-config"
 
@@ -9,17 +11,25 @@ const {
   nextButton: { autoclickTimeout }
 } = ChatPageConfig
 
+function formatGrandTotal(chatMessage: string, grandTotal: string): string {
+  return chatMessage.replace("{{grandTotal}}", grandTotal)
+}
+
 const ChatMessages: FunctionalComponent<{
   messages: ReadonlyArray<string>
-}> = props => (
-  <ol className={style.chatMessageList}>
-    {props.messages.map(chatMessage => (
-      <li key={chatMessage} className={style.chatMessage}>
-        {chatMessage}
-      </li>
-    ))}
-  </ol>
-)
+}> = props => {
+  const completedJobs = useTypedSelector(state => state.completedJobs)
+  const grandTotal = toDollars(getStartingBalance(completedJobs))
+  return (
+    <ol className={style.chatMessageList}>
+      {props.messages.map(chatMessage => (
+        <li key={chatMessage} className={style.chatMessage}>
+          {formatGrandTotal(chatMessage, grandTotal)}
+        </li>
+      ))}
+    </ol>
+  )
+}
 
 interface ChatOverlayProps {
   chatMessages: IntermediateAct["chats"]
@@ -72,7 +82,7 @@ const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
 }
 
 function getTimeoutLength(chatMessage: string): number {
-  return 300 + (chatMessage.split(" ").length + 1) * 150
+  return 300 + (chatMessage.split(" ").length + 1) * 300
 }
 
 export default ChatOverlay

@@ -276,7 +276,7 @@ export const ActsConfig: {
       "(In case you had other friends that hacked into the Facework messaging system to talk to you lol)",
       "Poking around the database I noticed how your bank balance is doing. Ouch.",
       "Didn't mean to invade your privacy or anything. But it's ridiculous how bad Facework's security is",
-      "And if I hadn't been just a bit nosy I couldn't have done this [BONUS MONEY APPEARS]",
+      "And if I hadn't been just a bit nosy I couldn't have done this {{grandTotal}}",
       "That should help a bit!",
       "Now keep your chin up",
       "Oh lol that sounded like Facework didn't it! :)",
