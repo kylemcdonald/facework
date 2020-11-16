@@ -50,7 +50,7 @@ const JobSummary: FunctionalComponent = () => {
   )
 
   return (
-    <AtopVideoSelfie isBlurred={true}>
+    <AtopVideoSelfie isBlurred={true} aboveHeader={showChat}>
       <div className={style.jobSummaryContainer}>
         {showChat && actId !== firstActId && (
           <ChatOverlay

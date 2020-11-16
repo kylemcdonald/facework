@@ -44,15 +44,17 @@ const GetStartedLink: FunctionalComponent = () => {
 
 const Welcome: FunctionalComponent = () => {
   return (
-    <div className={style.home}>
-      <div>Welcome to</div>
-      <div className={style.heroText}></div>
-      <div className={style.introText}>
-        When new jobs arrive our AI will give you an audition to see if your
-        face fits. We know you&apos;ll do whatever it takes to make yourself a
-        good match for every job. <em>All video stays on your device.</em>
+    <div className={style.homeContainer}>
+      <div className={style.home}>
+        <div>Welcome to</div>
+        <div className={style.heroText}></div>
+        <div className={style.introText}>
+          When new jobs arrive our AI will give you an audition to see if your
+          face fits. We know you&apos;ll do whatever it takes to make yourself a
+          good match for every job. <em>All video stays on your device.</em>
+        </div>
+        <GetStartedLink />
       </div>
-      <GetStartedLink />
     </div>
   )
 }
