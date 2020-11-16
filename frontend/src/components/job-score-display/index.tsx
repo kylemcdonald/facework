@@ -13,20 +13,19 @@ const JobScoreDisplay: FunctionalComponent<JobScoreDisplayProps> = (
 ) => {
   const ratingDegs =
     props.currentScore !== undefined ? props.currentScore * 180 - 90 : -90
+  const highScorePct = Math.floor(props.highScore * 100)
+  const highScoreMsg = getScoreMessage(props.highScore)
   return (
     <div>
       <div className={style.ratingGaugeContainer}>
         <div className={style.ratingGaugeCommentContainer}>
           {props.highScore !== undefined && (
             <div className={style.ratingGaugeComment}>
-              <div
-                className={style.ratingGaugeCommentOnly}
-                key={props.highScore}
-              >
-                {getScoreMessage(props.highScore)}
+              <div className={style.ratingGaugeCommentOnly} key={highScoreMsg}>
+                {highScoreMsg}
               </div>
-              <div className={style.ratingGaugeValue} key={props.highScore}>
-                {Math.floor(props.highScore * 100)}
+              <div className={style.ratingGaugeValue} key={highScorePct}>
+                {highScorePct}
               </div>
             </div>
           )}
