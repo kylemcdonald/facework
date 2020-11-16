@@ -68,6 +68,10 @@
   cursor: pointer;
 }
 
+.job-summary__footer--message {
+  color: rgba(255, 255, 255, 0.75);
+}
+
 .hidden {
   display: none;
 }

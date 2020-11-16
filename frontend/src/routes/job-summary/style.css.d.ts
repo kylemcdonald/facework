@@ -11,6 +11,6 @@ export const jobSummaryLineItemsSeparator: string;
 export const jobSummaryGrandTotalContainer: string;
 export const jobSummaryGrandTotalHeader: string;
 export const jobSummaryFooter: string;
+export const jobSummaryFooterMessage: string;
 export const hidden: string;
 export const jobSummaryFooterPadding: string;
-export const jobSummaryFooterMessage: string;
