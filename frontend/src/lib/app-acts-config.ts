@@ -451,7 +451,7 @@ type BasePageConfig = {
 
 export const ChooseJobConfig: BasePageConfig = {
   nextButton: {
-    autoclickTimeout: 10 * 1000
+    autoclickTimeout: 15 * 1000
   }
 }
 export const DoJobConfig: BasePageConfig & { scoringTimeLimit: number } = {
@@ -462,14 +462,14 @@ export const DoJobConfig: BasePageConfig & { scoringTimeLimit: number } = {
 }
 export const JobSummaryConfig: BasePageConfig = {
   nextButton: {
-    autoclickTimeout: 10 * 1000
+    autoclickTimeout: 20 * 1000
   }
 }
 export const ChatPageConfig: BasePageConfig & {
   messageAppearanceInterval: number
 } = {
   nextButton: {
-    autoclickTimeout: 10 * 1000
+    autoclickTimeout: 5 * 1000
   },
   messageAppearanceInterval: 2000
 }
