@@ -34,7 +34,7 @@ interface JobListProps {
 const JobList: FunctionalComponent<JobListProps> = props => {
   const { showCompletedJobs, setShowCompletedJobs, completedJobs } = props
 
-  return(
+  return (
     <div className={style.chooseJobContainer}>
       <div className={style.completedJobsContainer}>
         <div
@@ -56,17 +56,19 @@ const JobList: FunctionalComponent<JobListProps> = props => {
           </div>
           <div className={style.jobSummaryLineItemsSeparator} />
         </div>
-        <button
-          className={`${style.textButton} ${
-            showCompletedJobs ? style.fade : ""
-          }`}
-          type="button"
-          onClick={() => {
-            setShowCompletedJobs(true)
-          }}
-        >
-          See all completed jobs
-        </button>
+        {props.actId != "one" && (
+          <button
+            className={`${style.textButton} ${
+              showCompletedJobs ? style.fade : ""
+            }`}
+            type="button"
+            onClick={() => {
+              setShowCompletedJobs(true)
+            }}
+          >
+            See all completed jobs
+          </button>
+        )}
         <div className={style.grandTotal}>
           <span>Grand Total</span>
           <span>{toDollars(props.grandTotal)}</span>
@@ -77,7 +79,7 @@ const JobList: FunctionalComponent<JobListProps> = props => {
           showCompletedJobs ? style.fade : ""
         }`}
       >
-        <div>
+        <div className={style.contentWrapper}>
           {props.actId == "one" && (
             <h2 className={style.header}>Get started with your first job</h2>
           )}

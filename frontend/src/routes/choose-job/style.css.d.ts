@@ -22,4 +22,5 @@ export const jobTrait: string;
 export const job__name: string;
 export const jobName: string;
 export const chooseJobContainer: string;
+export const contentWrapper: string;
 export const header: string;
