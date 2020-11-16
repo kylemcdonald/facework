@@ -26,13 +26,13 @@ const JobList: FunctionalComponent<JobListProps> = props => (
   <div className={style.chooseJobContainer}>
     <div className={style.grandTotal}>
       <span>Grand Total</span>
-      <span className={style.grandTotalAmount}>
-        {toDollars(props.grandTotal)}
-      </span>
+      <span>{toDollars(props.grandTotal)}</span>
     </div>
     <div className={`content ${style.content}`}>
       <div>
-        {props.actId == "one" && <h2>Get started with your first job</h2>}
+        {props.actId == "one" && (
+          <h2 className={style.header}>Get started with your first job</h2>
+        )}
         <ul className={style.jobList}>
           {props.jobs.map(job => (
             <li key={`${job.name} ${job.trait}`} className={style.job}>

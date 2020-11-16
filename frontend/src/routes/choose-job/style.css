@@ -1,3 +1,8 @@
+.job-summary__line-items--separator {
+  border-bottom: 1px solid #00cd83;
+  margin: 15px 0px;
+}
+
 .grand-total {
   background: rgba(255, 255, 255, 0.75);
   color: black;
@@ -9,10 +14,6 @@
   justify-content: space-between;
   font-size: 34px;
   text-shadow: none;
-}
-
-.grand-total__amount {
-  color: #00cd83;
 }
 
 .job__list {
@@ -64,6 +65,7 @@
 .job__name {
   font-size: 18px;
   margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 @media (min-width: 992px) {
@@ -94,5 +96,9 @@
 
   .job {
     /* width: 200px; */
+  }
+
+  .header {
+    text-align: center;
   }
 }
