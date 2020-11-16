@@ -26,9 +26,7 @@ const JobList: FunctionalComponent<JobListProps> = props => (
   <div className={style.chooseJobContainer}>
     <div className={style.grandTotal}>
       <span>Grand Total</span>
-      <span className={style.grandTotalAmount}>
-        {toDollars(props.grandTotal)}
-      </span>
+      <span>{toDollars(props.grandTotal)}</span>
     </div>
     <div className={`content ${style.content}`}>
       <div>
