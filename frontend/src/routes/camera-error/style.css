@@ -10,6 +10,7 @@
   padding: 20px;
   display: flex;
   flex-flow: column nowrap;
+  z-index: 3000;
 }
 
 .error-page h1,
@@ -17,11 +18,18 @@
   flex-grow: 0;
 }
 
+.error-page--raw {
+  font-size: 16px;
+}
+
 .error-page h1 {
   text-align: center;
 }
 
 .error-page--body {
-  max-width: 1000px;
   margin: auto;
+  max-width: 350px;
+  font-size: 18px;
+  padding-top: 20px;
+  line-height: 130%;
 }

@@ -34,6 +34,7 @@
     "@tensorflow/tfjs-converter": "^1.5.2",
     "@tensorflow/tfjs-core": "^1.5.2",
     "@types/uuid": "^8.3.0",
+    "browser-detect": "^0.2.28",
     "preact": "^10.3.1",
     "preact-jsx-chai": "^3.0.0",
     "preact-markup": "^2.0.0",

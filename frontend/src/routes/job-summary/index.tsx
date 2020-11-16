@@ -20,6 +20,7 @@ import {
   getStartingBalance
 } from "../../lib/job"
 import * as style from "./style.css"
+import * as chooseStyle from "../choose-job/style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
 import { addMessage } from "../../lib/logging"
@@ -34,10 +35,11 @@ const JobSummary: FunctionalComponent = () => {
   const completedJobs = useTypedSelector(state => state.completedJobs),
     // there should always be at least one job in this list
     lastJob = completedJobs[completedJobs.length - 1]
+  const startingBalanceCents = getStartingBalance(completedJobs.slice(0, -1))
   const lastJobTip = toDollars(lastJob.tip),
     subscriptionCost = toDollars(getJobSubscriptionCost(lastJob)),
-    grandTotal = toDollars(getJobGrandTotal(lastJob)),
-    startingBalance = toDollars(getStartingBalance(completedJobs.slice(0, -1)))
+    grandTotal = toDollars(getJobGrandTotal(lastJob) + startingBalanceCents),
+    startingBalance = toDollars(startingBalanceCents)
   addMessage("job", {
     name: lastJob.name,
     trait: lastJob.trait,
@@ -50,7 +52,7 @@ const JobSummary: FunctionalComponent = () => {
   )
 
   return (
-    <AtopVideoSelfie isBlurred={true}>
+    <AtopVideoSelfie isBlurred={true} aboveHeader={showChat}>
       <div className={style.jobSummaryContainer}>
         {showChat && actId !== firstActId && (
           <ChatOverlay
@@ -63,7 +65,9 @@ const JobSummary: FunctionalComponent = () => {
           <h1>Job Summary</h1>
           <div className={style.jobSummaryImageReview}>
             <img class={style.jobImage} src={customerImagePath} />
-            <span className={style.jobReview}>{`"${lastJob.review}"`}</span>
+            <span className={style.jobReview}>
+              &#8220;{`${lastJob.review}`}&#8221;
+            </span>
           </div>
           <div>
             <div className={style.jobSummaryLineItem}>
@@ -76,7 +80,7 @@ const JobSummary: FunctionalComponent = () => {
             </div>
             <div className={style.jobSummaryLineItem}>
               <span>Facework Fee</span>
-              <span>{subscriptionCost}</span>
+              <span>-{subscriptionCost}</span>
             </div>
           </div>
           <div className={style.jobSummaryLineItemsSeparator} />
@@ -91,9 +95,18 @@ const JobSummary: FunctionalComponent = () => {
         </div>
         <div className={style.jobSummaryFooter}>
           <div className={style.jobSummaryFooterPadding}></div>
-          <div onClick={onClick} className={style.jobSummaryFooterMessage}>
-            See all new jobs →
-          </div>
+          <button
+            className={`${chooseStyle.textButton} ${chooseStyle.textButtonWhite}`}
+            type="button"
+            onClick={onClick}
+          >
+            See all new jobs{" "}
+            <img
+              src="/assets/images/arrow.svg"
+              height="15"
+              style={{ verticalAlign: "middle" }}
+            />
+          </button>
           <div className={style.jobSummaryFooterPadding}></div>
         </div>
         <div className={showChat ? style.hidden : ""}>

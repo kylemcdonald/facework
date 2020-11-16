@@ -1,5 +1,8 @@
 import { TraitLabel, getCaricaturePath } from "./face-reader-labels"
 
+const HACK_MONEY_ACT = 3
+const HACK_MONEY_AMOUNT = 10000
+
 export type BaseJob = {
   /** Short name for job */
   readonly name: string
@@ -81,7 +84,9 @@ export function getJobGrandTotal(job: CompletedJob): number {
 }
 
 export function getStartingBalance(jobs: ReadonlyArray<CompletedJob>): number {
-  return jobs.reduce((total, job) => getJobGrandTotal(job) + total, 0)
+  const baseRate = jobs.reduce((total, job) => getJobGrandTotal(job) + total, 0)
+  const additional = jobs.length >= HACK_MONEY_ACT ? HACK_MONEY_AMOUNT : 0
+  return baseRate + additional
 }
 
 const dollarsAndCents = new Intl.NumberFormat("en-US", {
@@ -100,7 +105,7 @@ const wholeDollars = new Intl.NumberFormat("en-US", {
  * Format a cents amount into a nice string
  * e.g. 250 -> "$2.50"
  *
- * Option to truncate cents
+ * Option to truncate cents (defaults to `false`)
  * e.g. 200 -> "$2" (not "$2.00")
  */
 export function toDollars(cents: number, omitCents?: boolean): string {

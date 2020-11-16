@@ -4,7 +4,10 @@ import { route } from "preact-router"
 import { useUserMedia } from "../../lib/use-user-media"
 import { RetryLink } from "../../components/retry-link"
 import { addMessage } from "../../lib/logging"
+import { explainError } from "../../lib/explain-error"
 import * as style from "./style.css"
+
+const explanation = explainError()
 
 const ErrorFound: FunctionalComponent<{ error: MediaStreamError }> = props => {
   useEffect(() => {
@@ -13,13 +16,12 @@ const ErrorFound: FunctionalComponent<{ error: MediaStreamError }> = props => {
   return (
     <div className={style.errorPage}>
       <h1>Oops!</h1>
-      <h1>
-        <img src="/assets/images/camera-icon.svg" height="100" />
-      </h1>
+      <img src="/assets/images/camera-icon.svg" height="100" />
       <div className={style.errorPageBody}>
         <p>Your camera is disabled.</p>
         <p>Don&apos;t miss out on all the good jobs!</p>
-        <p>Error: {props.error.message}</p>
+        <p>{explanation}</p>
+        <p className={style.errorPageRaw}>Error: {props.error.message}</p>
       </div>
       <RetryLink />
     </div>

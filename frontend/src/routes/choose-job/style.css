@@ -3,17 +3,93 @@
   margin: 15px 0px;
 }
 
-.grand-total {
+.completed-jobs--container {
   background: rgba(255, 255, 255, 0.75);
   color: black;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   padding: 15px 20px;
+  text-shadow: none;
+}
+
+.completed-jobs {
+  overflow: hidden;
+  transition: all 1s;
+  max-height: 0px;
+}
+
+.job-summary__line-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.job-summary__line-items--separator {
+  border-bottom: 1px solid #00cd83;
+}
+
+.completed-jobs h1 {
+  color: #00cd83;
+  font-size: 26px;
+  padding: 0;
+  margin: 0px;
+  margin-bottom: 30px;
+}
+
+.completed-jobs.visible {
+  max-height: 2000px;
+}
+
+.content {
+  transition: opacity 1s 1s, max-height 0s 2s;
+  max-height: 1000px;
+}
+
+.content.see-all {
+  transition: opacity 1s;
+}
+
+.text-button {
+  background: none;
+  border: 0;
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #00cd83;
+  transition: all 1s 0.75s;
+  cursor: pointer;
+  max-height: 100px;
+  font-family: "DIN Alternate Bold", "Helvetica Neue", arial, sans-serif;
+}
+
+.text-button--white {
+  color: white;
+  margin: auto;
+  opacity: 0.8;
+  font-size: 24px;
+  text-shadow: 0px 0px 10px #000000;
+}
+
+.text-button.fade {
+  transition: none;
+  opacity: 0;
+  max-height: 0;
+}
+
+.content.fade {
+  transition: opacity 0.25s 0s, max-height 0s 0.25s;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.grand-total {
   font-weight: bold;
   display: flex;
   justify-content: space-between;
   font-size: 34px;
-  text-shadow: none;
 }
 
 .job__list {
@@ -72,9 +148,11 @@
   .choose-job__container {
     height: 100%;
   }
-  .grand-total {
+  .completed-jobs--container {
     width: 375px;
     margin-left: 60px;
+    position: relative;
+    z-index: 5;
   }
 
   .content {
@@ -90,12 +168,20 @@
     padding: 50px;
   }
 
-  .content div {
+  .content--wrapper {
     width: 100%;
   }
 
   .job {
-    /* width: 200px; */
+    width: calc(25% - 20px);
+  }
+
+  .job__trait,
+  .job__name {
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
 
   .header {

@@ -14,6 +14,7 @@ interface VideoSelfieProps {
   readonly onPlay?: (videoElement: HTMLVideoElement) => void
   /** defaults to false */
   readonly isBlurred: boolean
+  readonly aboveHeader?: boolean
 }
 
 const VideoSelfie: FunctionalComponent<VideoSelfieProps> = (
@@ -48,7 +49,13 @@ const VideoSelfie: FunctionalComponent<VideoSelfieProps> = (
 
 export const AtopVideoSelfie: FunctionalComponent<VideoSelfieProps> = props => (
   <>
-    <div class={style.upperLayer}>{props.children}</div>
+    <div
+      class={`${style.upperLayer} ${
+        props.aboveHeader ? style.aboveHeader : ""
+      }`}
+    >
+      {props.children}
+    </div>
     <VideoSelfie key="selfie" {...props} />
   </>
 )

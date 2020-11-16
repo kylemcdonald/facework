@@ -60,6 +60,9 @@ h2 {
   justify-content: center;
   height: 100px;
   text-shadow: none;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .desktop-banner__logo {
@@ -80,10 +83,11 @@ h2 {
 @media (min-width: 992px) {
   #app {
     background: #bbb8b6;
+    overflow: auto;
   }
   body,
   html {
-    min-height: 800px;
+    /* min-height: 800px; */
   }
 }
 

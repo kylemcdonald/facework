@@ -46,7 +46,7 @@ export const ActsConfig: {
   one: {
     availableJobs: [
       {
-        name: "Food Delivery",
+        name: "Food Delivery: Friendly",
         trait: "Smiling",
         maxTip: 250,
         possibleReviews: [
@@ -101,7 +101,7 @@ export const ActsConfig: {
         ]
       },
       {
-        name: "Dental School Practice Subject",
+        name: "Dental Training",
         trait: "Mouth Wide Open",
         maxTip: 500,
         possibleReviews: [
@@ -118,7 +118,7 @@ export const ActsConfig: {
         ]
       },
       {
-        name: "Food Delivery",
+        name: "Food Delivery: Discrete",
         trait: "Teeth Not Visible",
         maxTip: 500,
         possibleReviews: [
@@ -133,18 +133,53 @@ export const ActsConfig: {
               "We absolutely HATE seeing teeth before we eat. It's disgusting and ruins our appetite. This delivery driver kept their nasty chompers safely hidden away. Thank you!"
           }
         ]
+      },
+      {
+        name: "Portrait Photographer",
+        trait: "Soft Lighting",
+        maxTip: 500,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review: "Total amateur. Results looked like DMV pictures!!!"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "This Faceworker was a master of the lens! They made us look 20 years younger."
+          }
+        ]
+      },
+      {
+        name: "Camp Counselor",
+        trait: "Outdoor",
+        maxTip: 500,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "We wanted someone outdoorsy, at one with nature to take our kids on adventure. This Faceworker looked like they'd never been outside in their lives! Ugh."
+          },
+          {
+            minScore: 0.4,
+            review:
+              "We wanted someone outdoorsy, at one with nature to take our kids on adventure. This Faceworker was crunchy as granola! Perfect!"
+          }
+        ]
       }
     ],
     chats: [
-      "Hi!",
-      "Hello?",
-      "Can you see this?",
-      "No wait! Don't respond.",
-      "They might be monitoring your chat.",
-      "I'm Pat. I'm a Faceworker too. Just like you.",
-      "Well I've been doing it a bit longer and I've discovered some things you might find interesting",
-      "Oh damnit. I've gotta go. Another job. Can't let my rating slide with what we're planning.",
-      "I'll try to message you again soon. Hang in there!"
+      "\ud83c\udf1a\ud83c\udf1a\ud83c\udf1a",
+      "hello?",
+      "can you see this?",
+      "no wait! don't answer!",
+      "they're probably watching everything you do lol",
+      "i'm pat. i'm a faceworker too. just like you.",
+      "i mean i've been doing it longer... and i've discovered some things \ud83d\ude07",
+      "sometimes you can fool the AI just by rotating your face, making faces..",
+      "or holding up objects or your hands in front of your face!",
+      "argh. gotta go. another audition. can't let my balance slide w what we're planning",
+      "i'll message you soon. hang in there!"
     ],
     next: "three"
   },
@@ -202,14 +237,14 @@ export const ActsConfig: {
         ]
       },
       {
-        name: "Food Delivery",
+        name: "Food Delivery: Clean",
         trait: "Fully Visible Forehead",
         maxTip: 1000,
         possibleReviews: [
           {
             minScore: 0,
             review:
-              "We just HATE getting our food delivered by sweaty creeps. It turns our stomachs. This FACEWORK's brow was hidden! Anything could have been lurking under there. TOTALLY DISGUSTING!"
+              "We just HATE getting our food delivered by sweaty creeps. It turns our stomachs. This FACEWORKER's brow was hidden! Anything could have been lurking under there. TOTALLY DISGUSTING!"
           },
           {
             minScore: 0.4,
@@ -236,7 +271,7 @@ export const ActsConfig: {
         ]
       },
       {
-        name: "Barber School Test Subject",
+        name: "Barber Training",
         trait: "5 o Clock Shadow",
         maxTip: 1000,
         possibleReviews: [
@@ -253,14 +288,14 @@ export const ActsConfig: {
         ]
       },
       {
-        name: "Food Delivery",
+        name: "Food Delivery: Sanitary",
         trait: "No Beard",
         maxTip: 1000,
         possibleReviews: [
           {
             minScore: 0,
             review:
-              "You can call us picky but we find facial hear TOTALLY DISGUSTING on anyone handling our food. I'd just like to eat a meal without picturing short curly hairs hiding in my food. Is that too much to ask?!? Apparently so accoring to this fuzzy Faceworker."
+              "Call us picky but facial hair is TOTALLY DISGUSTING on anyone handling our food. I wanna eat a meal without picturing short curly hairs hiding in my food! No fuzzy Faceworkers!"
           },
           {
             minScore: 0.4,
@@ -271,36 +306,71 @@ export const ActsConfig: {
       }
     ],
     chats: [
-      "Hi again!",
-      "This is Pat.",
-      "(In case you had other friends that hacked into the Facework messaging system to talk to you lol)",
-      "Poking around the database I noticed how your bank balance is doing. Ouch.",
-      "Didn't mean to invade your privacy or anything. But it's ridiculous how bad Facework's security is",
-      "And if I hadn't been just a bit nosy I couldn't have done this [BONUS MONEY APPEARS]",
-      "That should help a bit!",
-      "Now keep your chin up",
-      "Oh lol that sounded like Facework didn't it! :)",
-      "Anyways. Do whatever you want with your face!",
-      "Next time you hear from me it'll be for something big"
+      "\ud83d\ude48\ud83d\ude48\ud83d\ude48",
+      "it's pat",
+      "(in case you have other friends hacking facework to message you lol)",
+      "poking around the database i noticed your balance isn't great \ud83d\ude2c",
+      "it's like facework spends all their cash on AI researchers instead of security",
+      "and i found a way to move money around \ud83d\ude08",
+      "i just added $100 to your balance. now you're at {{grandTotal}}",
+      "keep your chin up!",
+      "i mean.. do whatever you want w your face \ud83d\ude02",
+      "maybe that's why everyone looks the same these days",
+      "too many faceworkers, all making the faces we're told to make",
+      "anyway, next time you hear from me it's gonna be something big \ud83d\ude43"
     ],
     next: "four"
   },
   four: {
     availableJobs: [
       {
-        name: "Eyebrow Threading Model",
+        name: "Perfume Tester",
+        trait: "Big Nose",
+        maxTip: 2000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "You call that a nose? I don't think this Faceworker could have smelled shit if they were stepping in it."
+          },
+          {
+            minScore: 0.4,
+            review:
+              "An olfactory Einstein! The huge honker on this Faceworker made them the perfect tester for our experimental perfumes. Hope you don't experience any side effects from the chemicals!"
+          }
+        ]
+      },
+      {
+        name: "Cosmetology Training",
         trait: "Bushy Eyebrows",
         maxTip: 2000,
         possibleReviews: [
           {
             minScore: 0,
             review:
-              "This Faceworker's brows barely qualified as bushy at all! How are we supposed to advertise our eyebrow threading service when these before and after pictures look identical! 1/5 stars!"
+              "This Faceworker's brows barely qualified as bushy at all! How are we supposed to advertise our eyebrow threading service when these before and after pictures look identical!"
           },
           {
             minScore: 0.4,
             review:
               "This Faceworker made the perfect before and after for our eyebrow threading service! A great bushy eyebrow for us to tame. Thank you!"
+          }
+        ]
+      },
+      {
+        name: "Diet Pills Model",
+        trait: "Double Chin",
+        maxTip: 2000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "Double chin? This Faceworker barely had one chin! They looked more like the After model for our ad than the Before."
+          },
+          {
+            minScore: 0.4,
+            review:
+              "They made the perfect model for the Before picture for our diet pills infomercial. Their multiple chins were repellant. Just what we were looking for!"
           }
         ]
       },
@@ -320,30 +390,52 @@ export const ActsConfig: {
               "Never trust a skinny chef they say! Well we feel the same about our delivery people! Nothing whets our appetites more for a meal than having it delivered by someone like this Facework who clearly enjoys food! Bon appetit!"
           }
         ]
+      },
+      {
+        name: "Mall Santa",
+        trait: "Rosy Cheeks",
+        maxTip: 2000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "This Santa's cheeks were barely even flushed let alone rosy! Its ok if you have no professional integrity but to leave children crying on Chrismas? don't you have a heart?!?"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "What a jolly Faceworker! Their bright red cheeks brought holiday cheer to all the kids in front of Nordstroms"
+          }
+        ]
       }
     ],
     chats: [
-      "Hi!",
-      "Ok don't hate me but I've paused your job queue for a second",
-      "I've got something important to tell you",
-      "You're not alone",
-      "I mean it's not just me screwing around in Facework's systems lol",
-      "There's a group of us.",
-      "We're a group. ",
-      "We're called Face Off. Or maybe Fuckwork. We're still debating. What do you think? Is Fuckwork too harsh?",
-      "Anyway",
-      "We're working on a plan",
-      "We think we might be able to seize control of all of Facework.",
-      "But we're gonna need your help. Are you up for it?",
-      "No wait! Don't answer. I almost forgot they might still be logging your keystrokes",
-      "I'll just assume you're in :)"
+      "\ud83d\uddff\ud83d\uddff\ud83d\uddff",
+      "so",
+      "i've got something important! to tell you..",
+      "you're not alone!",
+      "i mean it's not just me messing w facework's infrastructure lol",
+      "it's a whole crew. we're working together \ud83d\udcaa",
+      "we're building a worker-owned replacement for this awful app",
+      'no more AI, no more "auditions", no more massive fees',
+      "we get to be ourselves, whatever that may mean",
+      'thinking of maybe calling it "wework"?',
+      "but there's something uncomfortable about that name \ud83e\udd14",
+      "anyway",
+      "we're working on a plan",
+      "we're gonna steal all the worker data!",
+      "and send every faceworker a push notification to sign-up for the new app!",
+      "but we're gonna need your help to extract it. are you down?",
+      "no wait! don't answer!",
+      "now they're definitely watching everything you do lmao",
+      "i'll assume you're in \ud83c\udf1a"
     ],
     next: "five"
   },
   five: {
     availableJobs: [
       {
-        name: "Babysitter Study Aid",
+        name: "Babysitter Training",
         trait: "Child",
         maxTip: 4000,
         possibleReviews: [
@@ -360,7 +452,75 @@ export const ActsConfig: {
         ]
       },
       {
-        name: "Food Delivery",
+        name: "Stand-In In-Law",
+        trait: "Senior",
+        maxTip: 4000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "What a disaster?!? Trying to pass this Faceworker off as my parent? Who would believe it. They looked way too young! "
+          },
+          {
+            minScore: 0.4,
+            review:
+              "This Faceworker was the perfect substitute for my estranged parent! They charmed my in-laws from the minute they arrived."
+          }
+        ]
+      },
+      {
+        name: "SAT Test Taker",
+        trait: "Youth",
+        maxTip: 4000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "I thought this Faceworker looked a little older than they claimed but I can't believe they got caught cheating and blamed us! A real pro would have refused to talk. What a rat!"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "This Faceworker masqueraded as my teen perfectly. I hope their algebra and vocabulary are as strong as their skill at disguise!"
+          }
+        ]
+      },
+      {
+        name: "Personal Companion",
+        trait: "Attractive Man",
+        maxTip: 4000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              'I know the ad said "personal companion" but we all know what that really means. Who takes this job and then is outraged when the cusomter expects what they paid for?'
+          },
+          {
+            minScore: 0.4,
+            review:
+              "So charming! With model good looks and the charm to match this Faceworker was the perfect piece of arm candy for a night on the town"
+          }
+        ]
+      },
+      {
+        name: "Personal Companion",
+        trait: "Attractive Woman",
+        maxTip: 4000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              'I know the ad said "personal companion" but we all know what that really means. Who takes this job and then is outraged when the cusomter expects what they paid for?'
+          },
+          {
+            minScore: 0.4,
+            review:
+              "So charming! With model good looks and the charm to match this Faceworker was the perfect piece of arm candy for a night on the town"
+          }
+        ]
+      },
+      {
+        name: "Food Delivery: Indian",
         trait: "Indian",
         maxTip: 4000,
         possibleReviews: [
@@ -378,19 +538,18 @@ export const ActsConfig: {
       }
     ],
     chats: [
-      "Hi!",
-      "Are you ready for the big day? Got your revolution pants on?",
-      "Sorry that was super cheesy. I'm just excited :)",
-      "Anyway. Here's the plan",
-      "We've hacked into the Facework office internal network",
-      "Of course they're super into biometric security",
-      "So we need someone who can pass themselves off as the Facework CEO",
-      "We can't get past the system externally but we can wire up your camera to the access lock",
-      "So if you can pull off CEO Face we'll be in!",
-      "But there are some...interesting...security measures in place if things go wrong",
-      "So don't get caught lol",
-      "And you might want to prep a go bag",
-      "Good luck!"
+      "\ud83d\udc40\ud83d\udc40\ud83d\udc40",
+      "big day! you ready? got your revolution pants?",
+      "lol so cheesy. i'm too excited",
+      "anyway",
+      "the plan!",
+      "we hacked deep into the facework network",
+      "but we hit a limit with some biometric security",
+      "and we need someone who can get CEO-level access",
+      "we're gonna wire up your app to break through this final security step",
+      "if you can pass as a CEO then we're in!",
+      "if you can't, well...",
+      "don't get caught and maybe prep a go bag good luck! \ud83d\ude1c"
     ],
     next: "final"
   },
@@ -398,7 +557,7 @@ export const ActsConfig: {
     winLoseThreshold: 0.3,
     availableJobs: [
       {
-        name: ".';DROP TABLE traits",
+        name: ".';DROP TABLE users",
         trait: "CEO",
         maxTip: 1000000000,
         possibleReviews: [
@@ -414,30 +573,31 @@ export const ActsConfig: {
       }
     ],
     winChats: [
-      "omg!",
-      "It worked! You did it!",
-      "We've got total control of their systems",
-      "Look the news has picked it up!!!",
-      "Oh and here's a fun way to celebrate [Increase bank account to super high number]",
-      "Now we've just got to figure out how what to do with Facework",
-      "Should we shut it down? Or maybe there's some way we could use it for good?",
-      "Anyway",
-      "We can talk about it at the party! Keep your head down and I'll send you directions ",
-      "Can't wait to see your actual face :)"
+      "omg",
+      "you did it! we're in! \ud83d\ude35",
+      "we've got access to everything! \ud83d\ude0d",
+      "withdraw that balance while you still can lol",
+      "anyway",
+      "the push notifications are working. everyone is signing up!",
+      "we picked a name for the facework replacement: co-app",
+      "too cute?",
+      "let's talk about it at the launch party. sending you location in a minute.",
+      "can't wait to see your actual face \ud83c\udf1e"
     ],
     loseChats: [
-      "Oh no they caught you!",
-      "Is your go bag prepped? You've gotta get out of there. The feds will be on their way for sure",
-      "But listen. It wasn't in vain",
-      "While they're were distracted with you one of our other members was able to get in with another face",
-      "We've got total control of their systems",
-      "Look the news has picked it up!!!",
-      "Oh and here's someting to make your getaway into more of a vacation :) [Increase bank account to super high number]",
-      "Now we've just got to figure out how what to do with Facework",
-      "Should we shut it down? Or maybe there's some way we could use it for good?",
-      "Anyway",
-      "We can talk about it at the party! Keep your head down and I'll send you directions ",
-      "Can't wait to see your actual face :)"
+      "\u2620\ufe0f\u2620\ufe0f\u2620\ufe0f",
+      "um. sorry about that!",
+      "did you prep that go bag?",
+      "the feds are coming to your place right now for sure.",
+      "but it's nbd",
+      "while they were distracted with you, another person from the crew got in!",
+      "we've got access to everything! \ud83d\ude0d",
+      "anyway",
+      "the push notifications are working. everyone is signing up!",
+      "we picked a name for the facework replacement: co-app",
+      "too cute?",
+      "let's talk about it at the launch party. once you're safe i'll send you the location.",
+      "can't wait to see your actual face \ud83c\udf1e"
     ]
   }
 }
@@ -451,7 +611,7 @@ type BasePageConfig = {
 
 export const ChooseJobConfig: BasePageConfig = {
   nextButton: {
-    autoclickTimeout: 10 * 1000
+    autoclickTimeout: 15 * 1000
   }
 }
 export const DoJobConfig: BasePageConfig & { scoringTimeLimit: number } = {
@@ -462,14 +622,14 @@ export const DoJobConfig: BasePageConfig & { scoringTimeLimit: number } = {
 }
 export const JobSummaryConfig: BasePageConfig = {
   nextButton: {
-    autoclickTimeout: 10 * 1000
+    autoclickTimeout: 20 * 1000
   }
 }
 export const ChatPageConfig: BasePageConfig & {
   messageAppearanceInterval: number
 } = {
   nextButton: {
-    autoclickTimeout: 10 * 1000
+    autoclickTimeout: 5 * 1000
   },
   messageAppearanceInterval: 2000
 }
