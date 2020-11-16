@@ -40,12 +40,19 @@
 @keyframes pop {
   0% {
     transform: scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.5);
+    opacity: 1;
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1);
+    opacity: 1;
   }
   100% {
-    transform: scale(1);
+    transform: scale(0.5);
+    opacity: 0;
   }
 }
 
@@ -74,7 +81,8 @@
   font-weight: bold;
   font-size: 46px;
   animation-name: pop;
-  animation-duration: 1s;
+  animation-duration: 2s;
+  opacity: 0;
 }
 
 @media (min-width: 992px) {
