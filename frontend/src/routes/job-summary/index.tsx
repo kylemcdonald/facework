@@ -35,10 +35,11 @@ const JobSummary: FunctionalComponent = () => {
   const completedJobs = useTypedSelector(state => state.completedJobs),
     // there should always be at least one job in this list
     lastJob = completedJobs[completedJobs.length - 1]
+  const startingBalanceCents = getStartingBalance(completedJobs.slice(0, -1))
   const lastJobTip = toDollars(lastJob.tip),
     subscriptionCost = toDollars(getJobSubscriptionCost(lastJob)),
-    grandTotal = toDollars(getJobGrandTotal(lastJob)),
-    startingBalance = toDollars(getStartingBalance(completedJobs.slice(0, -1)))
+    grandTotal = toDollars(getJobGrandTotal(lastJob) + startingBalanceCents),
+    startingBalance = toDollars(startingBalanceCents)
   addMessage("job", {
     name: lastJob.name,
     trait: lastJob.trait,
