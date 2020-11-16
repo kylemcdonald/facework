@@ -49,9 +49,10 @@ const Welcome: FunctionalComponent = () => {
         <div>Welcome to</div>
         <div className={style.heroText}></div>
         <div className={style.introText}>
-          When new jobs arrive our AI will give you an audition to see if your
-          face fits. We know you&apos;ll do whatever it takes to make yourself a
-          good match for every job. <em>All video stays on your device.</em>
+          Congrats on becoming a Faceworker! Our AI finds the perfect face for
+          every job. Audition for each job by showing us you can make your face
+          fit what the job needs. Ready to try out for your first job?{" "}
+          <em>All video stays on your device.</em>
         </div>
         <GetStartedLink />
       </div>

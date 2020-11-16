@@ -50,9 +50,9 @@ const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
         if (prev === chatMessages.length) {
           return prev
         }
-        const nextNextMessage =
-          chatMessages[Math.min(prev + 2, chatMessages.length - 1)]
-        timeoutId = setTimeout(update, getTimeoutLength(nextNextMessage))
+        const nextMessage =
+          chatMessages[Math.min(prev + 1, chatMessages.length - 1)]
+        timeoutId = setTimeout(update, getTimeoutLength(nextMessage))
         return prev + 1
       })
     }
@@ -82,7 +82,7 @@ const ChatOverlay: FunctionalComponent<ChatOverlayProps> = props => {
 }
 
 function getTimeoutLength(chatMessage: string): number {
-  return 300 + (chatMessage.split(" ").length + 1) * 300
+  return 500 + chatMessage.split(" ").length * 350
 }
 
 export default ChatOverlay
