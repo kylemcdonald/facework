@@ -15,13 +15,14 @@
   background: #882b77;
   color: white;
   list-style-type: none;
-  margin: 20px;
+  margin: 12px;
   padding: 10px;
   border-radius: 10px;
   position: relative;
   clear: both;
   float: left;
   z-index: 1;
+  font-size: 18px;
   font-family: "Roboto Mono", monospace;
 }
 

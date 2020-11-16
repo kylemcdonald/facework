@@ -49,8 +49,8 @@ const Welcome: FunctionalComponent = () => {
       <div className={style.heroText}></div>
       <div className={style.introText}>
         When new jobs arrive our AI will give you an audition to see if your
-        face fits. We know you'll do whatever it takes to make yourself a good
-        match for every job. <em>All video stays on your device.</em>
+        face fits. We know you&apos;ll do whatever it takes to make yourself a
+        good match for every job. <em>All video stays on your device.</em>
       </div>
       <GetStartedLink />
     </div>

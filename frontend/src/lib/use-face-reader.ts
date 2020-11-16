@@ -5,7 +5,7 @@ import { assertIsDefined } from "./assert"
 import { Nullable } from "./type-helpers"
 
 /** in milliseconds */
-const MAX_SEND_FACE_RATE = 250
+const MAX_SEND_FACE_RATE = 200
 
 /** The last time a face was sent to the worker */
 let lastSendFaceTime = Date.now()

@@ -85,7 +85,7 @@ const JobSummary: FunctionalComponent = () => {
               <span className={style.jobSummaryGrandTotalHeader}>
                 Grand Total
               </span>
-              <span className={style.jobSummaryGrandTotal}>{grandTotal}</span>
+              <span>{grandTotal}</span>
             </div>
           </div>
         </div>

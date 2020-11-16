@@ -9,7 +9,7 @@
   background-position: center;
   transform: rotate(-90deg);
   transform-origin: 50% calc(100% - 15px);
-  transition: transform 1s;
+  transition: transform 0.2s;
   position: absolute;
   bottom: 0;
   filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
@@ -36,14 +36,53 @@
   width: 200px;
   margin: auto;
 }
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .rating-gauge__comment {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
+
+.rating-gauge__comment--only {
+  animation-name: fade;
+  animation-duration: 5s;
+  opacity: 0;
+}
+
 .rating-gauge__value {
   font-weight: bold;
   font-size: 46px;
+  animation-name: pop;
+  animation-duration: 2s;
+  opacity: 0;
 }
 
 @media (min-width: 992px) {
