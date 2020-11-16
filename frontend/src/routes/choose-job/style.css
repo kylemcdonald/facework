@@ -60,6 +60,7 @@
   transition: all 1s 0.75s;
   cursor: pointer;
   max-height: 100px;
+  font-family: "DIN Alternate Bold", "Helvetica Neue", arial, sans-serif;
 }
 
 .text-button--white {
