@@ -20,6 +20,7 @@ import {
   getStartingBalance
 } from "../../lib/job"
 import * as style from "./style.css"
+import * as chooseStyle from "../choose-job/style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
 import { addMessage } from "../../lib/logging"
@@ -91,9 +92,18 @@ const JobSummary: FunctionalComponent = () => {
         </div>
         <div className={style.jobSummaryFooter}>
           <div className={style.jobSummaryFooterPadding}></div>
-          <div onClick={onClick} className={style.jobSummaryFooterMessage}>
-            See all new jobs →
-          </div>
+          <button
+            className={`${chooseStyle.textButton} ${chooseStyle.textButtonWhite}`}
+            type="button"
+            onClick={onClick}
+          >
+            See all new jobs{" "}
+            <img
+              src="/assets/images/arrow.svg"
+              height="15"
+              style={{ verticalAlign: "middle" }}
+            />
+          </button>
           <div className={style.jobSummaryFooterPadding}></div>
         </div>
         <div className={showChat ? style.hidden : ""}>
