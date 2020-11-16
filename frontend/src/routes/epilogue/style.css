@@ -17,6 +17,7 @@ pre {
   font-family: "VT323";
   z-index: 2;
   position: relative;
+  max-width: 28em;
 }
 
 .video-background {
@@ -27,9 +28,13 @@ pre {
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
-  opacity: 0.25;
+  opacity: 0.15;
   image-rendering: pixelated;
   z-index: 0;
+}
+
+a {
+  color: inherit;
 }
 
 @media (min-width: 992px) {

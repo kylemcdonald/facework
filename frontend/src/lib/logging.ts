@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid"
 
-const uuid = uuidv4()
+export const uuid = uuidv4()
 const loadTime = Date.now()
 
 function playDuration(): number {
