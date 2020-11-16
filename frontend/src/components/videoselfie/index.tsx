@@ -14,7 +14,7 @@ interface VideoSelfieProps {
   readonly onPlay?: (videoElement: HTMLVideoElement) => void
   /** defaults to false */
   readonly isBlurred: boolean
-  readonly class: string
+  readonly aboveHeader?: boolean
 }
 
 const VideoSelfie: FunctionalComponent<VideoSelfieProps> = (
