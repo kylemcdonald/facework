@@ -3,4 +3,7 @@ export const ratingGauge: string;
 export const ratingGaugeContainer: string;
 export const ratingGaugeCommentContainer: string;
 export const ratingGaugeComment: string;
+export const ratingGaugeCommentOnly: string;
+export const fade: string;
 export const ratingGaugeValue: string;
+export const pop: string;
