@@ -30,10 +30,10 @@ const FaceHint: FunctionalComponent<{
   ) : (
     <>
       <div class={style.faceHintContainer}>
-        <div class={style.faceHint}>{props.feature}</div>
+        <div class={style.faceHintShadow}></div>
       </div>
       <div class={style.faceHintContainer}>
-        <div class={style.faceHintShadow}></div>
+        <div class={style.faceHint}>{props.feature}</div>
       </div>
     </>
   )
