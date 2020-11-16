@@ -93,7 +93,7 @@ const Battle: FunctionalComponent<BattleProps> = props => {
           const rawMomentaryScore =
             ratings.expressions.get(prev.feature) ?? Number.MIN_VALUE
           // blended with previous score to smooth data
-          const blendedScore = rawMomentaryScore * 0.5 + prev.score * 0.5
+          const blendedScore = rawMomentaryScore * 0.7 + prev.score * 0.3
           latestHighScore = Math.max(prev.highestScore, blendedScore)
           keepGoing = !isPastTimeLimit(prev)
           return {
