@@ -288,6 +288,23 @@ export const ActsConfig: {
         ]
       },
       {
+        name: "Stand-In Father",
+        trait: "Mustache",
+        maxTip: 1000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              'Every child needs a father figure! Especially our grandson with his "two moms". But this Faceworker\'s clean shaven upper lip was as feminine as could be!'
+          },
+          {
+            minScore: 0.4,
+            review:
+              "Every child needs a father figure! Especially our grandson with his \"two moms\". This Faceworker's amazing 'stache really showed up for the patriarchy!"
+          }
+        ]
+      },
+      {
         name: "Food Delivery: Sanitary",
         trait: "No Beard",
         maxTip: 1000,
@@ -301,6 +318,23 @@ export const ActsConfig: {
             minScore: 0.4,
             review:
               "Some may call us picky but we find facial hair so gross on food service workers. This Faceworker met our needs perfectly. Smooth, hairless, and hygenic."
+          }
+        ]
+      },
+      {
+        name: "Hair Care Tester",
+        trait: "Receding Hairline",
+        maxTip: 1000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "Our new procedure is going to revolutionize men's hair. But how are we supposed to revitalize hair when there's already plenty on this Faceworker's head? Experiment failed."
+          },
+          {
+            minScore: 0.4,
+            review:
+              "Our new procedure is going to revolutionize men's hair. This Faceworker helped us do some of our first experiments! Thanks and sorry about the burns!"
           }
         ]
       }
@@ -387,7 +421,7 @@ export const ActsConfig: {
           {
             minScore: 0.4,
             review:
-              "Never trust a skinny chef they say! Well we feel the same about our delivery people! Nothing whets our appetites more for a meal than having it delivered by someone like this Facework who clearly enjoys food! Bon appetit!"
+              "Never trust a skinny chef they say! Well we feel the same about our delivery people! Nothing whets our appetites more for a meal than having it delivered by someone like this Faceworker who clearly enjoys food!"
           }
         ]
       },
@@ -399,12 +433,46 @@ export const ActsConfig: {
           {
             minScore: 0,
             review:
-              "This Santa's cheeks were barely even flushed let alone rosy! Its ok if you have no professional integrity but to leave children crying on Chrismas? don't you have a heart?!?"
+              "This Santa's cheeks were barely even flushed let alone rosy! Its ok if you have no professional integrity but to leave children crying on Chrismas? Don't you have a heart?!?"
           },
           {
             minScore: 0.4,
             review:
-              "What a jolly Faceworker! Their bright red cheeks brought holiday cheer to all the kids in front of Nordstroms"
+              "What a jolly Faceworker! Their bright red cheeks brought holiday cheer to all the kids in front of Nordstroms."
+          }
+        ]
+      },
+      {
+        name: "Stand-up Audience",
+        trait: "Strong Nose-Mouth Lines",
+        maxTip: 2000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "This Faceworker didn't laugh at a single joke and we should have known the moment we saw zero wrinkles in their face!"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "When we saw those big creases we knew this Faceworker was going to laugh at our jokes!"
+          }
+        ]
+      },
+      {
+        name: "Drawing Model",
+        trait: "Oval Face",
+        maxTip: 2000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "Our life drawing class wanted that Botticelli look but this Faceworker's scary appearance was more Munch!"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "Our life drawing class wanted to get their Botticelli on and this Faceworker was the perfect model!"
           }
         ]
       }
@@ -420,7 +488,7 @@ export const ActsConfig: {
       'no more AI, no more "auditions", no more massive fees',
       "we get to be ourselves, whatever that may mean",
       'thinking of maybe calling it "wework"?',
-      "but there's something uncomfortable about that name \ud83e\udd14",
+      "but there's something strange about that name.. \ud83e\udd14",
       "anyway",
       "we're working on a plan",
       "we're gonna steal all the worker data!",
@@ -520,26 +588,94 @@ export const ActsConfig: {
         ]
       },
       {
+        name: "COVID Expert",
+        trait: "Asian",
+        maxTip: 5000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "We've had a bad outbreak in our neighborhood and really needed someone to lend legitimacy to our safety efforts. This Faceworker looked more like a bumbling blonde head of state!"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "We've had a bad outbreak in our neighborhood and really needed someone to lend legitimacy to our safety efforts. Nothing says COVID expert like an Asian face!"
+          }
+        ]
+      },
+      {
+        name: "Breakdancer",
+        trait: "Black",
+        maxTip: 2500,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              'Our hip-hop group has a DJ, MC and a writer, but none of us can dance. This Faceworker brought zero credibility and now we\'re being accused of "cultural appropriation"!'
+          },
+          {
+            minScore: 0.4,
+            review:
+              "Our hip-hop group has a DJ, MC and a writer, but none of us can dance. This Faceworker really rounded out our performance without breaking the bank!"
+          }
+        ]
+      },
+      {
         name: "Food Delivery: Indian",
         trait: "Indian",
+        maxTip: 6500,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "As world travelers we love authentic experiences. This Faceworker ruined our Indian takeout experience. Were they supposed to be Indian? Don't make me laugh! And the Biryani was hardly better!"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "We just love authentic experiences! That's why it's so important to us that our Indian food be delivered by a real Indian. And this Faceworker was perfect. It felt like being in Mumbai!"
+          }
+        ]
+      },
+      {
+        name: "Stand-In Lover",
+        trait: "White",
         maxTip: 4000,
         possibleReviews: [
           {
             minScore: 0,
             review:
-              "We've been world travelers for years and love authentic experiences of other cultures. This Faceworker totally ruined our Indian takeout experience. Were they supposed to be Indian? Don't make me laugh! And the Biryani was little better!"
+              "I've been dreading telling my parents my romantic partner isn't white. This Faceworker was totally unconvincing at the family dinner and now my life is ruined!"
           },
           {
             minScore: 0.4,
             review:
-              "We just love authentic experiences of other cultures! That's why it's so important to us that our Indian food be delivered by a real Indian. And this Faceworker was perfect. It felt like being in Mumbai!"
+              "I don't know how to tell my parents my romantic partner isn't white. This Faceworker really saved me at the family dinner."
+          }
+        ]
+      },
+      {
+        name: "Board Room Backup",
+        trait: "Male",
+        maxTip: 4000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "As the only woman in my board room, I really wanted someone big and agressive to repeat everything I say in a deeper voice. This Faceworker was a total failure."
+          },
+          {
+            minScore: 0.4,
+            review:
+              "As the only woman in my board room, I really wanted someone big and agressive to repeat everything I say in a deeper voice. This masculine Faceworker really helped me sell it!"
           }
         ]
       }
     ],
     chats: [
       "\ud83d\udc40\ud83d\udc40\ud83d\udc40",
-      "big day! you ready? got your revolution pants?",
+      "big day! you ready? got your revolution pants on?",
       "lol so cheesy. i'm too excited",
       "anyway",
       "the plan!",
