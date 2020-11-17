@@ -72,10 +72,15 @@ export function getJobCaricaturePath(job: BaseJob): string {
 }
 
 export function getTip(job: PotentialJob, highScore: number): number {
-  return Math.trunc(highScore * job.maxTip)
+  return Math.round(highScore * job.maxTip)
 }
 
 export function getJobSubscriptionCost(job: BaseJob): number {
+  if (job.trait == "CEO") {
+    // short-circuit the CEO subscription fee
+    // to create a more comical effect
+    return 250
+  }
   return Math.ceil(job.maxTip / 2)
 }
 
