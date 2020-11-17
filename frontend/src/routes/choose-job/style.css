@@ -140,8 +140,8 @@
 
 .job__name {
   font-size: 18px;
-  margin-top: 10px;
-  margin-bottom: 5px;
+  margin-top: 8px;
+  margin-bottom: 2px;
 }
 
 @media (min-width: 992px) {
