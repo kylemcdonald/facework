@@ -35,6 +35,8 @@ const App: FunctionalComponent = () => {
       <Provider store={store}>
         <Router onChange={handleRoute}>
           <Route path="/" component={Welcome} />
+          {/** stops the router from getting confused by our netlify routing */}
+          <Route path="/index.html" component={Welcome} />
           <Route path="/error" component={CameraError} />
           <Route path="/choose" component={ChooseJob} />
           <Route path="/versus" component={DoJob} />
