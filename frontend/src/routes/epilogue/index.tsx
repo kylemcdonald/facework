@@ -7,7 +7,7 @@ import { uuid, addMessage } from "../../lib/logging"
 const Epilogue: FunctionalComponent = () => {
   addMessage("epilogue", {})
   const completedJobs = useTypedSelector(state => state.completedJobs)
-  const grandTotal = getStartingBalance(completedJobs)
+  const grandTotal = toDollars(getStartingBalance(completedJobs))
 
   const selected = completedJobs.map(job => {
     return {
