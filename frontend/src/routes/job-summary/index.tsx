@@ -23,7 +23,6 @@ import * as style from "./style.css"
 import * as chooseStyle from "../choose-job/style.css"
 
 import { JobSummaryConfig } from "../../lib/app-acts-config"
-import { addMessage } from "../../lib/logging"
 const {
   nextButton: { autoclickTimeout }
 } = JobSummaryConfig
@@ -40,13 +39,6 @@ const JobSummary: FunctionalComponent = () => {
     subscriptionCost = toDollars(getJobSubscriptionCost(lastJob)),
     grandTotal = toDollars(getJobGrandTotal(lastJob) + startingBalanceCents),
     startingBalance = toDollars(startingBalanceCents)
-  useEffect(() => {
-    addMessage("job", {
-      name: lastJob.name,
-      trait: lastJob.trait,
-      highScore: lastJob.highScore
-    })
-  })
   const onClick = useCallback(
     () =>
       showChat || actId === firstActId ? onAdvance(actId) : setShowChat(true),

@@ -1,4 +1,5 @@
 import { TraitLabel, getCaricaturePath } from "./face-reader-labels"
+import { addMessage } from "./logging"
 
 const HACK_MONEY_ACT = 3
 const HACK_MONEY_AMOUNT = 10000
@@ -38,6 +39,11 @@ export const completeJob = (
   const { name, description, trait, maxTip } = job
   const review = getReview(job, highScore),
     tip = getTip(job, highScore)
+  addMessage("job", {
+    name: name,
+    trait: trait,
+    highScore: highScore
+  })
   return {
     name,
     description,
