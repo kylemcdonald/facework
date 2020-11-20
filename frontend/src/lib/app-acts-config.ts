@@ -67,6 +67,23 @@ export const ActsConfig: {
   two: {
     availableJobs: [
       {
+        name: "Medical Assistant",
+        trait: "Wearing Mask",
+        maxTip: 500,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "My supervisor asked me to book this Faceworker, and they came completely unprepared. But I don't mind, I'm pretty sure it's all a hoax anyway."
+          },
+          {
+            minScore: 0.4,
+            review:
+              "We have been absolutely overwhelmed in the ER and a couple extra hands always help! This Faceworker came prepared."
+          }
+        ]
+      },
+      {
         name: "Tutor",
         trait: "Frowning",
         maxTip: 500,
@@ -97,6 +114,23 @@ export const ActsConfig: {
             minScore: 0.4,
             review:
               "Our kids are escape artists! But this eagle-eyed Faceworker was able to stop their every breakout attempt. Could work as a prison guard! 10/10."
+          }
+        ]
+      },
+      {
+        name: "Therapist",
+        trait: "Mouth Closed",
+        maxTip: 500,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "Sometimes you just need someone to listen, you know? I was looking for a deal compared to my usual shrink. But this Faceworker couldn't keep their mouth closed. Was three hours was too long? Did you\u2014what was your nam[...]"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "Sometimes you just need someone to listen, you know? This hour was such a deal compared to my usual shrink! I feel like we made some real breakthroughs together. It was just so relaxing, my Faceworker\u2014what was your nam[...]"
           }
         ]
       },
@@ -164,6 +198,23 @@ export const ActsConfig: {
             minScore: 0.4,
             review:
               "We wanted someone outdoorsy, at one with nature to take our kids on adventure. This Faceworker was crunchy as granola! Perfect!"
+          }
+        ]
+      },
+      {
+        name: "Prank Companion",
+        trait: "Wearing Lipstick",
+        maxTip: 500,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "My partner loves pranks and I thought she'd get a kick out of discovering some lipstick in an... unexpected place? But with this Faceworker's pale kisser we'll never find out."
+          },
+          {
+            minScore: 0.4,
+            review:
+              "My partner loves pranks and I thought she'd get a kick out of discovering some lipstick in an... unexpected place? Well, I was wrong. So... very... wrong."
           }
         ]
       }
@@ -271,6 +322,23 @@ export const ActsConfig: {
         ]
       },
       {
+        name: "Salon Visit",
+        trait: "Blond Hair",
+        maxTip: 1000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "Nothing better than going twinsies at the salon. But with this Faceworker's dark hair we ended up more checkerboard than lightning locks. Total dissapointment."
+          },
+          {
+            minScore: 0.4,
+            review:
+              "Nothing better than going twinsies at the salon. I needed someone to match my new platinum look and this Faceworker's lightning locks did just fine!"
+          }
+        ]
+      },
+      {
         name: "Barber Training",
         trait: "5 o Clock Shadow",
         maxTip: 1000,
@@ -358,6 +426,40 @@ export const ActsConfig: {
   four: {
     availableJobs: [
       {
+        name: "Bezos Impersonator",
+        trait: "Bald",
+        maxTip: 2000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "look..... i know it wasn't a great plan to begin with.... i mean you didn't help but.... it's MY fault the guillotine wasnt ready in time"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "look..... i know it wasn't a great plan to begin with.... you did great.... it's MY fault the guillotine wasnt ready in time"
+          }
+        ]
+      },
+      {
+        name: "Kissing Lesson",
+        trait: "Big Lips",
+        maxTip: 2000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              "Everyone in this city has the tiniest lips and it's just not doing it for me. Even this Faceworker!"
+          },
+          {
+            minScore: 0.4,
+            review:
+              "I mean, this whole exercise was meant to be more academic but I feel like we really connected??? How can I find you again??? xoxoxo"
+          }
+        ]
+      },
+      {
         name: "Perfume Tester",
         trait: "Big Nose",
         maxTip: 2000,
@@ -405,6 +507,23 @@ export const ActsConfig: {
             minScore: 0.4,
             review:
               "They made the perfect model for the Before picture for our diet pills infomercial. Their multiple chins were repellant. Just what we were looking for!"
+          }
+        ]
+      },
+      {
+        name: "Police",
+        trait: "Police",
+        maxTip: 2000,
+        possibleReviews: [
+          {
+            minScore: 0,
+            review:
+              'The rioters (sorry "protestors") were getting really noisy outside Facework HQ today and we needed backup. But this Faceworker might as well have joined them! Totally useless.'
+          },
+          {
+            minScore: 0.4,
+            review:
+              'The rioters (sorry "protestors") were getting really noisy outside Facework HQ today and we needed backup. Thanks for coming through!'
           }
         ]
       },
@@ -646,12 +765,12 @@ export const ActsConfig: {
           {
             minScore: 0,
             review:
-              "I've been dreading telling my parents my romantic partner isn't white. This Faceworker was totally unconvincing at the family dinner and now my life is ruined!"
+              "I've been dreading telling my parents my romantic partner isn't white. This Faceworker was totally unconvincing at the family dinner and now they won't stop talking about \"genocide\"!"
           },
           {
             minScore: 0.4,
             review:
-              "I don't know how to tell my parents my romantic partner isn't white. This Faceworker really saved me at the family dinner."
+              "I don't know how to tell my parents my romantic partner isn't white. At the family dinner this Faceworker really saved me from the usual \"genocide\" talk!"
           }
         ]
       },
@@ -699,11 +818,13 @@ export const ActsConfig: {
         possibleReviews: [
           {
             minScore: 0,
-            review: "#FATAL_ERROR: NO VALUES FOUND';';#"
+            review:
+              "err -1 no error (no error): {{}} // todo: fix #FATAL_ERROR: NO VALUES FOUND';';# ssh root@facework.app"
           },
           {
             minScore: 0.4,
-            review: "err -1 no error (no error): {{}} // todo: fix"
+            review:
+              "err -1 no error (no error): {{}} // todo: fix #FATAL_ERROR: NO VALUES FOUND';';# ssh root@facework.app"
           }
         ]
       }
@@ -747,11 +868,11 @@ type BasePageConfig = {
 
 export const ChooseJobConfig: BasePageConfig = {
   nextButton: {
-    autoclickTimeout: 15 * 1000
+    autoclickTimeout: 18 * 1000
   }
 }
 export const DoJobConfig: BasePageConfig & { scoringTimeLimit: number } = {
-  scoringTimeLimit: 15 * 1000,
+  scoringTimeLimit: 12 * 1000,
   nextButton: {
     autoclickTimeout: 1000
   }

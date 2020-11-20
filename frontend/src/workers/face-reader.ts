@@ -118,7 +118,7 @@ async function prepare(): Promise<void> {
   const loadStart = performance.now()
   await tf.setBackend("wasm")
   const detector = await blazeface.load()
-  const model = await loadGraphModel("assets/models/facework-v2/model.json")
+  const model = await loadGraphModel("assets/models/facework-v4/model.json")
   const loadDuration = performance.now() - loadStart
   console.debug("model load: " + loadDuration.toFixed() + "ms")
   ctx.addEventListener("message", async e => {
