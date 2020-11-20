@@ -13,6 +13,8 @@ const JobScoreDisplay: FunctionalComponent<JobScoreDisplayProps> = (
 ) => {
   const ratingDegs =
     props.currentScore !== undefined ? props.currentScore * 180 - 90 : -90
+  const highScoreDegs =
+    props.highScore !== undefined ? props.highScore * 180 - 90 : -90
   const highScore = props.highScore ?? 0
   const highScorePct = Math.floor(100 * highScore)
   const highScoreMsg = getScoreMessage(highScore)
@@ -31,6 +33,10 @@ const JobScoreDisplay: FunctionalComponent<JobScoreDisplayProps> = (
             </div>
           )}
         </div>
+        <div
+          className={style.ratingGaugeHighScore}
+          style={{ transform: `rotate(${highScoreDegs}deg)` }}
+        ></div>
         <div
           className={style.ratingGauge}
           style={{ transform: `rotate(${ratingDegs}deg)` }}
