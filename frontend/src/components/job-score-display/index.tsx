@@ -42,11 +42,11 @@ const JobScoreDisplay: FunctionalComponent<JobScoreDisplayProps> = (
 
 function getScoreMessage(score: number): string {
   if (score >= 0.99) return "Perfect"
-  else if (score > 0.9) return "Amazing"
-  else if (score > 0.8) return "Great job"
-  else if (score > 0.4) return "Just okay"
-  else if (score > 0.2) return "Do better"
-  else return "Try harder"
+  else if (score > 0.9) return "Well Done"
+  else if (score > 0.8) return "Just Okay"
+  else if (score > 0.4) return "Barely Enough"
+  else if (score > 0.2) return "Do Better"
+  else return "Try Harder"
 }
 
 /** Return a number between 0 and 1.0 */
