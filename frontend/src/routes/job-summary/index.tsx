@@ -40,10 +40,12 @@ const JobSummary: FunctionalComponent = () => {
     subscriptionCost = toDollars(getJobSubscriptionCost(lastJob)),
     grandTotal = toDollars(getJobGrandTotal(lastJob) + startingBalanceCents),
     startingBalance = toDollars(startingBalanceCents)
-  addMessage("job", {
-    name: lastJob.name,
-    trait: lastJob.trait,
-    highScore: lastJob.highScore
+  useEffect(() => {
+    addMessage("job", {
+      name: lastJob.name,
+      trait: lastJob.trait,
+      highScore: lastJob.highScore
+    })
   })
   const onClick = useCallback(
     () =>
