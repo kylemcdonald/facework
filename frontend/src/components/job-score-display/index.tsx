@@ -34,11 +34,11 @@ const JobScoreDisplay: FunctionalComponent<JobScoreDisplayProps> = (
           )}
         </div>
         <div
-          className={style.ratingGaugeHighScore}
-          style={{ transform: `rotate(${highScoreDegs}deg)` }}
+          className={`${style.ratingGauge} ${style.ratingGaugeGreen}`}
+          style={{ transform: `rotate(${highScoreDegs}deg) scale(1.1)` }}
         ></div>
         <div
-          className={style.ratingGauge}
+          className={`${style.ratingGauge} ${style.ratingGaugeWhite}`}
           style={{ transform: `rotate(${ratingDegs}deg)` }}
         ></div>
       </div>
