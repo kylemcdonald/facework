@@ -42,7 +42,7 @@
 }
 
 .content {
-  transition: opacity 1s 1s, max-height 0s 2s;
+  transition: opacity 1s 1s, max-height 0s 1s;
   max-height: 1000px;
 }
 
@@ -163,8 +163,8 @@
     bottom: 0;
     width: 1000px;
     margin: auto;
-    display: flex;
-    align-items: center;
+    display: flex-start;
+    align-items: top;
     padding: 50px;
   }
 
