@@ -35,6 +35,13 @@ type ReadFaceRequest = {
   readonly height: number
 }
 
+export type ReadFaceResponse = {
+  readonly detectorDuration: number
+  readonly modelDuration: number | null
+  readonly facePosition: ReadonlyArray<number> | null
+  readonly prediction: ReadonlyArray<number> | null
+}
+
 type LoadModelRequest = {
   readonly kind: "load-model"
 }
@@ -46,13 +53,14 @@ export type WorkerResponse =
   | {
       readonly kind: "face-read"
       readonly ratings: FeatureRatingsData | null
+      readonly response: ReadFaceResponse
     }
 
 const readFace = async (
   data: ReadFaceRequest,
   detector: blazeface.BlazeFaceModel,
   model: GraphModel
-): Promise<ReadonlyArray<number> | null> => {
+): Promise<ReadFaceResponse> => {
   const { buffer, width, height } = data
 
   // ArrayBuffer is untyped and in RGBA format, so we convert it to a
@@ -96,10 +104,20 @@ const readFace = async (
     console.debug("model: " + modelDuration.toFixed() + "ms")
     console.debug("Tensors: " + tf.memory().numTensors)
     tf.engine().endScope()
-    return prediction
+    return {
+      detectorDuration,
+      modelDuration,
+      facePosition: [x1, y2, x2, y2],
+      prediction: prediction
+    }
   }
   tf.engine().endScope()
-  return null
+  return {
+    detectorDuration,
+    modelDuration: null,
+    facePosition: null,
+    prediction: null
+  }
 }
 
 const extractRatings = (
@@ -137,9 +155,9 @@ async function handleLaterMessages(
   model: GraphModel
 ): Promise<void> {
   if (msg.kind === "read-face") {
-    const prediction = await readFace(msg, detector, model)
-    const ratings = extractRatings(prediction)
-    ctx.postMessage({ kind: "face-read", ratings })
+    const response = await readFace(msg, detector, model)
+    const ratings = extractRatings(response.prediction)
+    ctx.postMessage({ kind: "face-read", ratings, response })
   } else if (msg.kind === "load-model") {
     console.debug("model was already loaded")
     ctx.postMessage({ kind: "model-loaded" })

@@ -5,6 +5,7 @@ import {
   sendFace,
   FeatureRatingsData
 } from "../../lib/use-face-reader"
+import { ReadFaceResponse } from "../../workers/face-reader"
 import VideoSelfie from "../../components/videoselfie"
 import * as style from "./style.css"
 import { isPastTimeLimit, sendFaceOrSchedule } from "./helpers"
@@ -12,6 +13,7 @@ import { TraitLabel } from "../../lib/face-reader-labels"
 import TimeLimitDisplay from "../time-limit-display"
 import JobScoreDisplay from "../job-score-display"
 
+import { addMessage } from "../../lib/logging"
 import { DoJobConfig } from "../../lib/app-acts-config"
 const { scoringTimeLimit } = DoJobConfig
 
@@ -49,12 +51,21 @@ export type KeyFeatureScoring = {
   readonly timeLimit: number
   /** when did this round start? set with Date.now() */
   readonly startTime?: number
+  /** track the sequence of model outputs */
+  readonly modelHistory: (number | null)[]
+  readonly detectorDurations: number[]
+  readonly modelDurations: (number | null)[]
+  readonly facePositions: (readonly number[] | null)[]
 }
 
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
-  score: Number.MIN_VALUE,
-  highestScore: Number.MIN_VALUE,
-  timeLimit: scoringTimeLimit
+  score: 0,
+  highestScore: 0,
+  timeLimit: scoringTimeLimit,
+  modelHistory: [],
+  detectorDurations: [],
+  modelDurations: [],
+  facePositions: [[]]
 })
 
 interface BattleProps {
@@ -78,34 +89,65 @@ const Battle: FunctionalComponent<BattleProps> = props => {
     InitKeyFeatureScoring()
   )
   const updateFeatureRatings = useCallback(
-    (ratings: FeatureRatingsData | null): void => {
+    (ratings: FeatureRatingsData | null, response: ReadFaceResponse): void => {
       let keepGoing = true
       let latestHighScore = keyFeatureScoring.highestScore
       setFeatureRatingsData(ratings)
       setKeyFeatureScoring(prev => {
+        // we always want to return performance metrics
+        const baseOutput = {
+          ...prev,
+          detectorDurations: prev.detectorDurations.concat(
+            response.detectorDuration
+          ),
+          modelDurations: prev.modelDurations.concat(response.modelDuration),
+          facePositions: prev.facePositions.concat([response.facePosition])
+        }
         // if no new ratings, don't update the score
         if (ratings === null) {
-          return prev
+          return {
+            ...baseOutput,
+            modelHistory: prev.modelHistory.concat(null)
+          }
         }
+        const modelOutput = ratings.expressions.get(props.trait) ?? null
         // if we have previous ratings, we're in the middle of the round
         if (prev.feature !== undefined) {
           // pulled straight from the tf model results
-          const rawMomentaryScore =
-            ratings.expressions.get(prev.feature) ?? Number.MIN_VALUE
+          const rawMomentaryScore = modelOutput ?? 0
           // blended with previous score to smooth data
           const blendedScore = rawMomentaryScore * 0.7 + prev.score * 0.3
           latestHighScore = Math.max(prev.highestScore, blendedScore)
           keepGoing = !isPastTimeLimit(prev)
+          if (!keepGoing) {
+            // report performance metrics
+            addMessage("job-performance", {
+              trait: props.trait,
+              modelHistory: prev.modelHistory,
+              detectorDurations: prev.detectorDurations,
+              modelDurations: prev.modelDurations,
+              facePositions: prev.facePositions
+            })
+          }
           return {
-            ...prev,
+            ...baseOutput,
             score: blendedScore,
-            highestScore: latestHighScore
+            highestScore: latestHighScore,
+            modelHistory: prev.modelHistory.concat(modelOutput)
           }
         }
         // otherwise, init
         keepGoing = true
         console.debug(`setting key feature to ${props.trait}`)
-        return { ...prev, feature: props.trait, startTime: Date.now() }
+        return {
+          ...prev,
+          feature: props.trait,
+          startTime: Date.now(),
+          modelHistory: [modelOutput],
+          detectorDurations: [response.detectorDuration],
+          modelDurations: [response.modelDuration],
+          facePositions: [response.facePosition]
+        }
       })
 
       if (!keepGoing) {

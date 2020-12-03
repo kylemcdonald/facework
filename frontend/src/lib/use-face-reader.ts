@@ -1,6 +1,6 @@
 import { useEffect } from "preact/hooks"
 import FaceReaderWorker from "worker-loader!../workers/face-reader"
-import { WorkerResponse } from "../workers/face-reader"
+import { WorkerResponse, ReadFaceResponse } from "../workers/face-reader"
 import { assertIsDefined } from "./assert"
 import { Nullable } from "./type-helpers"
 
@@ -75,7 +75,10 @@ const cleanupEventListener = () => {
 }
 
 export function useFaceReader(
-  faceReadCallback: (ratings: FeatureRatingsData | null) => void
+  faceReadCallback: (
+    ratings: FeatureRatingsData | null,
+    response: ReadFaceResponse
+  ) => void
 ): void {
   useEffect(() => {
     const worker = getWorker()
@@ -83,7 +86,7 @@ export function useFaceReader(
     currentEventListener = (m): void => {
       const msg: WorkerResponse = m.data
       if (msg.kind === "face-read") {
-        faceReadCallback(msg.ratings)
+        faceReadCallback(msg.ratings, msg.response)
       }
     }
     worker.addEventListener("message", currentEventListener)
