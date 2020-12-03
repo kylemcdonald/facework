@@ -6,9 +6,10 @@ export interface UserMedia {
 }
 
 function defaultMediaStreamConstraints(): MediaStreamConstraints {
+  const width = Math.min(window.innerWidth, 1280)
   return {
     audio: false,
-    video: { facingMode: "user", width: window?.innerWidth ?? undefined }
+    video: { facingMode: "user", width: width }
   }
 }
 
