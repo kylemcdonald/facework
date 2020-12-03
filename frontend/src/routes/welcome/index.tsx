@@ -52,7 +52,9 @@ const Welcome: FunctionalComponent = () => {
           Congrats on becoming a Faceworker! Our AI finds the perfect face for
           every job. Audition for each job by showing us you can make your face
           fit what the job needs. Ready to try out for your first job?{" "}
-          <em>All video stays on your device.</em>
+          <em>
+            All face analysis happens on-device and no images are uploaded.
+          </em>
         </div>
         <GetStartedLink />
       </div>
