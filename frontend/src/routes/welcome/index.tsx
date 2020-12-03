@@ -11,10 +11,16 @@ const GetStartedLink: FunctionalComponent = () => {
     const { stream, error } = useUserMedia()
     if (stream != null) {
       const settings = stream.getVideoTracks()?.[0]?.getSettings()
-      addMessage("camera-success", {
-        width: settings?.width,
-        height: settings?.height,
-        frameRate: settings?.frameRate
+      navigator.mediaDevices.enumerateDevices().then(devices => {
+        const labels = devices
+          .filter(e => e.kind == "videoinput")
+          .map(e => e.label)
+        addMessage("camera-success", {
+          width: settings?.width,
+          height: settings?.height,
+          frameRate: settings?.frameRate,
+          labels: labels
+        })
       })
     }
     // if we have a stream OR an error returned, route user to the appropriate page
