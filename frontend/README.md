@@ -1,4 +1,4 @@
-# mfe frontend
+# facework frontend
 
 ## Dependencies
 
