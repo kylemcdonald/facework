@@ -10,7 +10,7 @@
   "scripts": {
     "build": "preact build --no-prerender --no-sw --template src/template.html",
     "serve": "sirv build --port 8080 --cors --single",
-    "dev": "preact watch -H localhost --template src/template.html",
+    "dev": "preact watch -H localhost --no-sw --template src/template.html",
     "lint": "eslint --no-error-on-unmatched-pattern src/**/*.{js,jsx,ts,tsx}",
     "test": "jest ./tests"
   },
