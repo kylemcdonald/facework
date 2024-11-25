@@ -35,10 +35,17 @@ type ReadFaceRequest = {
   readonly height: number
 }
 
+export type FacePosition = {
+  readonly x1: number
+  readonly y1: number
+  readonly x2: number
+  readonly y2: number
+}
+
 export type ReadFaceResponse = {
   readonly detectorDuration: number
   readonly modelDuration: number | null
-  readonly facePosition: ReadonlyArray<number> | null
+  readonly facePosition: FacePosition | null
   readonly prediction: ReadonlyArray<number> | null
 }
 
@@ -107,7 +114,12 @@ const readFace = async (
     return {
       detectorDuration,
       modelDuration,
-      facePosition: [x1, y2, x2, y2],
+      facePosition: {
+        x1: x1,
+        y1: y2,
+        x2: x2,
+        y2: y2
+      },
       prediction: prediction
     }
   }
