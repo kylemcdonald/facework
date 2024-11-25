@@ -3,7 +3,8 @@ import { useState, useCallback, useRef } from "preact/hooks"
 import {
   useFaceReader,
   sendFace,
-  FeatureRatingsData
+  FeatureRatingsData,
+  FacePosition
 } from "../../lib/use-face-reader"
 import { ReadFaceResponse } from "../../workers/face-reader"
 import VideoSelfie from "../../components/videoselfie"
@@ -55,7 +56,7 @@ export type KeyFeatureScoring = {
   readonly modelHistory: (number | null)[]
   readonly detectorDurations: number[]
   readonly modelDurations: (number | null)[]
-  readonly facePositions: (readonly number[] | null)[]
+  readonly facePositions: (FacePosition | null)[]
 }
 
 const InitKeyFeatureScoring = (): KeyFeatureScoring => ({
